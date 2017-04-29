@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+@model WebApplication.Models.LoginBindingModel
+<h2>Login</h2>
+@using (Html.BeginForm("Login", "Account", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+{
+    @Html.EditorFor(m => m.Email);
+    @Html.EditorFor(m => m.Password);
+    <input type="submit" />
+}
