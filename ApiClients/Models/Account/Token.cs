@@ -12,7 +12,7 @@ namespace ApiClients.Models.Account
         [JsonProperty(PropertyName = "grant_type")]
         public string GrantType { get; set; }
 
-        [JsonProperty(PropertyName = "userName")]
+        [JsonProperty(PropertyName = "username")]
         public string UserName { get; set; }
 
         [JsonProperty(PropertyName = "password")]

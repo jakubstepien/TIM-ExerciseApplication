@@ -24,7 +24,7 @@ namespace WebApplication.Controllers.WebSite
 
         public ActionResult GetAuthorizedData()
         {
-            var values = new ApiClients.ValuesClient("http://localhost:50533/",this.GetToken()).GetValues();
+            var values = new ApiClients.ValuesClient(this.GetToken()).GetValues();
             return new JsonResult { Data = values, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
     }

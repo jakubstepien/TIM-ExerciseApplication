@@ -7,21 +7,20 @@ using System.Threading.Tasks;
 
 namespace ApiClients
 {
-    public abstract class AuthorizedDataClient
+    public abstract class AuthorizedDataClient : BaseClient
     {
         protected string token;
-        protected string baseUrl;
 
-        public AuthorizedDataClient(string baseUrl, string token)
+        public AuthorizedDataClient(string token)
         {
             this.token = token;
-            this.baseUrl = baseUrl;
         }
 
-        protected void SetBaseUrlAndToken(HttpClient client)
+        protected HttpRequestMessage GetAuthorizedRequest(HttpMethod method, string relativeAdress)
         {
-            client.BaseAddress = new Uri(baseUrl);
-            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            var request = GetRequest(method, relativeAdress);
+            request.Headers.Add("Authorization", "Bearer " + token);
+            return request;
         }
     }
 }

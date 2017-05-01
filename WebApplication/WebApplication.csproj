@@ -236,7 +236,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\Api\AccountController.cs" />
     <Compile Include="Controllers\WebSite\AccountController.cs" />
-    <Compile Include="Controllers\WebSite\ContollerHelper.cs" />
+    <Compile Include="Controllers\WebSite\ControllerHelper.cs" />
     <Compile Include="Controllers\WebSite\ExampleController.cs" />
     <Compile Include="Controllers\WebSite\HomeController.cs" />
     <Compile Include="Controllers\Api\ValuesController.cs" />

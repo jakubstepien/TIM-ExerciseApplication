@@ -32,7 +32,7 @@ namespace WebApplication.Controllers.WebSite
         public ActionResult Login(LoginBindingModel model, string returnUrl = "/")
         {
             var idnetyty = HttpContext.User;
-            var token = new LoginClient().PostToken("http://localhost:50533");
+            var token = new LoginClient().GetToken();
             if (!string.IsNullOrEmpty(token))
             {
                 UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));

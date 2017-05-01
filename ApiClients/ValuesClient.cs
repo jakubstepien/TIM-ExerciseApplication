@@ -9,23 +9,18 @@ namespace ApiClients
 {
     public class ValuesClient : AuthorizedDataClient
     {
-        public ValuesClient(string baseUrl, string token) : base(baseUrl, token)
+        public ValuesClient(string token) : base(token)
         {
         }
 
         public IEnumerable<string> GetValues()
         {
-            using (var client = new HttpClient())
-            {
-                SetBaseUrlAndToken(client);
-                var response = client.GetAsync("api/Values").Result;
-                var responseJson = response.Content.ReadAsStringAsync().Result;
+            var request = GetAuthorizedRequest(HttpMethod.Get, "api/Values");
+            var response = client.SendAsync(request).Result;
+            var responseJson = response.Content.ReadAsStringAsync().Result;
 
-                //dodać obsugle bledu
-
-                var values = Newtonsoft.Json.JsonConvert.DeserializeObject<string[]>(responseJson);
-                return values;
-            }
+            var values = Newtonsoft.Json.JsonConvert.DeserializeObject<string[]>(responseJson);
+            return values;
         }
     }
 }
