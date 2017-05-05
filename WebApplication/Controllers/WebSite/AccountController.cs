@@ -38,24 +38,26 @@ namespace WebApplication.Controllers.WebSite
 
             return Redirect("/");
         }
-      
+
         [HttpPost]
         public ActionResult Login(LoginBindingModel model, string returnUrl = "/")
         {
-            var idnetyty = HttpContext.User;
-            var token = new AccountClient().GetToken();
-            if (!string.IsNullOrEmpty(token))
+            if (TryValidateModel(model))
             {
-                UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-                
-                //zamienic na model
-                var user = userManager.Find("test@test.test", "qwert123");
+                var identitiy = HttpContext.User;
+                var token = new AccountClient().GetToken(model.Email, model.Password);
+                if (!string.IsNullOrEmpty(token))
+                {
+                    UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
 
-                var authManager = HttpContext.GetOwinContext().Authentication;
-                var identity = userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie).Result;
-                identity.AddClaim(new Claim(ControllerHelper.TokenClaimType, token));
-                authManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
-                return Redirect(returnUrl);
+                    var user = userManager.Find(model.Email, model.Password);
+
+                    var authManager = HttpContext.GetOwinContext().Authentication;
+                    var identity = userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie).Result;
+                    identity.AddClaim(new Claim(ControllerHelper.TokenClaimType, token));
+                    authManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
+                    return Redirect(returnUrl);
+                }
             }
 
             return View(model);

@@ -10,7 +10,7 @@ namespace ApiClients
 {
     public class AccountClient : BaseClient
     {
-        public string GetToken()
+        public string GetToken(string email, string password)
         {
             var request = GetRequest(HttpMethod.Post, "/Token");
             //json jako Content requesta nie działa musi byc FormUrlEncodedContent
@@ -18,14 +18,17 @@ namespace ApiClients
                 new[]
                 {
                     new KeyValuePair<string, string>("grant_type", "password"),
-                    new KeyValuePair<string, string>("username", "test@test.test"),
-                    new KeyValuePair<string, string>("password", "qwert123"),
+                    new KeyValuePair<string, string>("username", email),
+                    new KeyValuePair<string, string>("password", password),
                 });
             request.Content = formContent;
 
             var response = client.SendAsync(request).Result;
 
-            //dodac obsluge bledu
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
 
             var responseJson = response.Content.ReadAsStringAsync().Result;
             var jObject = JObject.Parse(responseJson);
