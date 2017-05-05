@@ -36,7 +36,8 @@
   <ItemGroup>
     <Compile Include="AuthorizedDataClient.cs" />
     <Compile Include="BaseClient.cs" />
-    <Compile Include="LoginClient.cs" />
+    <Compile Include="AccountClient.cs" />
+    <Compile Include="Models\Account\RegisterData.cs" />
     <Compile Include="Models\Account\Token.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValuesClient.cs" />

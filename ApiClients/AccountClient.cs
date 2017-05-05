@@ -8,7 +8,7 @@ using System.Text;
 
 namespace ApiClients
 {
-    public class LoginClient : BaseClient
+    public class AccountClient : BaseClient
     {
         public string GetToken()
         {
@@ -30,6 +30,16 @@ namespace ApiClients
             var responseJson = response.Content.ReadAsStringAsync().Result;
             var jObject = JObject.Parse(responseJson);
             return jObject.GetValue("access_token").ToString();
+        }
+
+        public bool Register(RegisterData data)
+        {
+            var request = GetRequest(HttpMethod.Post,"/api/Account/Register");
+            WriteRequestBodyJson(request, data);
+            var response = client.SendAsync(request).Result;
+
+
+            return false;
         }
     }
 }

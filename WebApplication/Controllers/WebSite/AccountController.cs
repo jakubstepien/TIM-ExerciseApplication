@@ -27,12 +27,23 @@ namespace WebApplication.Controllers.WebSite
             ViewBag.ReturnUrl = ReturnUrl;
             return View();
         }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        public ActionResult Register(RegisterBindingModel model)
+        {
+
+            return Redirect("/");
+        }
       
         [HttpPost]
         public ActionResult Login(LoginBindingModel model, string returnUrl = "/")
         {
             var idnetyty = HttpContext.User;
-            var token = new LoginClient().GetToken();
+            var token = new AccountClient().GetToken();
             if (!string.IsNullOrEmpty(token))
             {
                 UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
