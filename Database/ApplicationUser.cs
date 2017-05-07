@@ -9,8 +9,16 @@ using System.Threading.Tasks;
 
 namespace Database
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser<Guid, GuidIdentityUserLogin, GuidIdentityUserRole, GuidIdentityUserClaim>, IUser, IUser<Guid>
     {
+        string IUser<string>.Id
+        {
+            get
+            {
+                return Id.ToString();
+            }
+        }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -18,5 +26,22 @@ namespace Database
             // Add custom user claims here
             return userIdentity;
         }
+    }
+
+    public class GuidIdentityRole : IdentityRole<Guid, GuidIdentityUserRole>
+    {
+    }
+
+    public class GuidIdentityUserLogin : IdentityUserLogin<Guid>
+    {
+
+    }
+
+    public class GuidIdentityUserRole : IdentityUserRole<Guid>
+    {
+    }
+
+    public class GuidIdentityUserClaim : IdentityUserClaim<Guid>
+    {
     }
 }

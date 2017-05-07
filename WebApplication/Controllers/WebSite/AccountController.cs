@@ -48,7 +48,7 @@ namespace WebApplication.Controllers.WebSite
                 var token = new AccountClient().GetToken(model.Email, model.Password);
                 if (!string.IsNullOrEmpty(token))
                 {
-                    UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                    UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new Providers.GuidUserStore(new ApplicationDbContext()));
 
                     var user = userManager.Find(model.Email, model.Password);
 
