@@ -17,10 +17,11 @@ textarea {
 }
 
 
-.field-validation-error:before{
-    /*content:"";*/
-}
-
 .field-validation-error{
     color:red;
 }
+
+  #register-from label > span,
+  #login-from label > span {
+       display:block
+    }

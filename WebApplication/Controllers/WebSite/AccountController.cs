@@ -33,10 +33,19 @@ namespace WebApplication.Controllers.WebSite
             return View();
         }
 
+        [HttpPost]
         public ActionResult Register(RegisterBindingModel model)
         {
-
-            return Redirect("/");
+            if (TryValidateModel(model))
+            {
+                var client = new AccountClient();
+                client.Register(new ApiClients.Models.Account.RegisterData { ConfirmPassword = model.ConfirmPassword, Email = model.Email, Password = model.Password });
+                if (SignIn(model.Email, model.Password))
+                {
+                    return Redirect("/");
+                }
+            }
+            return View(model);
         }
 
         [HttpPost]
@@ -46,16 +55,8 @@ namespace WebApplication.Controllers.WebSite
             {
                 var identitiy = HttpContext.User;
                 var token = new AccountClient().GetToken(model.Email, model.Password);
-                if (!string.IsNullOrEmpty(token))
+                if (!string.IsNullOrEmpty(token) && SignIn(model.Email, model.Password))
                 {
-                    UserManager<ApplicationUser> userManager = new UserManager<ApplicationUser>(new Providers.GuidUserStore(new ApplicationDbContext()));
-
-                    var user = userManager.Find(model.Email, model.Password);
-
-                    var authManager = HttpContext.GetOwinContext().Authentication;
-                    var identity = userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie).Result;
-                    identity.AddClaim(new Claim(ControllerHelper.TokenClaimType, token));
-                    authManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
                     return Redirect(returnUrl);
                 }
             }
@@ -63,14 +64,32 @@ namespace WebApplication.Controllers.WebSite
             return View(model);
         }
 
+        private bool SignIn(string email, string password)
+        {
+            var identitiy = HttpContext.User;
+            var token = new AccountClient().GetToken(email, password);
+            if (!string.IsNullOrEmpty(token))
+            {
+                UserManager<ApplicationUser, Guid> userManager = new UserManager<ApplicationUser, Guid>(new Providers.GuidUserStore(new ApplicationDbContext()));
+
+                var user = userManager.Find(email, password);
+
+                var authManager = HttpContext.GetOwinContext().Authentication;
+                var identity = userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie).Result;
+                identity.AddClaim(new Claim(ControllerHelper.TokenClaimType, token));
+                authManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
+                return true;
+            }
+            return false;
+        }
+
         public ActionResult SignOut()
         {
-            var user = this.HttpContext.User;
             HttpContext.GetOwinContext().Authentication.SignOut(HttpContext.GetOwinContext()
                            .Authentication.GetAuthenticationTypes()
                            .Select(o => o.AuthenticationType).ToArray());
 
-            return new EmptyResult();
+            return Redirect("/");
         }
     }
 }

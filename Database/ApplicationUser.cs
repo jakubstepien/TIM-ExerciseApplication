@@ -11,6 +11,11 @@ namespace Database
 {
     public class ApplicationUser : IdentityUser<Guid, GuidIdentityUserLogin, GuidIdentityUserRole, GuidIdentityUserClaim>, IUser, IUser<Guid>
     {
+        public ApplicationUser()
+        {
+            Id = Guid.NewGuid();
+        }
+
         string IUser<string>.Id
         {
             get
@@ -19,7 +24,7 @@ namespace Database
             }
         }
 
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser, Guid> manager, string authenticationType)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, authenticationType);

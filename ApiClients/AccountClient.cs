@@ -40,9 +40,7 @@ namespace ApiClients
             var request = GetRequest(HttpMethod.Post,"/api/Account/Register");
             WriteRequestBodyJson(request, data);
             var response = client.SendAsync(request).Result;
-
-
-            return false;
+            return response.IsSuccessStatusCode;
         }
     }
 }
