@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Database.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,6 +11,14 @@ namespace WebApplication.Controllers
     [Authorize]
     public class ValuesController : ApiController
     {
+        //Przykład wstrzykiwania repo;
+        IExcerciseRepository repo;
+
+        public ValuesController(IExcerciseRepository repo)
+        {
+            this.repo = repo;
+        }
+
         // GET api/values
         public IEnumerable<string> Get()
         {
