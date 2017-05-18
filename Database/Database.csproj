@@ -60,6 +60,11 @@
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="Exercise.cs" />
+    <Compile Include="Migrations\201705180904482_AspIdentity.cs" />
+    <Compile Include="Migrations\201705180904482_AspIdentity.Designer.cs">
+      <DependentUpon>201705180904482_AspIdentity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\ExcerciseRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
     <Compile Include="Repositories\IExcerciseRepository.cs" />
@@ -69,6 +74,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705180904482_AspIdentity.resx">
+      <DependentUpon>201705180904482_AspIdentity.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

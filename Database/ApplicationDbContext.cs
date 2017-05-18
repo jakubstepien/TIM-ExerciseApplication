@@ -13,9 +13,10 @@ namespace Database
         public ApplicationDbContext()
             : base("DefaultConnection")
         {
+            System.Data.Entity.Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Migrations.Configuration>());
         }
 
-        public DbSet<Exercise> Exercise { get; set; }
+        //public DbSet<Exercise> Exercise { get; set; }
 
         public static ApplicationDbContext Create()
         {
