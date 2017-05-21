@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileApp.Views.MasterDetail.MenuItemViewCell">
+   
+        <StackLayout>
+            <Label 
+                    VerticalTextAlignment="Center" 
+                    Text="{Binding Name}"
+                    FontSize="24"
+                />
+            <ListView x:Name="SubItemsList"
+                      VerticalOptions = "Start"
+              SeparatorVisibility="None"
+              HasUnevenRows="True"
+              IsVisible="{Binding ShowSubItems}"
+              ItemsSource="{Binding SubItems}" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="15,0,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" HeightRequest="{Binding Height}}">
+                                <Label 
+                                       VerticalOptions="CenterAndExpand"
+                                        VerticalTextAlignment="Center" 
+                                        Text="{Binding Name}"                             
+                                        FontSize="24"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    
+</ViewCell>
