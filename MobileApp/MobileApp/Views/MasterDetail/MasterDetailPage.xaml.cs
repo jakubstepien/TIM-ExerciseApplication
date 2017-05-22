@@ -73,7 +73,7 @@ namespace MobileApp.Views.MasterDetail
                 {
                     foreach (var listItem in masterViewModel.MenuItems)
                     {
-                        listItem.ShowSubItems = listItem.SubItems.Length != 00 && listItem.Id == item.Id && !listItem.ShowSubItems;
+                        listItem.ShowSubItems = listItem.SubItems != null && listItem.SubItems.Length != 00 && listItem.Id == item.Id && !listItem.ShowSubItems;
                     }
                 }
             }
