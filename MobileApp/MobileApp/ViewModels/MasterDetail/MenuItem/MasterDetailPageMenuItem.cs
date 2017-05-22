@@ -6,18 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace MobileApp.ViewModels.MasterDetail
+namespace MobileApp.ViewModels.MasterDetail.MenuItem
 {
 
-    public class MasterDetailMenuItem : BaseViewModel
+    public class MasterDetailMenuItem : BaseMenuItem
     {
-        public Guid Id { get; private set; } = Guid.NewGuid();
-
-        public string Name { get; set; }
-
         public string Image { get; set; }
-
-        public Type TargetType { get; set; }
 
         private bool _showSubItems = false;
         public bool ShowSubItems { get { return _showSubItems; } set { _showSubItems = value; OnPropertyChanged(); } }

@@ -1,4 +1,5 @@
 ﻿using MobileApp.ViewModels.MasterDetail;
+using MobileApp.ViewModels.MasterDetail.MenuItem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,7 @@ namespace MobileApp.Views.MasterDetail
             var context = BindingContext as MasterDetailMenuItem;
             if (context?.SubItems != null && context.SubItems.Length != 0)
             {
-                this.SubItemsList.HeightRequest = context.SubItems.Length * context.SubItems[0].Height;
+                SubItemsList.HeightRequest = context.SubItems.Length * context.SubItems[0].Height;
             }
         }
     }

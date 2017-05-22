@@ -4,17 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobileApp.ViewModels.MasterDetail
+namespace MobileApp.ViewModels.MasterDetail.MenuItem
 {
-    public class MasterDetailMenuSubItem : BaseViewModel
+    public abstract class BaseMenuItem : BaseViewModel
     {
         public Guid Id { get; private set; } = Guid.NewGuid();
 
         public string Name { get; set; }
 
         public Type TargetType { get; set; }
-
-        public double Height { get; set; } = 45;
-
     }
 }

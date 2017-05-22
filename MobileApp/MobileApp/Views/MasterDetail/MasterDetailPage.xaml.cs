@@ -1,5 +1,6 @@
 ﻿using MobileApp.ViewModels;
 using MobileApp.ViewModels.MasterDetail;
+using MobileApp.ViewModels.MasterDetail.MenuItem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,22 +25,17 @@ namespace MobileApp.Views.MasterDetail
         {
             Type type = null;
             string title = string.Empty;
-            if(e.SelectedItem is MasterDetailMenuItem)
+            if(e.SelectedItem is ViewModels.MasterDetail.MenuItem.BaseMenuItem)
             {
-                var item = e.SelectedItem as MasterDetailMenuItem;
+                var item = e.SelectedItem as ViewModels.MasterDetail.MenuItem.BaseMenuItem;
                 if (item == null)
                     return;
                 type = item.TargetType;
                 title = item.Name;
-                RefreshList(item);
-            }
-            else if(e.SelectedItem is MasterDetailMenuSubItem)
-            {
-                var item = e.SelectedItem as MasterDetailMenuSubItem;
-                if (item == null)
-                    return;
-                type = item.TargetType;
-                title = item.Name;
+                if (e.SelectedItem is MasterDetailMenuItem)
+                {
+                    RefreshList(item as MasterDetailMenuItem);
+                }
             }
             else
             {
