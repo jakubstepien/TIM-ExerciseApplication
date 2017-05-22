@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autofac;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,10 @@ namespace MobileApp
         public App()
         {
             InitializeComponent();
-
-            MainPage = new Views.MasterDetail.MasterDetailPage();
+            var builder = new ContainerBuilder();
+            builder.RegisterModule<Utills.Autofac.AppModule>();
+            var container = builder.Build();
+            MainPage = container.Resolve<Views.MasterDetail.MasterDetailPage>();
         }
 
         protected override void OnStart()

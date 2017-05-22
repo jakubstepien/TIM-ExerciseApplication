@@ -9,16 +9,25 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Autofac;
 
 namespace MobileApp.Views.MasterDetail
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MasterDetailPage : Xamarin.Forms.MasterDetailPage
     {
+        private readonly Autofac.ILifetimeScope lifetimeScope;
+
+        [Obsolete("Constructor for xaml design")]
         public MasterDetailPage()
+        {
+        }
+
+        public MasterDetailPage(ILifetimeScope lifetimeScope)
         {
             InitializeComponent();
             MasterPage.MasterDetailPage = this;
+            this.lifetimeScope = lifetimeScope;
         }
 
         public void ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -51,7 +60,7 @@ namespace MobileApp.Views.MasterDetail
 
         public void ChangeDetail(Type type, string title)
         {
-            var page = (Page)Activator.CreateInstance(type);
+            var page = (Page)lifetimeScope.Resolve(type);
             page.Title = title;
 
             Detail = new NavigationPage(page);

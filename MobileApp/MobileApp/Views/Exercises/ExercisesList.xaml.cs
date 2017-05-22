@@ -12,9 +12,15 @@ namespace MobileApp.Views.Exercises
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ExercisesList : ContentPage
     {
+        [Obsolete("Constructor for xaml design")]
         public ExercisesList()
+        {
+        }
+
+        public ExercisesList(Services.ITestService service)
         {
             InitializeComponent();
         }
+
     }
 }
