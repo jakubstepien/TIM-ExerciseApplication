@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MobileApp.Utills;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,9 @@ namespace MobileApp.Services.Account
     {
         public ServiceResult Login(string login, string password)
         {
-            //TODO
+            //TODO wysłać posta do web api
+
+            UserStore.SaveUser(login, "token", DateTime.Now.AddMonths(2));
             return new ServiceResult { Success = true };
         }
 

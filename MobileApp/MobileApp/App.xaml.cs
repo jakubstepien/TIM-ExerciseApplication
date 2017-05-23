@@ -18,10 +18,21 @@ namespace MobileApp
             var builder = new ContainerBuilder();
             builder.RegisterModule<Utills.Autofac.AppModule>();
             container = builder.Build();
-            
-            var login =  container.Resolve<Views.Account.Login>();
-            login.App = this;
-            MainPage = login;
+
+            //var login = container.Resolve<Views.Account.Login>();
+            //login.App = this;
+            //MainPage = login;
+
+            if (Utills.UserStore.IsLoggedIn())
+            {
+                MainPage = container.Resolve<Views.MasterDetail.MasterDetailPage>();
+            }
+            else
+            {
+                var login = container.Resolve<Views.Account.Login>();
+                login.App = this;
+                MainPage = login;
+            }
         }
 
         protected override void OnStart()
