@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using MobileApp.Services;
+using MobileApp.Services.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,17 +19,21 @@ namespace MobileApp.Utills.Autofac
 
         private void RegisterViews(ContainerBuilder builder)
         {
-            builder.RegisterType<Views.MasterDetail.MasterDetailPage>().AsSelf().InstancePerDependency();
+            builder.RegisterType<Views.MasterDetail.MasterDetailPage>().AsSelf().SingleInstance();
+
+            builder.RegisterType<Views.Account.Login>().AsSelf().SingleInstance();
 
             builder.RegisterType<Views.Exercises.ExercisesList>().AsSelf().InstancePerDependency();
             builder.RegisterType<Views.Summary.Summary>().AsSelf().InstancePerDependency();
             builder.RegisterType<Views.Trainings.AddTraining>().AsSelf().InstancePerDependency();
             builder.RegisterType<Views.Trainings.TrainingsList>().AsSelf().InstancePerDependency();
+
         }
 
         private void RegisterServices(ContainerBuilder builder)
         {
             builder.RegisterType<TestService>().As<ITestService>().InstancePerDependency();
+            builder.RegisterType<AccountService>().As<IAccountService>().InstancePerDependency();
         }
 
 

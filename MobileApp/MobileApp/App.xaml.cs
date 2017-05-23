@@ -8,15 +8,20 @@ using Xamarin.Forms;
 
 namespace MobileApp
 {
-    public partial class App : Application
+    public partial class App : Application, Utills.IApp
     {
+        IContainer container;
+
         public App()
         {
             InitializeComponent();
             var builder = new ContainerBuilder();
             builder.RegisterModule<Utills.Autofac.AppModule>();
-            var container = builder.Build();
-            MainPage = container.Resolve<Views.MasterDetail.MasterDetailPage>();
+            container = builder.Build();
+            
+            var login =  container.Resolve<Views.Account.Login>();
+            login.App = this;
+            MainPage = login;
         }
 
         protected override void OnStart()
@@ -32,6 +37,11 @@ namespace MobileApp
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        public void HandleLoggingIn()
+        {
+            MainPage = container.Resolve<Views.MasterDetail.MasterDetailPage>();
         }
     }
 }
