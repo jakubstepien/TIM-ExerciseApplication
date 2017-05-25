@@ -23,11 +23,14 @@ namespace MobileApp.Views.MasterDetail
         {
         }
 
-        public MasterDetailPage(ILifetimeScope lifetimeScope)
+        public MasterDetailPage(ILifetimeScope lifetimeScope, Utills.IApp app, Services.Account.IAccountService accountService, MasterDetailPageMasterViewModel masterViewModel)
         {
             InitializeComponent();
             MasterPage.MasterDetailPage = this;
             this.lifetimeScope = lifetimeScope;
+            MasterPage.App = app;
+            MasterPage.accountService = accountService;
+            MasterPage.BindingContext = masterViewModel;
         }
 
         public void ItemSelected(object sender, SelectedItemChangedEventArgs e)

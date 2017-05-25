@@ -8,6 +8,8 @@ namespace MobileApp.Utills
 {
     public interface IApp
     {
-        void HandleLoggingIn();
+        void HandleLoggedin();
+
+        void HandleLoggedOut();
     }
 }

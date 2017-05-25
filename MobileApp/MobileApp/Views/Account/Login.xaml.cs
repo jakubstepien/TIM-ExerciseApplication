@@ -15,7 +15,7 @@ namespace MobileApp.Views.Account
     {
         readonly IAccountService accountService;
 
-        public Utills.IApp App { get; set; }
+        readonly Utills.IApp app;
 
         [Obsolete("Constructor for xaml design")]
         public Login()
@@ -23,9 +23,10 @@ namespace MobileApp.Views.Account
         }
 
 
-        public Login(IAccountService accountService)
+        public Login(IAccountService accountService, Utills.IApp app)
         {
             this.accountService = accountService;
+            this.app = app;
             InitializeComponent();
         }
 
@@ -42,7 +43,7 @@ namespace MobileApp.Views.Account
             if (result.Success)
             {
                 errorMsg.IsVisible = false;
-                App.HandleLoggingIn();
+                app.HandleLoggedin();
             }
             else
             {

@@ -17,23 +17,33 @@ namespace MobileApp
             InitializeComponent();
             var builder = new ContainerBuilder();
             builder.RegisterModule<Utills.Autofac.AppModule>();
-            container = builder.Build();
+            builder.RegisterInstance<Utills.IApp>(this);
 
-            //var login = container.Resolve<Views.Account.Login>();
-            //login.App = this;
-            //MainPage = login;
+            container = builder.Build();
 
             if (Utills.UserStore.IsLoggedIn())
             {
-                MainPage = container.Resolve<Views.MasterDetail.MasterDetailPage>();
+                HandleLoggedin();
             }
             else
             {
-                var login = container.Resolve<Views.Account.Login>();
-                login.App = this;
-                MainPage = login;
+                HandleLoggedOut();
             }
         }
+
+        #region IAppImplementation
+
+        public void HandleLoggedin()
+        {
+            MainPage = container.Resolve<Views.MasterDetail.MasterDetailPage>();
+        }
+
+        public void HandleLoggedOut()
+        {
+            MainPage = new NavigationPage(container.Resolve<Views.Account.Login>());
+        }
+
+        #endregion
 
         protected override void OnStart()
         {
@@ -50,9 +60,5 @@ namespace MobileApp
             // Handle when your app resumes
         }
 
-        public void HandleLoggingIn()
-        {
-            MainPage = container.Resolve<Views.MasterDetail.MasterDetailPage>();
-        }
     }
 }

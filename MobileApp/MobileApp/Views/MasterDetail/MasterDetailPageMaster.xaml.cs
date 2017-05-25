@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using MobileApp.Utills;
 
 namespace MobileApp.Views.MasterDetail
 {
@@ -21,12 +22,13 @@ namespace MobileApp.Views.MasterDetail
 
         public ListView MenuItems { get; private set; }
 
+        public IApp App { get; set; }
+
+        public Services.Account.IAccountService accountService { get; set; }
 
         public MasterDetailPageMaster()
         {
             InitializeComponent();
-
-            BindingContext = new MasterDetailPageMasterViewModel();
             MenuItems = MenuItemsListView;
         }
 
@@ -35,5 +37,9 @@ namespace MobileApp.Views.MasterDetail
             MasterDetailPage.ItemSelected(sender, e);
         }
 
+        private void LogoutClick(object sender, EventArgs e)
+        {
+            App.HandleLoggedOut();
+        }
     }
 }

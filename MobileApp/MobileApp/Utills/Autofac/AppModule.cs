@@ -15,13 +15,14 @@ namespace MobileApp.Utills.Autofac
         {
             RegisterViews(builder);
             RegisterServices(builder);
+            RegisterViewModels(builder);
         }
 
         private void RegisterViews(ContainerBuilder builder)
         {
-            builder.RegisterType<Views.MasterDetail.MasterDetailPage>().AsSelf().SingleInstance();
+            builder.RegisterType<Views.MasterDetail.MasterDetailPage>().AsSelf().InstancePerDependency();
 
-            builder.RegisterType<Views.Account.Login>().AsSelf().SingleInstance();
+            builder.RegisterType<Views.Account.Login>().AsSelf().InstancePerDependency();
 
             builder.RegisterType<Views.Exercises.ExercisesList>().AsSelf().InstancePerDependency();
             builder.RegisterType<Views.Summary.Summary>().AsSelf().InstancePerDependency();
@@ -36,6 +37,10 @@ namespace MobileApp.Utills.Autofac
             builder.RegisterType<AccountService>().As<IAccountService>().InstancePerDependency();
         }
 
+        private void RegisterViewModels(ContainerBuilder builder)
+        {
+            builder.RegisterType<ViewModels.MasterDetail.MasterDetailPageMasterViewModel>().AsSelf().InstancePerDependency();
+        }
 
     }
 }

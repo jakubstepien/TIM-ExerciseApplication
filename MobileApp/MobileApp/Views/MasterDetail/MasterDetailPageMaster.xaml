@@ -11,12 +11,18 @@
             <ListView.Header>
                 <Grid BackgroundColor="#03A9F4">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Column="1" FontSize="30" TextColor="#fff" Grid.Row="1" Text="AppName" Style="{DynamicResource SubtitleStyle}"/>
+                    <Label  FontSize="30" TextColor="#fff"  Text="AppName" Grid.Column="1" Grid.Row="1"/>
+                    <!--<StackLayout HorizontalOptions="Start" Grid.Column="1" Grid.Row="1">
+                    </StackLayout>-->
+                    <StackLayout HorizontalOptions="End" Grid.Column="2" Grid.Row="1">
+                        <Button Text="Logout" TextColor="#fff" Grid.Column="2" Grid.Row="1" Clicked="LogoutClick"/>
+                    </StackLayout>
                 </Grid>
             </ListView.Header>
             <ListView.ItemTemplate>
