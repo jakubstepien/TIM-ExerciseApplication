@@ -1,4 +1,5 @@
-﻿using MobileApp.Services.Account;
+﻿using Autofac;
+using MobileApp.Services.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,20 +18,23 @@ namespace MobileApp.Views.Account
 
         readonly Utills.IApp app;
 
+        readonly ILifetimeScope lifetimeScope;
+
         [Obsolete("Constructor for xaml design")]
         public Login()
         {
         }
 
 
-        public Login(IAccountService accountService, Utills.IApp app)
+        public Login(ILifetimeScope lifetimeScope, IAccountService accountService, Utills.IApp app)
         {
             this.accountService = accountService;
             this.app = app;
+            this.lifetimeScope = lifetimeScope;
             InitializeComponent();
         }
 
-        private void loginClick(object sender, EventArgs e)
+        private void LoginClick(object sender, EventArgs e)
         {
             var email = login.Text;
             var password = this.password.Text;
@@ -51,9 +55,10 @@ namespace MobileApp.Views.Account
             }
         }
 
-        private void registerClick(object sender, EventArgs e)
+        private void RegisterClick(object sender, EventArgs e)
         {
-
+            var registerView = lifetimeScope.Resolve<Register>();
+            Navigation.PushAsync(registerView);
         }
     }
 }

@@ -1,17 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MobileApp.Views.Account.Login">
+             x:Class="MobileApp.Views.Account.Register">
     <ContentPage.Content>
         <Grid Margin="10,0,10,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
             <StackLayout Grid.Row="0" Padding="0,5,0,20">
-                <Label Text="Welcome!" FontSize="24" VerticalOptions="Start"/>
+                <Label Text="Rejestracja" FontSize="24" VerticalOptions="Start"/>
             </StackLayout>
             <StackLayout  Grid.Row="1">
                 <StackLayout >
@@ -22,12 +21,13 @@
                     <Label Margin="5,0,5,0" Text="Hasło" />
                     <Entry x:Name="password" IsPassword="True" />
                 </StackLayout>
-                <StackLayout x:Name="errorMsg" IsVisible="False">
-                    <Label TextColor="#d9534f" Margin="5,0,5,0" Text="Niepoprawny login lub hasło" />
+                <StackLayout>
+                    <Label Margin="5,0,5,0" Text="Powtórz Hasło" />
+                    <Entry x:Name="passwordCompare" IsPassword="True" />
                 </StackLayout>
-                <Button x:Name="LoginButton" Clicked="LoginClick" Text="Zaloguj się"/>
-            </StackLayout>
-            <StackLayout Grid.Row="2" Padding="0,0,0,10">
+                <StackLayout x:Name="errorMsgPanel" IsVisible="False">
+                    <Label x:Name="error" TextColor="#d9534f" Margin="5,0,5,0" />
+                </StackLayout>
                 <Button x:Name="RegisterButton" Clicked="RegisterClick" Text="Zarejestruj się"/>
             </StackLayout>
 
