@@ -241,5 +241,3 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 
-WebApplication/Content/kendo
-WebApplication/Scripts/kendo
