@@ -10,7 +10,7 @@ namespace ApiClients
 {
     public class AccountClient : BaseClient
     {
-        public string GetToken(string email, string password)
+        public Response<string> GetToken(string email, string password)
         {
             var request = GetRequest(HttpMethod.Post, "/Token");
             //json jako Content requesta nie działa musi byc FormUrlEncodedContent
@@ -27,20 +27,25 @@ namespace ApiClients
 
             if (!response.IsSuccessStatusCode)
             {
-                return null;
+                return new Response<string> { Succes = false };
             }
 
             var responseJson = response.Content.ReadAsStringAsync().Result;
             var jObject = JObject.Parse(responseJson);
-            return jObject.GetValue("access_token").ToString();
+
+            return new Response<string>
+            {
+                Succes = false,
+                Data = jObject.GetValue("access_token").ToString()
+            };
         }
 
-        public bool Register(RegisterData data)
+        public Response Register(RegisterRequest data)
         {
-            var request = GetRequest(HttpMethod.Post,"/api/Account/Register");
+            var request = GetRequest(HttpMethod.Post, "/api/Account/Register");
             WriteRequestBodyJson(request, data);
             var response = client.SendAsync(request).Result;
-            return response.IsSuccessStatusCode;
+            return new Response { Succes = response.IsSuccessStatusCode };
         }
     }
 }
