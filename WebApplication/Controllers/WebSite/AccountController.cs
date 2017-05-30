@@ -55,7 +55,7 @@ namespace WebApplication.Controllers.WebSite
             {
                 var identitiy = HttpContext.User;
                 var token = new AccountClient().GetToken(model.Email, model.Password);
-                if (!token.Succes)
+                if (!token.Success)
                 {
                     Login(model.Email, model.Password, token.Data);
                     return Redirect(returnUrl);
@@ -69,7 +69,7 @@ namespace WebApplication.Controllers.WebSite
         {
             var identitiy = HttpContext.User;
             var token = new AccountClient().GetToken(email, password);
-            if (token.Succes)
+            if (token.Success)
             {
                 Login(email, password, token.Data);
                 return true;

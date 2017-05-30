@@ -23,19 +23,20 @@ namespace ApiClients
                 });
             request.Content = formContent;
 
-            var response = client.SendAsync(request).Result;
+            HttpResponseMessage response = null;
+            response = client.SendAsync(request).Result;
 
             if (!response.IsSuccessStatusCode)
             {
-                return new Response<string> { Succes = false };
+                return new Response<string> { Success = false };
             }
 
             var responseJson = response.Content.ReadAsStringAsync().Result;
             var jObject = JObject.Parse(responseJson);
-
+            var expires = jObject.GetValue(".expires").ToString();
             return new Response<string>
             {
-                Succes = false,
+                Success = false,
                 Data = jObject.GetValue("access_token").ToString()
             };
         }
@@ -45,7 +46,7 @@ namespace ApiClients
             var request = GetRequest(HttpMethod.Post, "/api/Account/Register");
             WriteRequestBodyJson(request, data);
             var response = client.SendAsync(request).Result;
-            return new Response { Succes = response.IsSuccessStatusCode };
+            return new Response { Success = response.IsSuccessStatusCode };
         }
     }
 }
