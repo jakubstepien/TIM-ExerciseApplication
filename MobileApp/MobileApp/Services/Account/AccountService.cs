@@ -19,7 +19,8 @@ namespace MobileApp.Services.Account
 
         public ServiceResult Register(string login, string password)
         {
-            throw new NotImplementedException();
+            //TODO
+            return new ServiceResult { Success = true };
         }
     }
 }
