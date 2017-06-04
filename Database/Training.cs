@@ -8,22 +8,21 @@ using System.Threading.Tasks;
 
 namespace Database
 {
-    [Table("Exercise")]
-    public class Exercise
+    [Table("Training")]
+    public class Training
     {
         [Key]
-        public Guid IdExercise { get; set; }
+        public Guid IdTraining { get; set; }
 
         [Required]
         [MaxLength(256)]
         public string Name { get; set; }
 
-        [Required]
-        [MaxLength(256)]
-        public string Description { get; set; }
+        [ForeignKey("User")]
+        public Guid IdUser { get; set; }
 
-        public byte[] Image { get; set; }
+        public ApplicationUser User { get; set; }
 
-        public int CaloriesPerHour { get; set; }
+        public ICollection<TrainingExcercise> Excercises { get; set; } = new HashSet<TrainingExcercise>();
     }
 }

@@ -60,9 +60,9 @@
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="Exercise.cs" />
-    <Compile Include="Migrations\201705180904482_AspIdentity.cs" />
-    <Compile Include="Migrations\201705180904482_AspIdentity.Designer.cs">
-      <DependentUpon>201705180904482_AspIdentity.cs</DependentUpon>
+    <Compile Include="Migrations\201706041236320_InitalCreate.cs" />
+    <Compile Include="Migrations\201706041236320_InitalCreate.Designer.cs">
+      <DependentUpon>201706041236320_InitalCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\ExcerciseRepository.cs" />
@@ -70,14 +70,18 @@
     <Compile Include="Repositories\IExcerciseRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Statistic.cs" />
+    <Compile Include="Training.cs" />
+    <Compile Include="TrainingExcercisecs.cs" />
+    <Compile Include="UserExcercise.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705180904482_AspIdentity.resx">
-      <DependentUpon>201705180904482_AspIdentity.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201706041236320_InitalCreate.resx">
+      <DependentUpon>201706041236320_InitalCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
