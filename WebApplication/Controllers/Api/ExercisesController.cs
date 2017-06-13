@@ -9,24 +9,37 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Database;
+using Database.Repositories;
 
 namespace WebApplication.Controllers.Api
 {
+    [RoutePrefix("api/exercises")]
     public class ExercisesController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ExcerciseRepository db;
+
+        public ExercisesController(ExcerciseRepository db)
+        {
+            this.db = db;
+        }
 
         // GET: api/Exercises
         public IQueryable<Exercise> GetExercise()
         {
-            return db.Exercise;
+            return db.GetAll();
+        }
+
+        [Route("user/{userId}")]
+        public IQueryable<Exercise> GetExerciseForUser(Guid userId)
+        {
+            return db.GetAll();
         }
 
         // GET: api/Exercises/5
         [ResponseType(typeof(Exercise))]
         public IHttpActionResult GetExercise(Guid id)
         {
-            Exercise exercise = db.Exercise.Find(id);
+            Exercise exercise = db.GetById(id);
             if (exercise == null)
             {
                 return NotFound();
@@ -49,7 +62,7 @@ namespace WebApplication.Controllers.Api
                 return BadRequest();
             }
 
-            db.Entry(exercise).State = EntityState.Modified;
+            db.Update(exercise);
 
             try
             {
@@ -57,7 +70,7 @@ namespace WebApplication.Controllers.Api
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ExerciseExists(id))
+                if (!db.Exists(id))
                 {
                     return NotFound();
                 }
@@ -79,7 +92,7 @@ namespace WebApplication.Controllers.Api
                 return BadRequest(ModelState);
             }
 
-            db.Exercise.Add(exercise);
+            db.Add(exercise);
 
             try
             {
@@ -87,7 +100,7 @@ namespace WebApplication.Controllers.Api
             }
             catch (DbUpdateException)
             {
-                if (ExerciseExists(exercise.IdExercise))
+                if (db.Exists(exercise.IdExercise))
                 {
                     return Conflict();
                 }
@@ -104,13 +117,13 @@ namespace WebApplication.Controllers.Api
         [ResponseType(typeof(Exercise))]
         public IHttpActionResult DeleteExercise(Guid id)
         {
-            Exercise exercise = db.Exercise.Find(id);
+            Exercise exercise = db.GetById(id);
             if (exercise == null)
             {
                 return NotFound();
             }
 
-            db.Exercise.Remove(exercise);
+            db.Remove(exercise);
             db.SaveChanges();
 
             return Ok(exercise);
@@ -123,11 +136,6 @@ namespace WebApplication.Controllers.Api
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool ExerciseExists(Guid id)
-        {
-            return db.Exercise.Count(e => e.IdExercise == id) > 0;
         }
     }
 }

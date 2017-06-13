@@ -25,5 +25,7 @@ namespace Database
         public byte[] Image { get; set; }
 
         public int CaloriesPerHour { get; set; }
+
+        public ICollection<UserExcercise> UserExcercise { get; set; }
     }
 }

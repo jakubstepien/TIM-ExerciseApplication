@@ -7,13 +7,18 @@ using System.Threading.Tasks;
 
 namespace Database.Repositories
 {
-    public class GenericRepository<T> : IRepository<T,Guid> where T : class
+    public class GenericRepository<T> : IRepository<T, Guid> where T : class
     {
         protected DbContext db;
 
         public GenericRepository(DbContext context)
         {
             this.db = context;
+        }
+
+        public IQueryable<T> GetAll()
+        {
+            return db.Set<T>();
         }
 
         public bool Add(T entitiy)
@@ -66,7 +71,7 @@ namespace Database.Repositories
                 db.Entry(entity).State = EntityState.Modified;
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -80,6 +85,11 @@ namespace Database.Repositories
         public void Dispose()
         {
             db.Dispose();
+        }
+
+        public bool Exists(Guid id)
+        {
+            return db.Set<T>().Find(id) != null;
         }
     }
 }
