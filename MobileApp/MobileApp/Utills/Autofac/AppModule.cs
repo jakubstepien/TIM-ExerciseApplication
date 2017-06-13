@@ -23,6 +23,7 @@ namespace MobileApp.Utills.Autofac
             builder.RegisterType<Views.MasterDetail.MasterDetailPage>().AsSelf().InstancePerDependency();
 
             builder.RegisterType<Views.Account.Login>().AsSelf().InstancePerDependency();
+            builder.RegisterType<Views.Account.Register>().AsSelf().InstancePerDependency();
 
             builder.RegisterType<Views.Exercises.ExercisesList>().AsSelf().InstancePerDependency();
             builder.RegisterType<Views.Summary.Summary>().AsSelf().InstancePerDependency();

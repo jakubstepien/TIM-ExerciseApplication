@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApiClients.Models.Account
 {
-    public class RegisterData
+    public class RegisterRequest
     {  
         public string Email { get; set; }
 

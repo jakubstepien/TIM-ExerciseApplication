@@ -39,7 +39,7 @@ namespace WebApplication.Controllers.WebSite
             if (TryValidateModel(model))
             {
                 var client = new AccountClient();
-                client.Register(new ApiClients.Models.Account.RegisterData { ConfirmPassword = model.ConfirmPassword, Email = model.Email, Password = model.Password });
+                client.Register(new ApiClients.Models.Account.RegisterRequest { ConfirmPassword = model.ConfirmPassword, Email = model.Email, Password = model.Password });
                 if (SignIn(model.Email, model.Password))
                 {
                     return Redirect("/");
@@ -55,8 +55,9 @@ namespace WebApplication.Controllers.WebSite
             {
                 var identitiy = HttpContext.User;
                 var token = new AccountClient().GetToken(model.Email, model.Password);
-                if (!string.IsNullOrEmpty(token) && SignIn(model.Email, model.Password))
+                if (!token.Success)
                 {
+                    Login(model.Email, model.Password, token.Data);
                     return Redirect(returnUrl);
                 }
             }
@@ -68,19 +69,24 @@ namespace WebApplication.Controllers.WebSite
         {
             var identitiy = HttpContext.User;
             var token = new AccountClient().GetToken(email, password);
-            if (!string.IsNullOrEmpty(token))
+            if (token.Success)
             {
-                UserManager<ApplicationUser, Guid> userManager = new UserManager<ApplicationUser, Guid>(new Providers.GuidUserStore(new ApplicationDbContext()));
-
-                var user = userManager.Find(email, password);
-
-                var authManager = HttpContext.GetOwinContext().Authentication;
-                var identity = userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie).Result;
-                identity.AddClaim(new Claim(ControllerHelper.TokenClaimType, token));
-                authManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
+                Login(email, password, token.Data);
                 return true;
             }
             return false;
+        }
+
+        private void Login(string email, string password, string token)
+        {
+            UserManager<ApplicationUser, Guid> userManager = new UserManager<ApplicationUser, Guid>(new Providers.GuidUserStore(new ApplicationDbContext()));
+
+            var user = userManager.Find(email, password);
+
+            var authManager = HttpContext.GetOwinContext().Authentication;
+            var identity = userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie).Result;
+            identity.AddClaim(new Claim(ControllerHelper.TokenClaimType, token));
+            authManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
         }
 
         public ActionResult SignOut()
