@@ -12,12 +12,12 @@ namespace MobileApp.Services.Account
         public ServiceResult Login(string login, string password)
         {
             //TODO wysłać posta do web api
-            var client = new ApiClients.AccountClient();
-            var tokenResponse = client.GetToken(login, password);
-            if (tokenResponse.Success)
-            {
-                UserStore.SaveUser(login, tokenResponse.Data, DateTime.Now.AddMonths(2));
-            }
+            //var client = new ApiClients.AccountClient();
+            //var tokenResponse = client.GetToken(login, password);
+            //if (tokenResponse.Success)
+            //{
+            //    UserStore.SaveUser(login, tokenResponse.Data, DateTime.Now.AddMonths(2));
+            //}
             return new ServiceResult { Success = true };
         }
 

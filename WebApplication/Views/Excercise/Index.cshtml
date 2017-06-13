@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="demo-section k-content wide">
+    <table class="table" style="box-sizing: border-box;">
+        <thead>
+            <tr>
+                <td class="col-md-2">Nazwa</td>
+                <td class="col-md-4">Opis</td>
+                <td class="col-md-2">Zdjecie</td>
+                <td class="col-md-3">Kalorie na godzine</td>
+                <td class="col-md-1"></td>
+            </tr>
+        </thead>
+        <tbody id="listView"></tbody>
+    </table>
+    <div id="pager" class="k-pager-wrap"></div>
+</div>
+
+<script type="text/x-kendo-template" id="template">
+    <tr>
+        <td>
+            #:Name#
+        </td>
+        <td>
+            #:Description#
+        </td>
+        <td>
+            @*<img src="../content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />*@
+            Obraz do dodania
+        </td>
+        <td>
+            #:CaloriesPerHour#
+        </td>
+        <td class="text-center">
+            <div class="btn btn-default inline">Edytuj</div>
+            <div class="btn btn-default inline">Usuń</div>
+        </td>
+
+    </tr>
+</script>
+
+@section Scripts{
+
+    <script>
+        $(function () {
+            var dataSource = new kendo.data.DataSource({
+                transport: {
+                    read: {
+                        url: "@Url.Action("GetExercise","Exercises", new { httproute = "" })",
+                        dataType: "json"
+                    }
+                },
+                pageSize: 21
+            });
+
+            $("#pager").kendoPager({
+                dataSource: dataSource
+            });
+
+            $("#listView").kendoListView({
+                dataSource: dataSource,
+                template: kendo.template($("#template").html())
+            });
+        });
+    </script>
+
+}
