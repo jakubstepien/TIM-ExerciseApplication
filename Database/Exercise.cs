@@ -26,6 +26,6 @@ namespace Database
 
         public int CaloriesPerHour { get; set; }
 
-        public ICollection<UserExcercise> UserExcercise { get; set; }
+        public ICollection<UserExcercise> UserExcercise { get; set; } = new HashSet<UserExcercise>();
     }
 }

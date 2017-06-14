@@ -16,12 +16,12 @@ namespace Database.Repositories
             this.db = context;
         }
 
-        public IQueryable<T> GetAll()
+        public virtual IQueryable<T> GetAll()
         {
             return db.Set<T>();
         }
 
-        public bool Add(T entitiy)
+        public virtual bool Add(T entitiy)
         {
             try
             {
@@ -34,18 +34,18 @@ namespace Database.Repositories
             }
         }
 
-        public T GetById(Guid id)
+        public virtual T GetById(Guid id)
         {
             return db.Set<T>().Find(id);
         }
 
-        public bool Remove(Guid id)
+        public virtual bool Remove(Guid id)
         {
             var entity = db.Set<T>().Find(id);
             return Remove(entity);
         }
 
-        public bool Remove(T entity)
+        public virtual bool Remove(T entity)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace Database.Repositories
             }
         }
 
-        public bool Update(T entity)
+        public virtual bool Update(T entity)
         {
             //zakładam że nie jest attached w db
             try
@@ -77,17 +77,17 @@ namespace Database.Repositories
             }
         }
 
-        public void SaveChanges()
+        public virtual void SaveChanges()
         {
             db.SaveChanges();
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             db.Dispose();
         }
 
-        public bool Exists(Guid id)
+        public virtual bool Exists(Guid id)
         {
             return db.Set<T>().Find(id) != null;
         }

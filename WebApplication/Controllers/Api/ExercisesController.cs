@@ -10,33 +10,44 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Database;
 using Database.Repositories;
+using WebApplication.Models;
+using ApiClients.Model.DTO;
+using WebApplication.Helpers;
 
 namespace WebApplication.Controllers.Api
 {
     [RoutePrefix("api/exercises")]
     public class ExercisesController : ApiController
     {
-        private ExcerciseRepository db;
+        private IExcerciseRepository db;
 
-        public ExercisesController(ExcerciseRepository db)
+        public ExercisesController(IExcerciseRepository db)
         {
             this.db = db;
         }
 
         // GET: api/Exercises
-        public IQueryable<Exercise> GetExercise()
+        public IEnumerable<ExerciseDTO> GetExercise()
         {
-            return db.GetAll();
+            return db.GetAll()
+                .Select(s => new ExerciseDTO
+                {
+                    IdExercise = s.IdExercise,
+                    CaloriesPerHour = s.CaloriesPerHour,
+                    Description = s.Description,
+                    Image = s.Image,
+                    Name = s.Name
+                });
         }
 
         [Route("user/{userId}")]
-        public IQueryable<Exercise> GetExerciseForUser(Guid userId)
+        public IEnumerable<ExerciseDTO> GetExerciseForUser(Guid userId)
         {
-            return db.GetAll();
+            return db.GetExercisesForUser(userId).Select(s => s.ToDTO());
         }
 
         // GET: api/Exercises/5
-        [ResponseType(typeof(Exercise))]
+        [ResponseType(typeof(ExerciseDTO))]
         public IHttpActionResult GetExercise(Guid id)
         {
             Exercise exercise = db.GetById(id);
@@ -45,13 +56,15 @@ namespace WebApplication.Controllers.Api
                 return NotFound();
             }
 
-            return Ok(exercise);
+            return Ok(exercise.ToDTO());
         }
 
         // PUT: api/Exercises/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutExercise(Guid id, Exercise exercise)
+        public IHttpActionResult PutExercise(Guid id, ExerciseDTO exercise)
         {
+            var entity = exercise.ToEntity();
+            Validate(entity);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -62,7 +75,7 @@ namespace WebApplication.Controllers.Api
                 return BadRequest();
             }
 
-            db.Update(exercise);
+            db.Update(entity);
 
             try
             {
@@ -84,15 +97,19 @@ namespace WebApplication.Controllers.Api
         }
 
         // POST: api/Exercises
-        [ResponseType(typeof(Exercise))]
-        public IHttpActionResult PostExercise(Exercise exercise)
+        [Route("user/{userId}/")]
+        [ResponseType(typeof(ExerciseDTO))]
+        public IHttpActionResult PostExercise(Guid userId, ExerciseDTO exercise)
         {
+            var exerciseEntity = exercise.ToEntity();
+            exerciseEntity.UserExcercise.Add(new UserExcercise { UserId = userId });
+            Validate(exerciseEntity);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Add(exercise);
+            db.Add(exerciseEntity);
 
             try
             {
@@ -110,20 +127,34 @@ namespace WebApplication.Controllers.Api
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = exercise.IdExercise }, exercise);
+            return Ok(exercise);
         }
 
         // DELETE: api/Exercises/5
-        [ResponseType(typeof(Exercise))]
-        public IHttpActionResult DeleteExercise(Guid id)
+        [Route("{id}/user/{userId}/")]
+        [ResponseType(typeof(ExerciseDTO))]
+        public IHttpActionResult DeleteExerciseFromUser(Guid id,Guid userId)
         {
             Exercise exercise = db.GetById(id);
             if (exercise == null)
             {
                 return NotFound();
             }
-
-            db.Remove(exercise);
+            if(exercise.UserExcercise.Any(a => a.UserId == userId))
+            {
+                if(exercise.UserExcercise.Count != 1)
+                {
+                    exercise.UserExcercise = exercise.UserExcercise.Where(W => W.UserId != userId).ToArray();
+                }
+                else
+                {
+                    db.Remove(exercise);
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
             db.SaveChanges();
 
             return Ok(exercise);
