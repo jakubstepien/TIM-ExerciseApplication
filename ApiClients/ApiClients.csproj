@@ -37,7 +37,10 @@
     <Compile Include="AuthorizedDataClient.cs" />
     <Compile Include="BaseClient.cs" />
     <Compile Include="AccountClient.cs" />
-    <Compile Include="Models\Account\RegisterRequest.cs" />
+    <Compile Include="Model\Account\RegisterRequest.cs" />
+    <Compile Include="Model\DTO\ExerciseDTO.cs" />
+    <Compile Include="Model\DTO\TrainingDTO.cs" />
+    <Compile Include="Model\DTO\TrainingExcerciseDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Response.cs" />
     <Compile Include="ValuesClient.cs" />
