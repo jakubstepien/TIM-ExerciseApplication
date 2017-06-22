@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
 }
 
-
+@using Microsoft.AspNet.Identity;
 <h2>Ćwiczenia</h2>
 <input class="k-button k-primary pull-right" id="undo" value="Dodaj ćwiczenie" type="submit" />
 <div id="window"></div>
@@ -38,8 +38,8 @@
             #:CaloriesPerHour#
         </td>
         <td class="text-center">
-            <div class="btn btn-default inline" data-id="#=IdExercise#">Edytuj</div>
-            <div class="btn btn-default inline" data-id="#=IdExercise#">Usuń</div>
+            <div class="btn btn-default inline edit-excercise" data-id="#=IdExercise#">Edytuj</div>
+            <div class="btn btn-default inline delete-excercise" data-id="#=IdExercise#">Usuń</div>
         </td>
 
     </tr>
@@ -109,6 +109,17 @@
                         }
                     })
                 }
+            });
+
+            $(document).on('click', '.delete-excercise', function () {
+                var userId = "@User.Identity.GetUserId()";
+                var id = this.dataset["id"];
+                var url = '/api/Exercises/' + id + '/user/' + userId;
+                var deletexhr = $.ajax({
+                    url: url,
+                    type: 'DELETE'
+                });
+                deletexhr.done(function () { location.reload();})
             });
         });
     </script>
