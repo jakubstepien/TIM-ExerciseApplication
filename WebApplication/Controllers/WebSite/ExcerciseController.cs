@@ -13,5 +13,10 @@ namespace WebApplication.Controllers.WebSite
         {
             return View();
         }
+
+        public ActionResult AddExercise()
+        {
+            return View();
+        }
     }
 }

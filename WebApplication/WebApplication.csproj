@@ -2519,6 +2519,7 @@
     <Content Include="Scripts\kendo\2017.2.504\cultures\kendo.culture.af.min.js.map" />
     <Content Include="Scripts\kendo\2017.2.504\cultures\kendo.culture.af-ZA.min.js.map" />
     <Content Include="Views\Excercise\Index.cshtml" />
+    <Content Include="Views\Excercise\AddExercise.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2561,7 +2562,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50533</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50533/</IISUrl>
+          <IISUrl>http://localhost:8080/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

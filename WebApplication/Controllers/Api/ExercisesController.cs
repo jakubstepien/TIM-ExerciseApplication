@@ -101,6 +101,10 @@ namespace WebApplication.Controllers.Api
         [ResponseType(typeof(ExerciseDTO))]
         public IHttpActionResult PostExercise(Guid userId, ExerciseDTO exercise)
         {
+            if (exercise.IdExercise == Guid.Empty)
+            {
+                exercise.IdExercise = Guid.NewGuid();
+            }
             var exerciseEntity = exercise.ToEntity();
             exerciseEntity.UserExcercise.Add(new UserExcercise { UserId = userId });
             Validate(exerciseEntity);
