@@ -265,10 +265,12 @@
     <Compile Include="Helpers\ExerciseHelper.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ExcerciseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Providers\GuidUserStore.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Services\ImageService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2519,7 +2521,7 @@
     <Content Include="Scripts\kendo\2017.2.504\cultures\kendo.culture.af.min.js.map" />
     <Content Include="Scripts\kendo\2017.2.504\cultures\kendo.culture.af-ZA.min.js.map" />
     <Content Include="Views\Excercise\Index.cshtml" />
-    <Content Include="Views\Excercise\AddExercise.cshtml" />
+    <Content Include="Views\Excercise\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

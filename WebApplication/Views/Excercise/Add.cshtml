@@ -1,0 +1,45 @@
+﻿@model WebApplication.Models.ExcerciseModel
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "AddExercise";
+}
+
+<form action="@Html.Raw(Url.Content("/") + "api/exercises/user/" + User.Identity.GetUserId())" method="post" id="add-form">
+    @Html.ValidationSummary(true)
+    <input type="text" id="IdExercise" name="IdExercise" value="@Guid.NewGuid()" style="display:none" />
+    <div class="form-group">
+        <label>
+            <span class="block"> @Html.DisplayNameFor(m => m.Name)</span>
+            @Html.TextBoxFor(m => m.Name, new { @class = "k-textbox" })
+        </label>
+        <div>
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+    </div>
+    <div class="form-group">
+        <label>
+            <span class="block"> @Html.DisplayNameFor(m => m.Description)</span>
+            @Html.TextBoxFor(m => m.Description, new { @class = "k-textbox" })
+        </label>
+        <div>
+            @Html.ValidationMessageFor(m => m.Description)
+        </div>
+    </div>
+    <div class="form-group">
+        <label>
+            <span class="block"> @Html.DisplayNameFor(m => m.CaloriesPerHour)</span>
+            @Html.TextBoxFor(m => m.CaloriesPerHour, new { @class = "k-textbox", data_val_number = "Liczba kalori musi być liczbą całkowitą." })
+        </label>
+        <div>
+            @Html.ValidationMessageFor(m => m.CaloriesPerHour)
+        </div>
+    </div>
+    <label class="k-button">
+        Dodaj zdjęcie
+        <input type="file" name="ImageName" id="ImageName" style="display:none" />
+    </label>
+    <img id="img" />
+    <div class="k-button k-primary" id="add-btn">"Dodaj ćwiczenie"</div>
+</form>
+
+

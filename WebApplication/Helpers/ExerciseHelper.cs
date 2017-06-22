@@ -17,7 +17,8 @@ namespace WebApplication.Helpers
                 Description = exercise.Description,
                 IdExercise = exercise.IdExercise,
                 Image = exercise.Image,
-                Name = exercise.Name
+                Name = exercise.Name,
+                ImageName = exercise.ImageName
             };
         }
 
@@ -29,7 +30,8 @@ namespace WebApplication.Helpers
                 Description = exercise.Description,
                 IdExercise = exercise.IdExercise,
                 Image = exercise.Image,
-                Name = exercise.Name
+                Name = exercise.Name,
+                ImageName = exercise.ImageName
             };
         }
     }

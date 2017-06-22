@@ -16,6 +16,8 @@ namespace ApiClients.Model.DTO
 
         public byte[] Image { get; set; }
 
+        public string ImageName { get; set; }
+
         public int CaloriesPerHour { get; set; }
     }
 }

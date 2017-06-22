@@ -25,3 +25,14 @@ textarea {
   #login-from label > span {
        display:block
     }
+.block{
+    display:block;
+}
+
+.exercise-img{
+    height:150px;
+}
+
+.table.exercise tr td{
+    text-align:center;
+}

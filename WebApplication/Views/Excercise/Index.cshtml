@@ -3,10 +3,12 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
+<h2>Ćwiczenia</h2>
+<input class="k-button k-primary pull-right" id="undo" value="Dodaj ćwiczenie" type="submit" />
+<div id="window"></div>
 <div class="demo-section k-content wide">
-    <table class="table" style="box-sizing: border-box;">
+    <table class="table exercise" style="box-sizing: border-box;">
         <thead>
             <tr>
                 <td class="col-md-2">Nazwa</td>
@@ -30,15 +32,14 @@
             #:Description#
         </td>
         <td>
-            @*<img src="../content/web/foods/#= ProductID #.jpg" alt="#: ProductName # image" />*@
-            Obraz do dodania
+            # if(ImageName){#<img class="exercise-img" src="../images/#=IdExercise#/#=ImageName#" />#}#
         </td>
         <td>
             #:CaloriesPerHour#
         </td>
         <td class="text-center">
-            <div class="btn btn-default inline">Edytuj</div>
-            <div class="btn btn-default inline">Usuń</div>
+            <div class="btn btn-default inline" data-id="#=IdExercise#">Edytuj</div>
+            <div class="btn btn-default inline" data-id="#=IdExercise#">Usuń</div>
         </td>
 
     </tr>
@@ -65,6 +66,49 @@
             $("#listView").kendoListView({
                 dataSource: dataSource,
                 template: kendo.template($("#template").html())
+            });
+
+            var myWindow = $("#window"), undo = $("#undo");
+
+            function onClose() {
+                undo.fadeIn();
+            }
+
+            myWindow.kendoWindow({
+                width: "615px",
+                title: "Dodaj ćwiczenie",
+                content: '@Url.Action("Add", "Excercise")',
+                close: onClose,
+                visible: false
+            });
+
+            undo.click(function () {
+                myWindow.data("kendoWindow").open();
+                $.validator.unobtrusive.parse($('#add-form'));
+                undo.fadeOut();
+            });
+
+            $(document).on('click','#add-btn',function () {
+                var form = $('#add-form');
+                var formData = new FormData(form[0]);
+                var formArray = form.serializeArray();
+                formArray.push({ name: "ImageName", value: $("#ImageName")[0].files[0].name })
+                if (form.valid()) {
+                    var imagexhr = $.ajax({
+                        url: "@Url.Action("FileUpload", "Excercise")",
+                        type: "POST",
+                        data: formData,
+                        async: false,
+                        cache: false,
+                        contentType: false,
+                        processData: false
+                    });
+                    imagexhr.done(function (data) {
+                        if (data.Success) {
+                            $.post(form.attr("action"), formArray, function () { location.reload(); })
+                        }
+                    })
+                }
             });
         });
     </script>

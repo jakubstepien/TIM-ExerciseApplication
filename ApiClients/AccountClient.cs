@@ -36,7 +36,7 @@ namespace ApiClients
             var expires = jObject.GetValue(".expires").ToString();
             return new Response<string>
             {
-                Success = false,
+                Success = true,
                 Data = jObject.GetValue("access_token").ToString()
             };
         }

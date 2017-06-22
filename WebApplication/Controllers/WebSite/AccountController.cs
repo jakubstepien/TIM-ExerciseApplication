@@ -55,7 +55,7 @@ namespace WebApplication.Controllers.WebSite
             {
                 var identitiy = HttpContext.User;
                 var token = new AccountClient().GetToken(model.Email, model.Password);
-                if (!token.Success)
+                if (token.Success)
                 {
                     Login(model.Email, model.Password, token.Data);
                     return Redirect(returnUrl);

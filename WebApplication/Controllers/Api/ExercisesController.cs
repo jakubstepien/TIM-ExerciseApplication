@@ -13,6 +13,8 @@ using Database.Repositories;
 using WebApplication.Models;
 using ApiClients.Model.DTO;
 using WebApplication.Helpers;
+using WebApplication.Services;
+using System.Web;
 
 namespace WebApplication.Controllers.Api
 {
@@ -20,24 +22,31 @@ namespace WebApplication.Controllers.Api
     public class ExercisesController : ApiController
     {
         private IExcerciseRepository db;
+        ImageService imageService;
 
-        public ExercisesController(IExcerciseRepository db)
+        public ExercisesController(IExcerciseRepository db, ImageService imageService)
         {
             this.db = db;
+            this.imageService = imageService;
         }
+
 
         // GET: api/Exercises
         public IEnumerable<ExerciseDTO> GetExercise()
         {
-            return db.GetAll()
+            var exercises = db.GetAll()
                 .Select(s => new ExerciseDTO
                 {
                     IdExercise = s.IdExercise,
                     CaloriesPerHour = s.CaloriesPerHour,
                     Description = s.Description,
                     Image = s.Image,
-                    Name = s.Name
-                });
+                    Name = s.Name,
+                    ImageName = s.ImageName
+                }).ToList();
+
+            exercises.ForEach(f => SaveExerciseImageToDrive(f));
+            return exercises;
         }
 
         [Route("user/{userId}")]
@@ -55,7 +64,7 @@ namespace WebApplication.Controllers.Api
             {
                 return NotFound();
             }
-
+            SaveExerciseImageToDrive(exercise);
             return Ok(exercise.ToDTO());
         }
 
@@ -112,7 +121,10 @@ namespace WebApplication.Controllers.Api
             {
                 return BadRequest(ModelState);
             }
-
+            if (!string.IsNullOrEmpty(exercise.ImageName))
+            {
+                exerciseEntity.Image = imageService.GetImageBytes(new HttpServerUtilityWrapper(HttpContext.Current.Server), exercise.IdExercise, exercise.ImageName);
+            }
             db.Add(exerciseEntity);
 
             try
@@ -137,16 +149,16 @@ namespace WebApplication.Controllers.Api
         // DELETE: api/Exercises/5
         [Route("{id}/user/{userId}/")]
         [ResponseType(typeof(ExerciseDTO))]
-        public IHttpActionResult DeleteExerciseFromUser(Guid id,Guid userId)
+        public IHttpActionResult DeleteExerciseFromUser(Guid id, Guid userId)
         {
             Exercise exercise = db.GetById(id);
             if (exercise == null)
             {
                 return NotFound();
             }
-            if(exercise.UserExcercise.Any(a => a.UserId == userId))
+            if (exercise.UserExcercise.Any(a => a.UserId == userId))
             {
-                if(exercise.UserExcercise.Count != 1)
+                if (exercise.UserExcercise.Count != 1)
                 {
                     exercise.UserExcercise = exercise.UserExcercise.Where(W => W.UserId != userId).ToArray();
                 }
@@ -162,6 +174,16 @@ namespace WebApplication.Controllers.Api
             db.SaveChanges();
 
             return Ok(exercise);
+        }
+
+        private void SaveExerciseImageToDrive(ExerciseDTO exercise)
+        {
+            imageService.SaveImage(new HttpServerUtilityWrapper(HttpContext.Current.Server), exercise.Image, exercise.IdExercise, exercise.ImageName);
+        }
+
+        private void SaveExerciseImageToDrive(Exercise exercise)
+        {
+            imageService.SaveImage(new HttpServerUtilityWrapper(HttpContext.Current.Server), exercise.Image, exercise.IdExercise, exercise.ImageName);
         }
 
         protected override void Dispose(bool disposing)

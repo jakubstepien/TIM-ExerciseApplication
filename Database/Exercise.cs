@@ -24,6 +24,9 @@ namespace Database
 
         public byte[] Image { get; set; }
 
+        [MaxLength(256)]
+        public string ImageName { get; set; }
+
         public int CaloriesPerHour { get; set; }
 
         public ICollection<UserExcercise> UserExcercise { get; set; } = new HashSet<UserExcercise>();
