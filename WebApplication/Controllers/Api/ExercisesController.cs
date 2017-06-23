@@ -32,8 +32,6 @@ namespace WebApplication.Controllers.Api
             this.imageService = imageService;
         }
 
-
-
         // GET: api/Exercises
         public IEnumerable<ExerciseDTO> GetExercise()
         {
