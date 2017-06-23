@@ -197,7 +197,7 @@ namespace WebApplication.Controllers.Api
                 var userExcercise = userExerciseRepo.Get(userId, id);
                 userExcercise.IsFavourite = !userExcercise.IsFavourite;
                 userExerciseRepo.SaveChanges();
-                return Ok();
+                return Ok(userExcercise.IsFavourite);
             }
             catch (Exception e)
             {
