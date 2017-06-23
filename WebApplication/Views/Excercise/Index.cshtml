@@ -92,7 +92,11 @@
                 var form = $('#add-form');
                 var formData = new FormData(form[0]);
                 var formArray = form.serializeArray();
-                formArray.push({ name: "ImageName", value: $("#ImageName")[0].files[0].name })
+                var image = $("#ImageName");
+                if (image[0].files[0]) {
+                    var value = $("#ImageName")[0].files[0].name;
+                }
+                formArray.push({ name: "ImageName", value: value })
                 if (form.valid()) {
                     var imagexhr = $.ajax({
                         url: "@Url.Action("FileUpload", "Excercise")",

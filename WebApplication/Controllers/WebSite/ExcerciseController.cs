@@ -8,6 +8,7 @@ using WebApplication.Services;
 
 namespace WebApplication.Controllers.WebSite
 {
+    [Authorize]
     public class ExcerciseController : Controller
     {
         ImageService imageService;
@@ -37,7 +38,7 @@ namespace WebApplication.Controllers.WebSite
                 return Json(new { Success = succes });
 
             }
-            return Json(new { Success = false });
+            return Json(new { Success = true });
 
         }
     }
