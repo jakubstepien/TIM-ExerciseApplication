@@ -11,11 +11,11 @@
     <table class="table exercise" style="box-sizing: border-box;">
         <thead>
             <tr>
-                <td class="col-md-2">Nazwa</td>
+                <td class="col-md-1">Nazwa</td>
                 <td class="col-md-4">Opis</td>
                 <td class="col-md-2">Zdjecie</td>
                 <td class="col-md-3">Kalorie na godzine</td>
-                <td class="col-md-1"></td>
+                <td class="col-md-2"></td>
             </tr>
         </thead>
         <tbody id="listView"></tbody>
@@ -48,7 +48,7 @@
 @section Scripts{
 
     <script>
-        $(function () {
+        $(document).ready(function () {
             var dataSource = new kendo.data.DataSource({
                 transport: {
                     read: {
@@ -71,6 +71,11 @@
             var myWindow = $("#window"), undo = $("#undo");
 
             function onClose() {
+                $('#IdExercise').val(null);
+                $('#Name').val(null);
+                $('#Description').val(null);
+                $('#CaloriesPerHour').val(null);
+                $('#ImageName').val(null);
                 undo.fadeIn();
             }
 
@@ -83,9 +88,38 @@
             });
 
             undo.click(function () {
+                $('#add-btn').show();
+                $('#update-btn').hide();
+                openform()
+            });
+
+            function openform() {
                 myWindow.data("kendoWindow").open();
                 $.validator.unobtrusive.parse($('#add-form'));
                 undo.fadeOut();
+            }
+
+            $(document).on('click', '.edit-excercise',function () {
+                var id = this.dataset['id'];
+                var jqueryxhr = $.get("api/Exercises/" + id);
+                jqueryxhr.done(function (data) {
+                    if (data) {
+                        $('#IdExercise').val(data.IdExercise);
+                        $('#Name').val(data.Name);
+                        $('#Description').val(data.Description);
+                        $('#CaloriesPerHour').val(data.CaloriesPerHour);
+                        if (!data.ImageName) {
+                            $('#ImageName').val(data.ImageName);
+                        } else {
+                            $('#ImageName').val('');
+
+                        }
+                        $('#add-btn').hide();
+                        $('#update-btn').show();
+                        openform();
+                    }
+
+                });
             });
 
             $(document).on('click','#add-btn',function () {
@@ -113,6 +147,39 @@
                         }
                     })
                 }
+            });
+
+            $(document).on('click','#update-btn',function () {
+                var id = $('#IdExercise').val();
+                var form = $('#add-form');
+                var formData = new FormData(form[0]);
+                var formArray = form.serializeArray();
+                var image = $("#ImageName");
+                if (image[0].files[0]) {
+                    var value = $("#ImageName")[0].files[0].name;
+                }
+                formArray.push({ name: "ImageName", value: value })
+                if (form.valid()) {
+                    var imagexhr = $.ajax({
+                        url: "@Url.Action("FileUpload", "Excercise")",
+                        type: "POST",
+                        data: formData,
+                        async: false,
+                        cache: false,
+                        contentType: false,
+                        processData: false
+                });
+                imagexhr.done(function (data) {
+                    if (data.Success) {
+                        var updatexhr = $.ajax({
+                            url: "api/Exercises/" + id,
+                            type: "PUT",
+                            data: formArray,
+                        });
+                        updatexhr.done(function(){location.reload()})
+                    }
+                })
+            }
             });
 
             $(document).on('click', '.delete-excercise', function () {

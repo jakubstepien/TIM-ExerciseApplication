@@ -20,6 +20,18 @@ namespace Database.Repositories
                 .SingleOrDefault(s => s.IdExercise == id);
         }
 
+        public Exercise GetById(Guid id, bool asNoTracking)
+        {
+            if (asNoTracking)
+            {
+                return db.Set<Exercise>()
+                    .AsNoTracking()
+                    .Include(i => i.UserExcercise)
+                    .SingleOrDefault(s => s.IdExercise == id);
+            }
+            return GetById(id);
+        }
+
         public IEnumerable<Exercise> GetExercisesForUser(Guid IdUser)
         {
             return db.Set<Exercise>()

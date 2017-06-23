@@ -8,7 +8,7 @@ namespace WebApplication.Services
 {
     public class ImageService
     {
-        public bool SaveImage(HttpServerUtilityBase server, HttpPostedFileBase file, Guid id)
+        public bool SaveImage(HttpServerUtilityBase server, HttpPostedFileBase file, Guid id, string fileName)
         {
             if (file != null)
             {
@@ -37,7 +37,10 @@ namespace WebApplication.Services
                 }
 
             }
-            return false;
+            else
+            {
+                return File.Exists(GetFilePath(server, id, fileName));
+            }
         }
 
         private static string GetFilePath(HttpServerUtilityBase server, Guid id, string pic)
@@ -65,7 +68,7 @@ namespace WebApplication.Services
 
         public void SaveImage(HttpServerUtilityBase server, byte[] file, Guid id, string fileName)
         {
-            if (!string.IsNullOrEmpty(fileName))
+            if (!string.IsNullOrEmpty(fileName) && file != null)
             {
                 var path = GetFolderPath(server, id);
                 if (!Directory.Exists(path))

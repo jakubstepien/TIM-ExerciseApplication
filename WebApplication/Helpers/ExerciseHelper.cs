@@ -18,7 +18,7 @@ namespace WebApplication.Helpers
                 IdExercise = exercise.IdExercise,
                 Image = exercise.Image,
                 Name = exercise.Name,
-                ImageName = exercise.ImageName
+                ImageName = exercise.ImageName,
             };
         }
 

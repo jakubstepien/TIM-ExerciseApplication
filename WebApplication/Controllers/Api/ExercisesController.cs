@@ -73,6 +73,7 @@ namespace WebApplication.Controllers.Api
         public IHttpActionResult PutExercise(Guid id, ExerciseDTO exercise)
         {
             var entity = exercise.ToEntity();
+            var oldEntity = db.GetById(id, true);
             Validate(entity);
             if (!ModelState.IsValid)
             {
@@ -83,7 +84,15 @@ namespace WebApplication.Controllers.Api
             {
                 return BadRequest();
             }
-
+            if (!string.IsNullOrEmpty(exercise.ImageName))
+            {
+                entity.Image = imageService.GetImageBytes(new HttpServerUtilityWrapper(HttpContext.Current.Server), exercise.IdExercise, exercise.ImageName);
+            }
+            else
+            {
+                entity.Image = oldEntity.Image;
+                entity.ImageName = oldEntity.ImageName;
+            }
             db.Update(entity);
 
             try

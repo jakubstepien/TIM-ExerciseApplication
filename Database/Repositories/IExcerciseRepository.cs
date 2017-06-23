@@ -9,5 +9,6 @@ namespace Database.Repositories
     public interface IExcerciseRepository : IRepository<Exercise, Guid>
     {
         IEnumerable<Exercise> GetExercisesForUser(Guid IdUser);
+        Exercise GetById(Guid id, bool v);
     }
 }

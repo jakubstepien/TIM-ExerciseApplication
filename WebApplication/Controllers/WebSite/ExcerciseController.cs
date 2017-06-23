@@ -30,11 +30,11 @@ namespace WebApplication.Controllers.WebSite
         }
 
         [HttpPost]
-        public ActionResult FileUpload(HttpPostedFileBase ImageName, Guid IdExercise)
+        public ActionResult FileUpload(HttpPostedFileBase ImageName, Guid IdExercise, string fileName)
         {
-            if (ImageName != null)
+            if (ImageName != null || !string.IsNullOrEmpty(fileName))
             {
-                var succes = imageService.SaveImage(Server, ImageName, IdExercise);
+                var succes = imageService.SaveImage(Server, ImageName, IdExercise, fileName);
                 return Json(new { Success = succes });
 
             }
