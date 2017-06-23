@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ApiClients
 {
     public class AccountClient : BaseClient
     {
-        public Response<string> GetToken(string email, string password)
+        public async Task<Response<string>> GetToken(string email, string password)
         {
             var request = GetRequest(HttpMethod.Post, "/Token");
             //json jako Content requesta nie działa musi byc FormUrlEncodedContent
@@ -24,14 +25,14 @@ namespace ApiClients
             request.Content = formContent;
 
             HttpResponseMessage response = null;
-            response = client.SendAsync(request).Result;
+            response = await client.SendAsync(request);
 
             if (!response.IsSuccessStatusCode)
             {
                 return new Response<string> { Success = false };
             }
 
-            var responseJson = response.Content.ReadAsStringAsync().Result;
+            var responseJson = await response.Content.ReadAsStringAsync();
             var jObject = JObject.Parse(responseJson);
             var expires = jObject.GetValue(".expires").ToString();
             return new Response<string>
@@ -41,11 +42,13 @@ namespace ApiClients
             };
         }
 
-        public Response Register(RegisterRequest data)
+        public async Task<Response> Register(RegisterRequest data)
         {
             var request = GetRequest(HttpMethod.Post, "/api/Account/Register");
             WriteRequestBodyJson(request, data);
-            var response = client.SendAsync(request).Result;
+            var response = await client.SendAsync(request);
+            var error = string.Empty;
+            var content = await response.Content.ReadAsByteArrayAsync();
             return new Response { Success = response.IsSuccessStatusCode };
         }
     }

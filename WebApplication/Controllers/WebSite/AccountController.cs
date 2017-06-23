@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication.Models;
@@ -34,13 +35,14 @@ namespace WebApplication.Controllers.WebSite
         }
 
         [HttpPost]
-        public ActionResult Register(RegisterBindingModel model)
+        public async Task<ActionResult> Register(RegisterBindingModel model)
         {
             if (TryValidateModel(model))
             {
                 var client = new AccountClient();
-                client.Register(new ApiClients.Models.Account.RegisterRequest { ConfirmPassword = model.ConfirmPassword, Email = model.Email, Password = model.Password });
-                if (SignIn(model.Email, model.Password))
+                var result = await client.Register(new ApiClients.Models.Account.RegisterRequest { ConfirmPassword = model.ConfirmPassword, Email = model.Email, Password = model.Password });
+                var signedIn = await SignIn(model.Email, model.Password);
+                if (signedIn)
                 {
                     return Redirect("/");
                 }
@@ -49,15 +51,15 @@ namespace WebApplication.Controllers.WebSite
         }
 
         [HttpPost]
-        public ActionResult Login(LoginBindingModel model, string returnUrl = "/")
+        public async Task<ActionResult> Login(LoginBindingModel model, string returnUrl = "/")
         {
             if (TryValidateModel(model))
             {
                 var identitiy = HttpContext.User;
-                var token = new AccountClient().GetToken(model.Email, model.Password);
+                var token = await new AccountClient().GetToken(model.Email, model.Password);
                 if (token.Success)
                 {
-                    Login(model.Email, model.Password, token.Data);
+                    await Login(model.Email, model.Password, token.Data);
                     return Redirect(returnUrl);
                 }
             }
@@ -65,26 +67,26 @@ namespace WebApplication.Controllers.WebSite
             return View(model);
         }
 
-        private bool SignIn(string email, string password)
+        private async Task<bool> SignIn(string email, string password)
         {
             var identitiy = HttpContext.User;
-            var token = new AccountClient().GetToken(email, password);
+            var token = await new AccountClient().GetToken(email, password);
             if (token.Success)
             {
-                Login(email, password, token.Data);
+                await Login(email, password, token.Data);
                 return true;
             }
             return false;
         }
 
-        private void Login(string email, string password, string token)
+        private async Task Login(string email, string password, string token)
         {
             UserManager<ApplicationUser, Guid> userManager = new UserManager<ApplicationUser, Guid>(new Providers.GuidUserStore(new ApplicationDbContext()));
 
             var user = userManager.Find(email, password);
 
             var authManager = HttpContext.GetOwinContext().Authentication;
-            var identity = userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie).Result;
+            var identity = await userManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
             identity.AddClaim(new Claim(ControllerHelper.TokenClaimType, token));
             authManager.SignIn(new AuthenticationProperties { IsPersistent = false }, identity);
         }
