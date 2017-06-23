@@ -47,9 +47,14 @@ namespace ApiClients
             var request = GetRequest(HttpMethod.Post, "/api/Account/Register");
             WriteRequestBodyJson(request, data);
             var response = await client.SendAsync(request);
-            var error = string.Empty;
-            var content = await response.Content.ReadAsByteArrayAsync();
-            return new Response { Success = response.IsSuccessStatusCode };
+            string[] errors = null;
+            if (!response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var jObject = JObject.Parse(content);
+                errors = jObject["ModelState"].First.Values().Select(s => s.ToString()).ToArray();
+            }
+            return new Response<string[]> { Success = response.IsSuccessStatusCode, Message = string.Join("<br/>", errors), Data = errors };
         }
     }
 }

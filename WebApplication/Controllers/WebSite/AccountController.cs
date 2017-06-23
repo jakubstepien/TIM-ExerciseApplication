@@ -41,11 +41,19 @@ namespace WebApplication.Controllers.WebSite
             {
                 var client = new AccountClient();
                 var result = await client.Register(new ApiClients.Models.Account.RegisterRequest { ConfirmPassword = model.ConfirmPassword, Email = model.Email, Password = model.Password });
-                var signedIn = await SignIn(model.Email, model.Password);
-                if (signedIn)
+                if (result.Success)
                 {
-                    return Redirect("/");
+                    var signedIn = await SignIn(model.Email, model.Password);
+                    if (signedIn)
+                    {
+                        return Redirect("/");
+                    }
                 }
+                else
+                {
+                    ViewBag.Errors = result.Message;
+                }
+                
             }
             return View(model);
         }
@@ -63,7 +71,7 @@ namespace WebApplication.Controllers.WebSite
                     return Redirect(returnUrl);
                 }
             }
-
+            ViewBag.Errors = "Nieprawidłowy login lub hasło";
             return View(model);
         }
 

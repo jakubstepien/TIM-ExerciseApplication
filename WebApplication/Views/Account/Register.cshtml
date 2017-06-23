@@ -5,8 +5,16 @@
 @model WebApplication.Models.RegisterBindingModel
 
 <h2>Rejestracja</h2>
+@if (!string.IsNullOrEmpty(ViewBag.Errors))
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @Html.Raw(ViewBag.Errors)
+    </div>
+}
 @using (Html.BeginForm("Register", "Account", new { returnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "register-from" }))
 {
+
 
     @Html.ValidationSummary(true)
     <div class="form-group">

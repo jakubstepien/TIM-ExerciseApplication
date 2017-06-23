@@ -39,6 +39,7 @@
     <Compile Include="AccountClient.cs" />
     <Compile Include="ExcerciseClient.cs" />
     <Compile Include="Model\Account\RegisterRequest.cs" />
+    <Compile Include="Model\Account\RegisterResponse.cs" />
     <Compile Include="Model\DTO\ExerciseDTO.cs" />
     <Compile Include="Model\DTO\TrainingDTO.cs" />
     <Compile Include="Model\DTO\TrainingExcerciseDTO.cs" />
