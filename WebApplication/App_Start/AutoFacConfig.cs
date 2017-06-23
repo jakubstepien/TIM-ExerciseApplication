@@ -55,6 +55,7 @@ namespace WebApplication
         {
             builder.RegisterType<Database.ApplicationDbContext>().As<System.Data.Entity.DbContext>().InstancePerRequest();
             builder.RegisterType<Database.Repositories.ExcerciseRepository>().As<Database.Repositories.IExcerciseRepository>().InstancePerRequest();
+            builder.RegisterType<Database.Repositories.UserExcerciseRepository>().As<Database.Repositories.IUserExcerciseRepository>().InstancePerRequest();
         }
 
         private static void RegisterServices(ContainerBuilder builder)

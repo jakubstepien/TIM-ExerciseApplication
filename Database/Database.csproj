@@ -74,6 +74,8 @@
     <Compile Include="Repositories\IExcerciseRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IUserExcerciseRepository.cs" />
+    <Compile Include="Repositories\UserExcerciseRepository.cs" />
     <Compile Include="Statistic.cs" />
     <Compile Include="Training.cs" />
     <Compile Include="TrainingExcercisecs.cs" />

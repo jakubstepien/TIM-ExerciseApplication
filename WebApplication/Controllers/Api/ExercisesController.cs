@@ -21,20 +21,23 @@ namespace WebApplication.Controllers.Api
     [RoutePrefix("api/exercises")]
     public class ExercisesController : ApiController
     {
-        private IExcerciseRepository db;
+        private IExcerciseRepository excerciseRepo;
+        private IUserExcerciseRepository userExerciseRepo;
         ImageService imageService;
 
-        public ExercisesController(IExcerciseRepository db, ImageService imageService)
+        public ExercisesController(IExcerciseRepository db, IUserExcerciseRepository userExerciseRepo, ImageService imageService)
         {
-            this.db = db;
+            this.excerciseRepo = db;
+            this.userExerciseRepo = userExerciseRepo;
             this.imageService = imageService;
         }
+
 
 
         // GET: api/Exercises
         public IEnumerable<ExerciseDTO> GetExercise()
         {
-            var exercises = db.GetAll()
+            var exercises = excerciseRepo.GetAll()
                 .Select(s => new ExerciseDTO
                 {
                     IdExercise = s.IdExercise,
@@ -52,14 +55,14 @@ namespace WebApplication.Controllers.Api
         [Route("user/{userId}")]
         public IEnumerable<ExerciseDTO> GetExerciseForUser(Guid userId)
         {
-            return db.GetExercisesForUser(userId).Select(s => s.ToDTO());
+            return excerciseRepo.GetExercisesForUser(userId).Select(s => s.ToDTO());
         }
 
         // GET: api/Exercises/5
         [ResponseType(typeof(ExerciseDTO))]
         public IHttpActionResult GetExercise(Guid id)
         {
-            Exercise exercise = db.GetById(id);
+            Exercise exercise = excerciseRepo.GetById(id);
             if (exercise == null)
             {
                 return NotFound();
@@ -73,7 +76,7 @@ namespace WebApplication.Controllers.Api
         public IHttpActionResult PutExercise(Guid id, ExerciseDTO exercise)
         {
             var entity = exercise.ToEntity();
-            var oldEntity = db.GetById(id, true);
+            var oldEntity = excerciseRepo.GetById(id, true);
             Validate(entity);
             if (!ModelState.IsValid)
             {
@@ -93,15 +96,15 @@ namespace WebApplication.Controllers.Api
                 entity.Image = oldEntity.Image;
                 entity.ImageName = oldEntity.ImageName;
             }
-            db.Update(entity);
+            excerciseRepo.Update(entity);
 
             try
             {
-                db.SaveChanges();
+                excerciseRepo.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!db.Exists(id))
+                if (!excerciseRepo.Exists(id))
                 {
                     return NotFound();
                 }
@@ -134,15 +137,15 @@ namespace WebApplication.Controllers.Api
             {
                 exerciseEntity.Image = imageService.GetImageBytes(new HttpServerUtilityWrapper(HttpContext.Current.Server), exercise.IdExercise, exercise.ImageName);
             }
-            db.Add(exerciseEntity);
+            excerciseRepo.Add(exerciseEntity);
 
             try
             {
-                db.SaveChanges();
+                excerciseRepo.SaveChanges();
             }
             catch (DbUpdateException)
             {
-                if (db.Exists(exercise.IdExercise))
+                if (excerciseRepo.Exists(exercise.IdExercise))
                 {
                     return Conflict();
                 }
@@ -160,7 +163,7 @@ namespace WebApplication.Controllers.Api
         [ResponseType(typeof(ExerciseDTO))]
         public IHttpActionResult DeleteExerciseFromUser(Guid id, Guid userId)
         {
-            Exercise exercise = db.GetById(id);
+            Exercise exercise = excerciseRepo.GetById(id);
             if (exercise == null)
             {
                 return NotFound();
@@ -173,16 +176,33 @@ namespace WebApplication.Controllers.Api
                 }
                 else
                 {
-                    db.Remove(exercise);
+                    excerciseRepo.Remove(exercise);
                 }
             }
             else
             {
                 return BadRequest();
             }
-            db.SaveChanges();
+            excerciseRepo.SaveChanges();
 
             return Ok(exercise);
+        }
+
+        [HttpPost]
+        [Route("favourite/{id}/user/{userId}/")]
+        public IHttpActionResult FavouriteExercise(Guid id, Guid userId)
+        {
+            try
+            {
+                var userExcercise = userExerciseRepo.Get(userId, id);
+                userExcercise.IsFavourite = !userExcercise.IsFavourite;
+                userExerciseRepo.SaveChanges();
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
         }
 
         private void SaveExerciseImageToDrive(ExerciseDTO exercise)
@@ -199,7 +219,7 @@ namespace WebApplication.Controllers.Api
         {
             if (disposing)
             {
-                db.Dispose();
+                excerciseRepo.Dispose();
             }
             base.Dispose(disposing);
         }
