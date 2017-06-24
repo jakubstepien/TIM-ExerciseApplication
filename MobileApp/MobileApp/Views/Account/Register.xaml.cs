@@ -44,7 +44,7 @@ namespace MobileApp.Views.Account
             }
             else
             {
-                //TODO
+                error.Text = registerResult.Message;
             }
         }
 
