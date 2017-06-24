@@ -47,7 +47,8 @@
     <Compile Include="Utills\Autofac\AppModule.cs" />
     <Compile Include="Services\ServiceResult.cs" />
     <Compile Include="Utills\IApp.cs" />
-    <Compile Include="Utills\TimeInputHelper.cs" />
+    <Compile Include="Utills\TimeInput\TimeInputHelper.cs" />
+    <Compile Include="Utills\TimeInput\TimeEntry.cs" />
     <Compile Include="Utills\UserStore.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Exercises\ExerciseList.cs" />

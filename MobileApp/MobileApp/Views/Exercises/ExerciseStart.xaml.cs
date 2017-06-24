@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using MobileApp.Utills;
+using MobileApp.Utills.TimeInput;
 
 namespace MobileApp.Views.Exercises
 {
@@ -135,13 +136,5 @@ namespace MobileApp.Views.Exercises
             canGoBack = !val;
             NavigationPage.SetHasBackButton(this, !val);
         }
-
-        private void TimeTextChanged(object sender, TextChangedEventArgs e)
-        {
-            var timeString = Utills.TimeInputHelper.GetTimeString(e.OldTextValue, e.NewTextValue);
-            (sender as Entry).Text = timeString;
-        }
-
-
     }
 }

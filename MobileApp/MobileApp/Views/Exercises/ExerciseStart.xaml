@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:timeInput="clr-namespace:MobileApp.Utills.TimeInput"
              x:Class="MobileApp.Views.Exercises.ExerciseStart">
     <ContentPage.Content>
         <ScrollView>
@@ -31,9 +32,9 @@
                     <Label Grid.Row="0" Grid.Column="0" VerticalOptions="Center" Text="Liczba serii"/>
                     <Entry x:Name="series" Grid.Row="0" VerticalOptions="Center" Grid.Column="1" Keyboard="Keyboard.Numeric"/>
                     <Label Grid.Row="1" Grid.Column="0" VerticalOptions="Center" Text="Interwał"/>
-                    <Entry x:Name="interval" Grid.Row="1" VerticalOptions="Center" Grid.Column="1" Keyboard="Keyboard.Numeric" TextChanged="TimeTextChanged" />
+                    <timeInput:TimeEntry x:Name="interval" Grid.Row="1" VerticalOptions="Center" Grid.Column="1" Keyboard="Keyboard.Numeric" />
                     <Label Grid.Row="2" Grid.Column="0" VerticalOptions="Center" Text="Czas trwania ćwiczenia"/>
-                    <Entry x:Name="seriesSpan" Grid.Row="2" VerticalOptions="Center" Grid.Column="1" Keyboard="Keyboard.Numeric" TextChanged="TimeTextChanged"/>
+                    <timeInput:TimeEntry x:Name="seriesSpan" Grid.Row="2" VerticalOptions="Center" Grid.Column="1" Keyboard="Keyboard.Numeric" />
                 </Grid>
                 <StackLayout Grid.Row="3">
                     <Button x:Name="startButton" Text="Rozpocznij ćwiczenie" HorizontalOptions="Center" Clicked="Started" />

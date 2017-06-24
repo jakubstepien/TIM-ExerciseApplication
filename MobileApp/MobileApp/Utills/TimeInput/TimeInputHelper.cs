@@ -4,28 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MobileApp.Utills
+namespace MobileApp.Utills.TimeInput
 {
     static class TimeInputHelper
     {
-        public static string GetTimeString(string oldTextValue, string newTextValue)
-        {
-            bool removedChar = !string.IsNullOrEmpty(oldTextValue) && oldTextValue.Contains("s") && !newTextValue.Contains("s");
-            var nums = newTextValue.ToCharArray().Where(w => char.IsNumber(w)).ToList();
-            if (removedChar)
-            {
-                nums.RemoveAt(nums.Count - 1);
-            }
-            nums = ToSixChars(nums);
-            nums.Insert(2, 'h');
-            nums.Insert(3, ' ');
-            nums.Insert(6, 'm');
-            nums.Insert(7, ' ');
-            nums.Insert(10, 's');
-            return string.Concat(nums);
-        }
-
-        private static List<char> ToSixChars(List<char> nums, char charToFill = '0')
+        public static List<char> ToSixChars(List<char> nums, char charToFill = '0')
         {
             if (nums.Count > 6)
             {
