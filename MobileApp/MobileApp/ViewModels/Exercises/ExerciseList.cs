@@ -17,6 +17,7 @@ namespace MobileApp.ViewModels.Exercises
             set { excercises = value; OnPropertyChanged(); }
         }
 
+
         public ExerciseList()
         {
             excercises = new ObservableCollection<ExerciseListElement>(new ExerciseListElement[] {
@@ -27,5 +28,6 @@ namespace MobileApp.ViewModels.Exercises
                 new ExerciseListElement {Name = "Piaty", DetailsVisable = false,  },
             });
         }
+
     }
 }

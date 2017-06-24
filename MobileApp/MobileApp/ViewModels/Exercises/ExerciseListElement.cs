@@ -10,6 +10,8 @@ namespace MobileApp.ViewModels.Exercises
 {
     public class ExerciseListElement : BaseViewModel
     {
+        const string NotFavouriedIcon = "ic_favorite_border_black_24dp.png";
+        const string FavouriedIcon = "ic_favorite_black_24dp.png";
 
         public ExerciseListElement()
         {
@@ -18,12 +20,21 @@ namespace MobileApp.ViewModels.Exercises
             SelectCommand = new Command(() => { });
         }
 
+        public Guid Id { get; set; } = Guid.NewGuid();
+
         private string name;
         public string Name
         {
             get { return name; }
             set { name = value; OnPropertyChanged(); }
         }
+
+        private bool favouriteIcon;
+        public string FavouriteIcon
+        {
+            get { return favouriteIcon ? FavouriedIcon : NotFavouriedIcon; }
+        }
+
 
         private bool detailsVisable;
 
@@ -41,6 +52,8 @@ namespace MobileApp.ViewModels.Exercises
 
         private void SetFavourite()
         {
+            favouriteIcon = !favouriteIcon;
+            OnPropertyChanged("FavouriteIcon");
         }
 
     }

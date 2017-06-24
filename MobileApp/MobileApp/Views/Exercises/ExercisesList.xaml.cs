@@ -25,5 +25,13 @@ namespace MobileApp.Views.Exercises
             this.BindingContext = new ViewModels.Exercises.ExerciseList();
         }
 
+        private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var exercie = e.Item as ViewModels.Exercises.ExerciseListElement;
+            if(exercie != null)
+            {
+                exercie.DetailsVisable = !exercie.DetailsVisable;
+            }
+        }
     }
 }

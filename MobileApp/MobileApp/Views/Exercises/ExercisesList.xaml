@@ -4,7 +4,7 @@
              x:Class="MobileApp.Views.Exercises.ExercisesList">
     <ContentPage.Content>
         <StackLayout>
-            <ListView ItemsSource="{Binding Excercises}" VerticalOptions="FillAndExpand" HasUnevenRows="True">
+            <ListView ItemsSource="{Binding Excercises}"  VerticalOptions="FillAndExpand" HasUnevenRows="True" ItemTapped="ListView_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -18,11 +18,11 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Column="0" x:Name="name" Text="{Binding Name}" />
-                                    <Button x:Name="favBtn" Grid.Column="1" Command="{Binding FavouriteCommand}" Text="Dodaj do ulubionych"/>
-                                    <Button x:Name="expandBtn" Grid.Column="2" Command="{Binding ExpandCommand}" Text="▼" />
+                                    <Button Grid.Column="1" Command="{Binding FavouriteCommand}" Image="{Binding FavouriteIcon, Mode=TwoWay}" WidthRequest="50" 
+                                            BorderRadius="100"
+                                            BackgroundColor="AliceBlue"/>
                                 </Grid>
                                 <Grid Grid.Row="1" IsVisible="{Binding DetailsVisable}">
                                     <Grid.ColumnDefinitions>
