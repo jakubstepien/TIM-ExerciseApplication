@@ -19,7 +19,7 @@ namespace MobileApp.Utills.TimeInput
             this.Text = GetTimeString(e.OldTextValue, e.NewTextValue);
         }
 
-        public static string GetTimeString(string oldTextValue, string newTextValue)
+        private string GetTimeString(string oldTextValue, string newTextValue)
         {
             bool removedChar = !string.IsNullOrEmpty(oldTextValue) && oldTextValue.Contains("s") && !newTextValue.Contains("s");
             var nums = newTextValue.ToCharArray().Where(w => char.IsNumber(w)).ToList();
