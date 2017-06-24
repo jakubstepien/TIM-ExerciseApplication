@@ -30,14 +30,14 @@ namespace MobileApp.Views.Account
             InitializeComponent();
         }
 
-        private void RegisterClick(object sender, EventArgs e)
+        private async void RegisterClick(object sender, EventArgs e)
         {
             if (!CanRegister())
             {
                 return;
             }
 
-            var registerResult = accountService.Register(login.Text, password.Text);
+            var registerResult = await accountService.Register(login.Text, password.Text);
             if (registerResult.Success)
             {
                 app.HandleLoggedin();

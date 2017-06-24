@@ -14,6 +14,7 @@ namespace MobileApp
 
         public App()
         {
+            ApiClients.BaseClient.Init("http://10.0.2.2:8080");
             InitializeComponent();
             var builder = new ContainerBuilder();
             builder.RegisterModule<Utills.Autofac.AppModule>();

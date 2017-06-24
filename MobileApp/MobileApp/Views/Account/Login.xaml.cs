@@ -34,7 +34,7 @@ namespace MobileApp.Views.Account
             InitializeComponent();
         }
 
-        private void LoginClick(object sender, EventArgs e)
+        private async void LoginClick(object sender, EventArgs e)
         {
             var email = login.Text;
             var password = this.password.Text;
@@ -43,7 +43,7 @@ namespace MobileApp.Views.Account
                 errorMsg.IsVisible = true;
                 return;
             }
-            var result = accountService.Login(email, password);
+            var result = await accountService.Login(email, password);
             if (result.Success)
             {
                 errorMsg.IsVisible = false;

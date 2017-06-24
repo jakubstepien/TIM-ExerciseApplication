@@ -11,7 +11,7 @@ namespace ApiClients
 {
     public class AccountClient : BaseClient
     {
-        public async Task<Response<string>> GetToken(string email, string password)
+        public async Task<Response<TokenResponse>> GetToken(string email, string password)
         {
             var request = GetRequest(HttpMethod.Post, "/Token");
             //json jako Content requesta nie działa musi byc FormUrlEncodedContent
@@ -29,32 +29,34 @@ namespace ApiClients
 
             if (!response.IsSuccessStatusCode)
             {
-                return new Response<string> { Success = false };
+                return new Response<TokenResponse> { Success = false };
             }
 
             var responseJson = await response.Content.ReadAsStringAsync();
             var jObject = JObject.Parse(responseJson);
             var expires = jObject.GetValue(".expires").ToString();
-            return new Response<string>
+            var token = jObject.GetValue("access_token").ToString();
+            var validTo = DateTime.Parse(expires);
+            return new Response<TokenResponse>
             {
                 Success = true,
-                Data = jObject.GetValue("access_token").ToString()
+                Data = new TokenResponse { Token = token, ValidTo = validTo }
             };
         }
 
-        public async Task<Response> Register(RegisterRequest data)
+        public async Task<Response> Register(RegisterRequest data, string errorSeparator)
         {
             var request = GetRequest(HttpMethod.Post, "/api/Account/Register");
             WriteRequestBodyJson(request, data);
             var response = await client.SendAsync(request);
-            string[] errors = null;
+            string[] errors = new string[0];
             if (!response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
                 var jObject = JObject.Parse(content);
                 errors = jObject["ModelState"].First.Values().Select(s => s.ToString()).ToArray();
             }
-            return new Response<string[]> { Success = response.IsSuccessStatusCode, Message = string.Join("<br/>", errors), Data = errors };
+            return new Response<string[]> { Success = response.IsSuccessStatusCode, Message = string.Join(errorSeparator, errors), Data = errors };
         }
     }
 }

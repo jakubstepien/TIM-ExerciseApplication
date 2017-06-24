@@ -9,8 +9,8 @@ namespace MobileApp.Services.Account
 {
     public interface IAccountService
     {
-        ServiceResult Login(string login, string password);
+        Task<ServiceResult> Login(string login, string password);
 
-        ServiceResult Register(string login, string password);
+        Task<ServiceResult> Register(string login, string password);
     }
 }

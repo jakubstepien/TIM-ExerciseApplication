@@ -40,7 +40,7 @@ namespace WebApplication.Controllers.WebSite
             if (TryValidateModel(model))
             {
                 var client = new AccountClient();
-                var result = await client.Register(new ApiClients.Models.Account.RegisterRequest { ConfirmPassword = model.ConfirmPassword, Email = model.Email, Password = model.Password });
+                var result = await client.Register(new ApiClients.Models.Account.RegisterRequest { ConfirmPassword = model.ConfirmPassword, Email = model.Email, Password = model.Password }, "<br/>");
                 if (result.Success)
                 {
                     var signedIn = await SignIn(model.Email, model.Password);
@@ -67,7 +67,7 @@ namespace WebApplication.Controllers.WebSite
                 var token = await new AccountClient().GetToken(model.Email, model.Password);
                 if (token.Success)
                 {
-                    await Login(model.Email, model.Password, token.Data);
+                    await Login(model.Email, model.Password, token.Data.Token);
                     return Redirect(returnUrl);
                 }
             }
@@ -81,7 +81,7 @@ namespace WebApplication.Controllers.WebSite
             var token = await new AccountClient().GetToken(email, password);
             if (token.Success)
             {
-                await Login(email, password, token.Data);
+                await Login(email, password, token.Data.Token);
                 return true;
             }
             return false;
