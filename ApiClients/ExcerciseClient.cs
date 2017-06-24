@@ -31,28 +31,28 @@ namespace ApiClients
         public async Task<Response> UpdateExercise(Guid id, ExerciseDTO exercise)
         {
             string url = "api/Exercises/" + id + "/";
-            var response = await SendRequest(HttpMethod.Get, url);
+            var response = await SendRequest(HttpMethod.Put, url);
             return response;
         }
 
         public async Task<Response> AddExercise(Guid userId, ExerciseDTO exercise)
         {
             string url = "api/exercises/user/" + userId + "/";
-            var response = await SendRequest(HttpMethod.Get, url);
+            var response = await SendRequest(HttpMethod.Post, url);
             return response;
         }
 
         public async Task<Response> DeleteExerciseFromUser(Guid id, Guid userId)
         {
             string url = "api/exercises/" + id + "/user/" + userId + "/";
-            var response = await SendRequest(HttpMethod.Get, url);
+            var response = await SendRequest(HttpMethod.Delete, url);
             return response;
         }
 
         public async Task<Response> FavouriteExercise(Guid id, Guid userId)
         {
             string url = "api/favourite/" + id + "/user/" + userId + "/";
-            var response = await SendRequest(HttpMethod.Get, url);
+            var response = await SendRequest(HttpMethod.Post, url);
             return response;
         }
     }
