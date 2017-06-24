@@ -3,8 +3,69 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileApp.Views.Summary.Summary">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Summary" />
-        </StackLayout>
+        <Grid Padding="5, 0, 5, 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Od" Grid.Row="0" Grid.Column="0" VerticalOptions="Center" />
+                <DatePicker x:Name="after" Grid.Row="0" Grid.Column="1" VerticalOptions="Center" />
+                <Label Text="Do" Grid.Row="1" Grid.Column="0" VerticalOptions="Center" />
+                <DatePicker x:Name="before" Grid.Row="1" Grid.Column="1" VerticalOptions="Center" />
+                <StackLayout Grid.Row="2">
+                    <Button Text="Szukaj" Clicked="Search"/>
+                </StackLayout>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Text="{Binding ExcerciseTotal}"/>
+                <Label Grid.Row="1" Text="{Binding CalloriesTotal}"/>
+                <ListView Grid.Row="2" VerticalOptions="FillAndExpand" ItemsSource="{Binding FinishedExcercises}" Margin="0, 10, 0, 0">
+                    <ListView.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="Data" />
+                            <Label Grid.Column="1" Text="Nazwa" />
+                            <Label Grid.Column="2" Text="Liczba kalorii" />
+                        </Grid>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Text="{Binding Date}" />
+                                    <Label Grid.Column="1" Text="{Binding Name}" />
+                                    <Label Grid.Column="2" Text="{Binding Callories}" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Grid>
+        
     </ContentPage.Content>
 </ContentPage>

@@ -43,6 +43,8 @@
     <Compile Include="Services\Excercise\ExcerciseService.cs" />
     <Compile Include="Services\Excercise\IExcerciseService.cs" />
     <Compile Include="Services\ITestService.cs" />
+    <Compile Include="Services\Statistics\IStatisticsService.cs" />
+    <Compile Include="Services\Statistics\StatisticsService.cs" />
     <Compile Include="Services\TestService.cs" />
     <Compile Include="Utills\Autofac\AppModule.cs" />
     <Compile Include="Services\ServiceResult.cs" />
@@ -57,6 +59,8 @@
     <Compile Include="ViewModels\MasterDetail\MenuItem\MasterDetailMenuSubItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\MasterDetail\MasterDetailPageMasterViewModel.cs" />
+    <Compile Include="ViewModels\Statistics\FinishedExcercise.cs" />
+    <Compile Include="ViewModels\Statistics\SummaryViewModel.cs" />
     <Compile Include="Views\Account\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>

@@ -17,6 +17,8 @@ using WebApplication.Services;
 using System.Web;
 using Microsoft.AspNet.Identity;
 using ApiClients.Models.DTO;
+using ApiClients.Models.Account;
+using ApiClients.Models;
 
 namespace WebApplication.Controllers.Api
 {
@@ -225,6 +227,19 @@ namespace WebApplication.Controllers.Api
             });
             statisticsRepo.SaveChanges();
             return Ok();
+        }
+
+        [Route("statistics/user/{userId}/")]
+        public IEnumerable<FinishedExerciseDTO> PostFinishedExerciseByDate(Guid userId, FinishedExerciseRequest request)
+        {
+            var finishedExcercises = statisticsRepo.GetAllBetweenDate(request.After, request.Before).Select(s => new FinishedExerciseDTO
+            {
+                Date = s.Date,
+                Callories = s.Callories,
+                Name = s.ExerciseName,
+                UserId = s.IdUser
+            });
+            return finishedExcercises;
         }
 
         private void SaveExerciseImageToDrive(ExerciseDTO exercise)

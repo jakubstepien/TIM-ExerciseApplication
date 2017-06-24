@@ -12,5 +12,13 @@ namespace Database.Repositories
         public StatisticRepository(DbContext context) : base(context)
         {
         }
+
+        public IEnumerable<Statistic> GetAllBetweenDate(DateTime after, DateTime before)
+        {
+            return db.Set<Statistic>()
+                .AsNoTracking()
+                .Where(w => DbFunctions.TruncateTime(w.Date) <= before && DbFunctions.TruncateTime(w.Date) >= after)
+                .ToArray();
+        }
     }
 }

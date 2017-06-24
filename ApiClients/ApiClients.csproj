@@ -38,6 +38,7 @@
     <Compile Include="BaseClient.cs" />
     <Compile Include="AccountClient.cs" />
     <Compile Include="ExcerciseClient.cs" />
+    <Compile Include="Models\FinishedExerciseRequest.cs" />
     <Compile Include="Models\Account\RegisterRequest.cs" />
     <Compile Include="Models\Account\RegisterResponse.cs" />
     <Compile Include="Models\Account\TokenResponse.cs" />

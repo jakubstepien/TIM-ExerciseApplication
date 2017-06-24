@@ -2,6 +2,7 @@
 using MobileApp.Services;
 using MobileApp.Services.Account;
 using MobileApp.Services.Excercise;
+using MobileApp.Services.Statistics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,8 @@ namespace MobileApp.Utills.Autofac
         {
             builder.RegisterType<AccountService>().As<IAccountService>().InstancePerDependency();
             builder.RegisterType<ExcerciseService>().As<IExcerciseService>().InstancePerDependency();
+            builder.RegisterType<StatisticsService>().As<IStatisticsService>().InstancePerDependency();
+
         }
 
         private void RegisterViewModels(ContainerBuilder builder)
