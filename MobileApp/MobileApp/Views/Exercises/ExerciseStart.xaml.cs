@@ -86,8 +86,19 @@ namespace MobileApp.Views.Exercises
                     {
                         if (currentSeries == allSeries)
                         {
-                            currentState.Text = "Koniec ćwiczenia";
+                            currentState.Text = "Koniec ćwiczenia, zpisywanie zmian.";
                             currentTime.Text = "";
+                            Task.Factory.StartNew(async () =>
+                            {
+                                var saveResult = await service.SavedFinishedExercise(exercise.Name, CalculateTotalCallories(allSeries, seriesTime));
+                                Device.BeginInvokeOnMainThread(() =>
+                                {
+                                    if (saveResult.Success)
+                                    {
+                                        currentState.Text = "Wykonane ćwiczenie zostało zapisane.";
+                                    }
+                                });
+                            });
                             ToggleExercising(false);
                             return false;
                         }
@@ -110,6 +121,12 @@ namespace MobileApp.Views.Exercises
                     return true;
                 });
             }
+        }
+
+        private decimal CalculateTotalCallories(int series, int seriesSeconds)
+        {
+            var totalSeconds = (decimal) series * seriesSeconds;
+            return exercise.CaloriesPerHour * totalSeconds / 3600m;
         }
 
         private void ToggleExercising(bool val)

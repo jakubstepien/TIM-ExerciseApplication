@@ -14,5 +14,7 @@ namespace MobileApp.Services.Excercise
         Task<ServiceResult<bool>> SetAsFavourite(Guid excerciseId);
 
         string GetImageSource(Guid excerciseId, string imageName);
+
+        Task<ServiceResult> SavedFinishedExercise(string exerciseName, decimal calories);
     }
 }

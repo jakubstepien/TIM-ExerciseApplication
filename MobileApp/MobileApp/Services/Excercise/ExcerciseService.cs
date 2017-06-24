@@ -54,5 +54,18 @@ namespace MobileApp.Services.Excercise
         {
             return app.ApiServer + "/images/" + excerciseId.ToString() + "/" + imageName;
         }
+
+        public async Task<ServiceResult> SavedFinishedExercise(string exerciseName, decimal calories)
+        {
+            var client = new ApiClients.ExcerciseClient(token);
+            var response = await client.AddFinishedExercise(userId, new ApiClients.Models.DTO.FinishedExerciseDTO
+            {
+                UserId = userId,
+                Callories = calories,
+                Date = DateTime.Now,
+                Name = exerciseName
+            });
+            return new ServiceResult { Success = response.Success, Message = response.Message };
+        }
     }
 }
