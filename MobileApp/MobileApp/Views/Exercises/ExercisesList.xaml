@@ -19,7 +19,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" x:Name="name" Text="{Binding Name}" />
+                                    <Label VerticalTextAlignment="Center" Grid.Column="0" x:Name="name" Text="{Binding Name}" />
                                     <Button Grid.Column="1" Command="{Binding FavouriteCommand}" Image="{Binding FavouriteIcon, Mode=TwoWay}" WidthRequest="50" 
                                             BorderRadius="100"
                                             BackgroundColor="AliceBlue"/>
@@ -29,7 +29,7 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" Text="Details"/>
+                                    <Label VerticalTextAlignment="Center"  Grid.Column="0" Text="{Binding Description}"/>
                                     <Button Grid.Column="1" Command="{Binding SelectCommand}" Text="Wybierz" />
                                 </Grid>
                             </Grid>
