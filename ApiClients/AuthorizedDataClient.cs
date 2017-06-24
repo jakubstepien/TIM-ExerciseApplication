@@ -16,27 +16,48 @@ namespace ApiClients
             this.token = token;
         }
 
-        protected async Task<Response<T>> SendRequest<T>(HttpMethod method, string url)
+        protected async Task<Response<TResponseType>> SendRequest<TResponseType>(HttpMethod method, string url)
         {
             HttpResponseMessage response = await Send(method, url);
+            return await ParseResponse<TResponseType>(response);
+        }
+
+        protected async Task<Response<TResponseType>> SendRequest<TResponseType,TRequestBody>(HttpMethod method, string url, TRequestBody data)
+        {
+            HttpResponseMessage response = await Send(method, url, data);
+            return await ParseResponse<TResponseType>(response);
+        }
+
+        private async Task<Response<TResponseType>> ParseResponse<TResponseType>(HttpResponseMessage response)
+        {
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
-                var deserilizedObject = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(content);
-                return new Response<T> { Success = true, Data = deserilizedObject };
+                var deserilizedObject = Newtonsoft.Json.JsonConvert.DeserializeObject<TResponseType>(content);
+                return new Response<TResponseType> { Success = true, Data = deserilizedObject };
             }
             else
             {
-                return new Response<T> { Success = false, Message = response.StatusCode.ToString() };
+                return new Response<TResponseType> { Success = false, Message = response.StatusCode.ToString() };
             }
         }
 
         protected async Task<Response> SendRequest(HttpMethod method, string url)
         {
             HttpResponseMessage response = await Send(method, url);
+            return ParseResponse(response);
+        }
+
+        protected async Task<Response> SendRequest<TRequestBody>(HttpMethod method, string url, TRequestBody data)
+        {
+            HttpResponseMessage response = await Send(method, url, data);
+            return ParseResponse(response);
+        }
+
+        private Response ParseResponse(HttpResponseMessage response)
+        {
             if (response.IsSuccessStatusCode)
             {
-                var content = await response.Content.ReadAsStringAsync();
                 return new Response { Success = true };
             }
             else
@@ -48,6 +69,14 @@ namespace ApiClients
         private async Task<HttpResponseMessage> Send(HttpMethod method, string url)
         {
             var request = GetAuthorizedRequest(method, url);
+            var response = await client.SendAsync(request);
+            return response;
+        }
+
+        private async Task<HttpResponseMessage> Send<TRequestBody>(HttpMethod method, string url, TRequestBody data)
+        {
+            var request = GetAuthorizedRequest(method, url);
+            WriteRequestBodyJson(request, data);
             var response = await client.SendAsync(request);
             return response;
         }

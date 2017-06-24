@@ -1,4 +1,5 @@
 ﻿using ApiClients.Model.DTO;
+using ApiClients.Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,14 +32,14 @@ namespace ApiClients
         public async Task<Response> UpdateExercise(Guid id, ExerciseDTO exercise)
         {
             string url = "api/Exercises/" + id + "/";
-            var response = await SendRequest(HttpMethod.Put, url);
+            var response = await SendRequest(HttpMethod.Put, url, exercise);
             return response;
         }
 
         public async Task<Response> AddExercise(Guid userId, ExerciseDTO exercise)
         {
             string url = "api/exercises/user/" + userId + "/";
-            var response = await SendRequest(HttpMethod.Post, url);
+            var response = await SendRequest(HttpMethod.Post, url, exercise);
             return response;
         }
 
@@ -53,6 +54,13 @@ namespace ApiClients
         {
             string url = "api/exercises/favourite/" + id + "/user/" + userId + "/";
             var response = await SendRequest<bool>(HttpMethod.Post, url);
+            return response;
+        }
+
+        public async Task<Response> AddFinishedExercise(Guid userId, FinishedExerciseDTO finishedExercise)
+        {
+            string url = "api/exercises/finished/user/"+ userId +"/";
+            var response = await SendRequest<FinishedExerciseDTO>(HttpMethod.Post, url, finishedExercise);
             return response;
         }
     }
