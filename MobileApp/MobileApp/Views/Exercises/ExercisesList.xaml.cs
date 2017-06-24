@@ -15,11 +15,14 @@ namespace MobileApp.Views.Exercises
         [Obsolete("Constructor for xaml design")]
         public ExercisesList()
         {
+            InitializeComponent();
+
         }
 
         public ExercisesList(Services.ITestService service)
         {
             InitializeComponent();
+            this.BindingContext = new ViewModels.Exercises.ExerciseList();
         }
 
     }

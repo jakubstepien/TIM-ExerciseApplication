@@ -4,7 +4,39 @@
              x:Class="MobileApp.Views.Exercises.ExercisesList">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Exercesie List" />
+            <ListView ItemsSource="{Binding Excercises}" VerticalOptions="FillAndExpand" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" x:Name="name" Text="{Binding Name}" />
+                                    <Button x:Name="favBtn" Grid.Column="1" Command="{Binding FavouriteCommand}" Text="Dodaj do ulubionych"/>
+                                    <Button x:Name="expandBtn" Grid.Column="2" Command="{Binding ExpandCommand}" Text="▼" />
+                                </Grid>
+                                <Grid Grid.Row="1" IsVisible="{Binding DetailsVisable}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Text="Details"/>
+                                    <Button Grid.Column="1" Command="{Binding SelectCommand}" Text="Wybierz" />
+                                </Grid>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

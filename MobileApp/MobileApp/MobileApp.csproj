@@ -47,6 +47,8 @@
     <Compile Include="Utills\IApp.cs" />
     <Compile Include="Utills\UserStore.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\Exercises\ExerciseList.cs" />
+    <Compile Include="ViewModels\Exercises\ExerciseListElement.cs" />
     <Compile Include="ViewModels\MasterDetail\MenuItem\BaseMenuItem.cs" />
     <Compile Include="ViewModels\MasterDetail\MenuItem\MasterDetailMenuSubItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
