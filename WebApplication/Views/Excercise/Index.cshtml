@@ -49,16 +49,17 @@
 
     <script>
         $(document).ready(function () {
+            var userId = "@User.Identity.GetUserId()";
+
             var dataSource = new kendo.data.DataSource({
                 transport: {
                     read: {
-                        url: "@Url.Action("GetExercise","Exercises", new { httproute = "" })",
+                        url: "/api/exercises/user/" + userId,
                         dataType: "json"
                     }
                 },
                 pageSize: 21
             });
-
             $("#pager").kendoPager({
                 dataSource: dataSource
             });
@@ -183,7 +184,6 @@
             });
 
             $(document).on('click', '.delete-excercise', function () {
-                var userId = "@User.Identity.GetUserId()";
                 var id = this.dataset["id"];
                 var url = '/api/Exercises/' + id + '/user/' + userId;
                 var deletexhr = $.ajax({
