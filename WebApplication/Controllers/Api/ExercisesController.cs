@@ -16,6 +16,7 @@ using WebApplication.Helpers;
 using WebApplication.Services;
 using System.Web;
 using Microsoft.AspNet.Identity;
+using ApiClients.Models.DTO;
 
 namespace WebApplication.Controllers.Api
 {
@@ -24,12 +25,14 @@ namespace WebApplication.Controllers.Api
     {
         private IExcerciseRepository excerciseRepo;
         private IUserExcerciseRepository userExerciseRepo;
+        private IStatisticRepository statisticsRepo;
         ImageService imageService;
 
-        public ExercisesController(IExcerciseRepository db, IUserExcerciseRepository userExerciseRepo, ImageService imageService)
+        public ExercisesController(IExcerciseRepository excerciseRepo, IUserExcerciseRepository userExerciseRepo, IStatisticRepository statisticsRepo, ImageService imageService)
         {
-            this.excerciseRepo = db;
+            this.excerciseRepo = excerciseRepo;
             this.userExerciseRepo = userExerciseRepo;
+            this.statisticsRepo = statisticsRepo;
             this.imageService = imageService;
         }
 
@@ -202,6 +205,21 @@ namespace WebApplication.Controllers.Api
             {
                 return BadRequest();
             }
+        }
+
+        [Route("finished/user/{userId}/")]
+        public IHttpActionResult PostFinishedExercise(Guid userId, FinishedExerciseDTO exercise)
+        {
+            statisticsRepo.Add(new Statistic
+            {
+                Callories = exercise.Callories,
+                Date = exercise.Date,
+                ExerciseName = exercise.Name,
+                IdUser = exercise.UserId,
+                IdStatistic = Guid.NewGuid()
+            });
+            statisticsRepo.SaveChanges();
+            return Ok();
         }
 
         private void SaveExerciseImageToDrive(ExerciseDTO exercise)

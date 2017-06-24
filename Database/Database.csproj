@@ -78,8 +78,10 @@
     <Compile Include="Repositories\IExcerciseRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IStatisticRepository.cs" />
     <Compile Include="Repositories\ITrainingRepository.cs" />
     <Compile Include="Repositories\IUserExcerciseRepository.cs" />
+    <Compile Include="Repositories\StatisticRepository.cs" />
     <Compile Include="Repositories\TrainingRepository.cs" />
     <Compile Include="Repositories\UserExcerciseRepository.cs" />
     <Compile Include="Statistic.cs" />

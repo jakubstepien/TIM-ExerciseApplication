@@ -42,6 +42,7 @@
     <Compile Include="Models\Account\RegisterResponse.cs" />
     <Compile Include="Models\Account\TokenResponse.cs" />
     <Compile Include="Models\DTO\ExerciseDTO.cs" />
+    <Compile Include="Models\DTO\FinishedExerciseDTO.cs" />
     <Compile Include="Models\DTO\TrainingDTO.cs" />
     <Compile Include="Models\DTO\TrainingExcerciseDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
