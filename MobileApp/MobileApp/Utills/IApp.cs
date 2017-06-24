@@ -11,5 +11,7 @@ namespace MobileApp.Utills
         void HandleLoggedin();
 
         void HandleLoggedOut();
+
+        string ApiServer { get;}
     }
 }

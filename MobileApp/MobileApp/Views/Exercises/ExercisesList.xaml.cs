@@ -23,10 +23,11 @@ namespace MobileApp.Views.Exercises
             InitializeComponent();
         }
 
-        public ExercisesList(IExcerciseService service, ExerciseList exerciseListViewModel)
+        public ExercisesList(IExcerciseService service)
         {
             this.service = service;
-            viewModel = exerciseListViewModel;
+            viewModel = new ExerciseList(Navigation, service);
+            BindingContext = viewModel;
             InitializeComponent();
         }
 
@@ -40,14 +41,14 @@ namespace MobileApp.Views.Exercises
             var excercises = await service.GetExercisesViewModels();
             if (excercises.Success)
             {
-                BindingContext = viewModel;
                 viewModel.SetExcercises(excercises.Result);
             }
         }
 
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var exercie = e.Item as ExerciseListElement;
+
+            var exercie = e.Item as ExcerciseViewModel;
             if (exercie != null)
             {
                 exercie.DetailsVisable = !exercie.DetailsVisable;

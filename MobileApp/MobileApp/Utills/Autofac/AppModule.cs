@@ -35,7 +35,6 @@ namespace MobileApp.Utills.Autofac
 
         private void RegisterServices(ContainerBuilder builder)
         {
-            builder.RegisterType<TestService>().As<ITestService>().InstancePerDependency();
             builder.RegisterType<AccountService>().As<IAccountService>().InstancePerDependency();
             builder.RegisterType<ExcerciseService>().As<IExcerciseService>().InstancePerDependency();
         }
@@ -43,7 +42,6 @@ namespace MobileApp.Utills.Autofac
         private void RegisterViewModels(ContainerBuilder builder)
         {
             builder.RegisterType<ViewModels.MasterDetail.MasterDetailPageMasterViewModel>().AsSelf().InstancePerDependency();
-            builder.RegisterType<ViewModels.Exercises.ExerciseList>().AsSelf().InstancePerDependency();
         }
 
     }

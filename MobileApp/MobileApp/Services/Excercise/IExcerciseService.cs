@@ -9,8 +9,10 @@ namespace MobileApp.Services.Excercise
 {
     public interface IExcerciseService
     {
-        Task<ServiceResult<IEnumerable<ExerciseListElement>>> GetExercisesViewModels();
+        Task<ServiceResult<IEnumerable<ExcerciseViewModel>>> GetExercisesViewModels();
 
         Task<ServiceResult<bool>> SetAsFavourite(Guid excerciseId);
+
+        string GetImageSource(Guid excerciseId, string imageName);
     }
 }

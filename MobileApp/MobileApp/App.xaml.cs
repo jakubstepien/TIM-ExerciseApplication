@@ -12,9 +12,11 @@ namespace MobileApp
     {
         IContainer container;
 
+        public string ApiServer { get { return "http://10.0.2.2:8080"; } }
+
         public App()
         {
-            ApiClients.BaseClient.Init("http://10.0.2.2:8080");
+            ApiClients.BaseClient.Init(ApiServer);
             InitializeComponent();
             var builder = new ContainerBuilder();
             builder.RegisterModule<Utills.Autofac.AppModule>();

@@ -5,32 +5,41 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace MobileApp.ViewModels.Exercises
 {
     public class ExerciseList : BaseViewModel
     {
-        private ObservableCollection<ExerciseListElement> excercises = new ObservableCollection<ExerciseListElement>();
+        private ObservableCollection<ExcerciseViewModel> excercises = new ObservableCollection<ExcerciseViewModel>();
         public IExcerciseService ExcerciseService { get; set; }
+        INavigation navigation;
 
-        public ExerciseList(IExcerciseService excerciseService)
+        public ExerciseList(INavigation navigation, IExcerciseService excerciseService)
         {
+            this.navigation = navigation;
             this.ExcerciseService = excerciseService;
         }
 
-        public ObservableCollection<ExerciseListElement> Excercises
+        public ObservableCollection<ExcerciseViewModel> Excercises
         {
             get { return excercises; }
             set { excercises = value; OnPropertyChanged(); }
         }
         
-        public void SetExcercises(IEnumerable<ExerciseListElement> excercises)
+        public void SetExcercises(IEnumerable<ExcerciseViewModel> excercises)
         {
             foreach (var excercise in excercises)
             {
                 excercise.Parent = this;
             }
-            Excercises = new ObservableCollection<ExerciseListElement>(excercises);
+            Excercises = new ObservableCollection<ExcerciseViewModel>(excercises);
+        }
+
+        public async Task ExerciseSelected(ExcerciseViewModel exercise)
+        {
+            var view = new Views.Exercises.ExerciseStart(ExcerciseService, exercise);
+            await navigation.PushAsync(view);
         }
 
     }

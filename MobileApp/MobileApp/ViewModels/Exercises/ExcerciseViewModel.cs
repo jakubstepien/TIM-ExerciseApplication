@@ -9,21 +9,24 @@ using Xamarin.Forms;
 
 namespace MobileApp.ViewModels.Exercises
 {
-    public class ExerciseListElement : BaseViewModel
+    public class ExcerciseViewModel : BaseViewModel
     {
         const string NotFavouriedIcon = "ic_favorite_border_black_24dp.png";
         const string FavouriedIcon = "ic_favorite_black_24dp.png";
 
-        public ExerciseListElement()
+        public ExcerciseViewModel()
         {
             FavouriteCommand = new Command(SetFavourite);
             ExpandCommand = new Command(() => { DetailsVisable = !DetailsVisable; });
-            SelectCommand = new Command(() => { });
+            SelectCommand = new Command(StartExcercise);
         }
 
-        public Guid Id { get; set; } = Guid.NewGuid();
-
         public ExerciseList Parent { get; set; }
+
+
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public string ImageName { get; set; }
+        public int CaloriesPerHour { get; set; }
 
         private string name;
         public string Name
@@ -72,5 +75,9 @@ namespace MobileApp.ViewModels.Exercises
             }
         }
 
+        private async void StartExcercise()
+        {
+            await Parent.ExerciseSelected(this);
+        }
     }
 }
