@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,39 +12,48 @@ namespace ApiClients
     {
         public ExcerciseClient(string token) : base(token)
         {
-            throw new NotImplementedException();
         }
 
-        public Response<IEnumerable<ExerciseDTO>> GetExercises(Guid userId)
+        public async Task<Response<IEnumerable<ExerciseDTO>>> GetExercises(Guid userId)
         {
-            throw new NotImplementedException();
-
+            string url = "api/exercises/user/" + userId + "/";
+            var response = await SendRequest<IEnumerable<ExerciseDTO>>(HttpMethod.Get, url);
+            return response;
         }
 
-        public Response<ExerciseDTO> GetExercise(Guid id)
+        public async Task<Response<ExerciseDTO>> GetExercise(Guid id)
         {
-            throw new NotImplementedException();
+            string url = "api/Exercises/" + id + "/";
+            var response = await SendRequest<ExerciseDTO>(HttpMethod.Get, url);
+            return response;
         }
 
-        public Response UpdateExercise(Guid id, ExerciseDTO exercise)
+        public async Task<Response> UpdateExercise(Guid id, ExerciseDTO exercise)
         {
-            throw new NotImplementedException();
+            string url = "api/Exercises/" + id + "/";
+            var response = await SendRequest(HttpMethod.Get, url);
+            return response;
         }
 
-        public Response AddExercise(Guid userId, ExerciseDTO exercise)
+        public async Task<Response> AddExercise(Guid userId, ExerciseDTO exercise)
         {
-            throw new NotImplementedException();
+            string url = "api/exercises/user/" + userId + "/";
+            var response = await SendRequest(HttpMethod.Get, url);
+            return response;
         }
 
-        public Response DeleteExerciseFromUser(Guid id, Guid userId)
+        public async Task<Response> DeleteExerciseFromUser(Guid id, Guid userId)
         {
-            throw new NotImplementedException();
+            string url = "api/exercises/" + id + "/user/" + userId + "/";
+            var response = await SendRequest(HttpMethod.Get, url);
+            return response;
         }
 
-        public Response FavouriteExercise(Guid id, Guid userId)
+        public async Task<Response> FavouriteExercise(Guid id, Guid userId)
         {
-            throw new NotImplementedException();
-
+            string url = "api/favourite/" + id + "/user/" + userId + "/";
+            var response = await SendRequest(HttpMethod.Get, url);
+            return response;
         }
     }
 }
