@@ -13,5 +13,7 @@ namespace MobileApp.Utills
         void HandleLoggedOut();
 
         string ApiServer { get;}
+
+        DateTime LastSleepDate { get; }
     }
 }

@@ -14,11 +14,13 @@ namespace MobileApp.ViewModels.Exercises
         private ObservableCollection<ExcerciseViewModel> excercises = new ObservableCollection<ExcerciseViewModel>();
         public IExcerciseService ExcerciseService { get; set; }
         INavigation navigation;
+        Utills.IApp app;
 
-        public ExerciseList(INavigation navigation, IExcerciseService excerciseService)
+        public ExerciseList(INavigation navigation, IExcerciseService excerciseService, Utills.IApp app)
         {
             this.navigation = navigation;
             this.ExcerciseService = excerciseService;
+            this.app = app;
         }
 
         public ObservableCollection<ExcerciseViewModel> Excercises
@@ -38,7 +40,7 @@ namespace MobileApp.ViewModels.Exercises
 
         public async Task ExerciseSelected(ExcerciseViewModel exercise)
         {
-            var view = new Views.Exercises.ExerciseStart(ExcerciseService, exercise);
+            var view = new Views.Exercises.ExerciseStart(ExcerciseService, exercise, app);
             await navigation.PushAsync(view);
         }
 

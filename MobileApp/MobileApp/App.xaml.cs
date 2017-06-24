@@ -14,6 +14,8 @@ namespace MobileApp
 
         public string ApiServer { get { return "http://10.0.2.2:8080"; } }
 
+        public DateTime LastSleepDate { get; set; }
+
         public App()
         {
             ApiClients.BaseClient.Init(ApiServer);
@@ -55,6 +57,7 @@ namespace MobileApp
 
         protected override void OnSleep()
         {
+            LastSleepDate = DateTime.Now;
             // Handle when your app sleeps
         }
 

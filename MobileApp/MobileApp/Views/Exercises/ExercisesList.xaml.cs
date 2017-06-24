@@ -23,10 +23,10 @@ namespace MobileApp.Views.Exercises
             InitializeComponent();
         }
 
-        public ExercisesList(IExcerciseService service)
+        public ExercisesList(IExcerciseService service, Utills.IApp app)
         {
             this.service = service;
-            viewModel = new ExerciseList(Navigation, service);
+            viewModel = new ExerciseList(Navigation, service,app);
             BindingContext = viewModel;
             InitializeComponent();
         }

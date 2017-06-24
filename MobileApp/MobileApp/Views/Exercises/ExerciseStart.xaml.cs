@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using MobileApp.Utills;
 
 namespace MobileApp.Views.Exercises
 {
@@ -16,70 +17,114 @@ namespace MobileApp.Views.Exercises
     {
         IExcerciseService service;
         ExcerciseViewModel exercise;
+        IApp app;
+        bool canGoBack = true;
 
         public ExerciseStart()
         {
         }
 
-        public ExerciseStart(IExcerciseService service, ExcerciseViewModel exercise)
+        public ExerciseStart(IExcerciseService service, ExcerciseViewModel exercise, IApp app)
         {
             this.service = service;
             this.exercise = exercise;
+            this.app = app;
             this.Title = "Ćwiczenie: " + exercise.Name;
             InitializeComponent();
             name.Text = exercise.Name;
             image.Source = service.GetImageSource(exercise.Id, exercise.ImageName);
+            var emptytime = "00h 00m 00s";
+            seriesSpan.Text = emptytime;
+            interval.Text = emptytime;
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            //false powoduje że nie można wrócić
+            return !canGoBack;
         }
 
 
         private void Started(object sender, EventArgs e)
         {
-            startButton.IsEnabled = false;
-
-            int seriesTime = 30;
-            int interval = 20;
-            var currentSeries = 1;
-            var timeLeft = seriesTime;
-            var allSeries = 4;
-            bool exerciseBreak = false;
-
-            Device.StartTimer(new TimeSpan(0, 0, 1), () =>
+            int allSeries;
+            if (int.TryParse(series.Text, out allSeries))
             {
-                if (exerciseBreak)
+                ToggleExercising(true);
+
+                int currentSeries = 1;
+                int seriesTime = this.seriesSpan.Text.GetSecondsFromTimeString();
+                int interval = this.interval.Text.GetSecondsFromTimeString();
+
+                if (seriesTime == 00)
                 {
-                    currentState.Text = "Przerwa, następna seria - " + (currentSeries + 1) + "/" + allSeries;
+                    ToggleExercising(false);
+                    return;
                 }
-                else
+
+                var timeLeft = seriesTime;
+                bool exerciseBreak = false;
+                DateTime start = DateTime.Now;
+                Device.StartTimer(new TimeSpan(0, 0, 1), () =>
                 {
-                    currentState.Text = "Seria: " + currentSeries + "/" + allSeries;
-                }
-                currentTime.Text = timeLeft.ToString();
-                timeLeft--;
-                if (timeLeft == 0)
-                {
-                    if (!exerciseBreak)
+                    if (app.LastSleepDate > start)
                     {
-                        timeLeft = interval;
-                        if (currentSeries == allSeries)
-                        {
-                            currentState.Text = "Koniec ćwiczenia";
-                            currentTime.Text = "0";
-                            startButton.IsEnabled = true;
-                            return false;
-                        }
+                        currentState.Text = "Aplikacja została zatrzymana";
+                        currentTime.Text = "";
+                        ToggleExercising(false);
+                        return false;
+                    }
+                    if (exerciseBreak)
+                    {
+                        currentState.Text = "Przerwa, następna seria - " + (currentSeries + 1) + "/" + allSeries;
                     }
                     else
                     {
-                        currentSeries++;
-                        timeLeft = seriesTime;
+                        currentState.Text = "Seria: " + currentSeries + "/" + allSeries;
                     }
-                    exerciseBreak = !exerciseBreak;
-                }
-                return true;
-            });
-
-
-
+                    if (timeLeft <= 0)
+                    {
+                        if (currentSeries == allSeries)
+                        {
+                            currentState.Text = "Koniec ćwiczenia";
+                            currentTime.Text = "";
+                            ToggleExercising(false);
+                            return false;
+                        }
+                        if (!exerciseBreak && interval != 0)
+                        {
+                            timeLeft = interval;
+                        }
+                        else
+                        {
+                            currentSeries++;
+                            timeLeft = seriesTime;
+                        }
+                        if (interval != 0)
+                        {
+                            exerciseBreak = !exerciseBreak;
+                        }
+                    }
+                    currentTime.Text = timeLeft.ToString();
+                    timeLeft--;
+                    return true;
+                });
+            }
         }
+
+        private void ToggleExercising(bool val)
+        {
+            startButton.IsEnabled = !val;
+            canGoBack = !val;
+            NavigationPage.SetHasBackButton(this, !val);
+        }
+
+        private void TimeTextChanged(object sender, TextChangedEventArgs e)
+        {
+            var timeString = Utills.TimeInputHelper.GetTimeString(e.OldTextValue, e.NewTextValue);
+            (sender as Entry).Text = timeString;
+        }
+
+
     }
 }
