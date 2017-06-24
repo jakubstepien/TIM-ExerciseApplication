@@ -37,8 +37,9 @@ namespace MobileApp.Views.MasterDetail
             MasterDetailPage.ItemSelected(sender, e);
         }
 
-        private void LogoutClick(object sender, EventArgs e)
+        private async void LogoutClick(object sender, EventArgs e)
         {
+            await UserStore.Logout();
             App.HandleLoggedOut();
         }
     }

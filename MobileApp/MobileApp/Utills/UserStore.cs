@@ -13,13 +13,13 @@ namespace MobileApp.Utills
         private const string tokenKey = "token";
         private const string tokenEndDateKey = "tokenEndDateKey";
 
-        public static void SaveUser(string login, string token, DateTime tokenEndDate)
+        public static async Task SaveUser(string login, string token, DateTime tokenEndDate)
         {
             var account = new Account { Username = login };
             account.Properties.Add(tokenKey, token);
             account.Properties.Add(tokenEndDateKey, tokenEndDate.ToString());
 
-            AccountStore.Create().Save(account, appName);
+            await AccountStore.Create().SaveAsync(account, appName);
         }
 
         public static bool IsLoggedIn()
@@ -60,10 +60,11 @@ namespace MobileApp.Utills
             return null;
         }
 
-        public static void Logout()
+        public static async Task Logout()
         {
             var account = GetAccount();
-            AccountStore.Create().Delete(account, appName);
+            await AccountStore.Create().DeleteAsync(account, appName);
+            var account2 = GetAccount();
         }
     }
 }

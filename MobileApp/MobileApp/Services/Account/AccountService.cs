@@ -15,7 +15,7 @@ namespace MobileApp.Services.Account
             var tokenResponse = await client.GetToken(login, password);
             if (tokenResponse.Success)
             {
-                UserStore.SaveUser(login, tokenResponse.Data.Token, tokenResponse.Data.ValidTo);
+                await UserStore.SaveUser(login, tokenResponse.Data.Token, tokenResponse.Data.ValidTo);
             }
             return new ServiceResult { Success = tokenResponse.Success, Message = tokenResponse.Message };
         }
