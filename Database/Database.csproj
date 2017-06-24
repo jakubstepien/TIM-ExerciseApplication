@@ -68,6 +68,10 @@
     <Compile Include="Migrations\201706222041016_AddImageName.Designer.cs">
       <DependentUpon>201706222041016_AddImageName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706241520340_ChangedDescriptionLength.cs" />
+    <Compile Include="Migrations\201706241520340_ChangedDescriptionLength.Designer.cs">
+      <DependentUpon>201706241520340_ChangedDescriptionLength.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\ExcerciseRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
@@ -93,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706222041016_AddImageName.resx">
       <DependentUpon>201706222041016_AddImageName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706241520340_ChangedDescriptionLength.resx">
+      <DependentUpon>201706241520340_ChangedDescriptionLength.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -30,7 +30,7 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <Label VerticalTextAlignment="Center"  Grid.Column="0" Text="{Binding Description}"/>
-                                    <Button Grid.Column="1" Command="{Binding SelectCommand}" Text="Wybierz" />
+                                    <Button VerticalOptions="End"  Grid.Column="1" Command="{Binding SelectCommand}" Text="Wybierz" />
                                 </Grid>
                             </Grid>
                         </ViewCell>

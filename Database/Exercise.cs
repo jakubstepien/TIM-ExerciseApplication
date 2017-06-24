@@ -19,7 +19,6 @@ namespace Database
         public string Name { get; set; }
 
         [Required]
-        [MaxLength(256)]
         public string Description { get; set; }
 
         public byte[] Image { get; set; }
