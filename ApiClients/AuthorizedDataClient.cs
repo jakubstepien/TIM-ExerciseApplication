@@ -16,7 +16,7 @@ namespace ApiClients
             this.token = token;
         }
 
-        protected async Task<Response<T>> SendRequest<T>(HttpMethod method, string url) where T : class
+        protected async Task<Response<T>> SendRequest<T>(HttpMethod method, string url)
         {
             HttpResponseMessage response = await Send(method, url);
             if (response.IsSuccessStatusCode)

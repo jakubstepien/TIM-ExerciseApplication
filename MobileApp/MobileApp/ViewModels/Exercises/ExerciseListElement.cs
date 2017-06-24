@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MobileApp.Services.Excercise;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,12 +23,23 @@ namespace MobileApp.ViewModels.Exercises
 
         public Guid Id { get; set; } = Guid.NewGuid();
 
+        public ExerciseList Parent { get; set; }
+
         private string name;
         public string Name
         {
             get { return name; }
             set { name = value; OnPropertyChanged(); }
         }
+
+        private string description;
+
+        public string Description
+        {
+            get { return description; }
+            set { description = value; OnPropertyChanged(); }
+        }
+
 
         private bool favouriteIcon;
         public string FavouriteIcon
@@ -50,10 +62,14 @@ namespace MobileApp.ViewModels.Exercises
 
 
 
-        private void SetFavourite()
+        private async void SetFavourite()
         {
-            favouriteIcon = !favouriteIcon;
-            OnPropertyChanged("FavouriteIcon");
+            var result = await Parent.ExcerciseService.SetAsFavourite(Id);
+            if (result.Success)
+            {
+                favouriteIcon = result.Result;
+                OnPropertyChanged("FavouriteIcon");
+            }
         }
 
     }

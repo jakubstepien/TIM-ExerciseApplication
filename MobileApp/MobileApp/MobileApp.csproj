@@ -40,6 +40,8 @@
     </Compile>
     <Compile Include="Services\Account\AccountService.cs" />
     <Compile Include="Services\Account\IAccountService.cs" />
+    <Compile Include="Services\Excercise\ExcerciseService.cs" />
+    <Compile Include="Services\Excercise\IExcerciseService.cs" />
     <Compile Include="Services\ITestService.cs" />
     <Compile Include="Services\TestService.cs" />
     <Compile Include="Utills\Autofac\AppModule.cs" />

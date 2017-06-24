@@ -49,10 +49,10 @@ namespace ApiClients
             return response;
         }
 
-        public async Task<Response> FavouriteExercise(Guid id, Guid userId)
+        public async Task<Response<bool>> FavouriteExercise(Guid id, Guid userId)
         {
-            string url = "api/favourite/" + id + "/user/" + userId + "/";
-            var response = await SendRequest(HttpMethod.Post, url);
+            string url = "api/exercises/favourite/" + id + "/user/" + userId + "/";
+            var response = await SendRequest<bool>(HttpMethod.Post, url);
             return response;
         }
     }
