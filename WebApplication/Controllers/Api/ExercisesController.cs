@@ -57,7 +57,12 @@ namespace WebApplication.Controllers.Api
         [Route("user/{userId}")]
         public IEnumerable<ExerciseDTO> GetExerciseForUser(Guid userId)
         {
-            return excerciseRepo.GetExercisesForUser(userId).Select(s => s.ToDTO());
+            var exercises = excerciseRepo.GetExercisesForUser(userId).Select(s => s.ToDTO());
+            foreach (var exercise in exercises)
+            {
+                SaveExerciseImageToDrive(exercise);
+            }
+            return exercises;
         }
 
         // GET: api/Exercises/5
