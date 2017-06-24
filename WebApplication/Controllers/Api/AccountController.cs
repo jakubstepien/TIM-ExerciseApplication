@@ -52,6 +52,14 @@ namespace WebApplication.Controllers
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
+
+        [Route("UserId")]
+        public IHttpActionResult GetCurrentUserId()
+        {
+            var id = User.Identity.GetUserId();
+            return Ok(Guid.Parse(id));
+        }
+
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]

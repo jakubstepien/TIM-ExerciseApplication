@@ -37,11 +37,22 @@ namespace ApiClients
             var expires = jObject.GetValue(".expires").ToString();
             var token = jObject.GetValue("access_token").ToString();
             var validTo = DateTime.Parse(expires);
+            var id = await GetCurrentUserId(token);
             return new Response<TokenResponse>
             {
                 Success = true,
-                Data = new TokenResponse { Token = token, ValidTo = validTo }
+                Data = new TokenResponse { Token = token, ValidTo = validTo, Id = id }
             };
+        }
+
+        private async Task<Guid> GetCurrentUserId(string token)
+        {
+            var request = GetRequest(HttpMethod.Get, "api/Account/UserId");
+            request.Headers.Add("Authorization", "Bearer " + token);
+            var response = await client.SendAsync(request);
+            var id = await response.Content.ReadAsStringAsync();
+            //Guid będzie w cudzysłowiu
+            return Guid.Parse(id.Replace("\"",""));
         }
 
         public async Task<Response> Register(RegisterRequest data, string errorSeparator)

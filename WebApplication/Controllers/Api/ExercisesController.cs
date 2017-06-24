@@ -15,6 +15,7 @@ using ApiClients.Model.DTO;
 using WebApplication.Helpers;
 using WebApplication.Services;
 using System.Web;
+using Microsoft.AspNet.Identity;
 
 namespace WebApplication.Controllers.Api
 {

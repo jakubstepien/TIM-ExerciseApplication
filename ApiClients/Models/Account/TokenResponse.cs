@@ -10,6 +10,8 @@ namespace ApiClients.Models.Account
     {
         public string Token { get; set; }
 
+        public Guid Id { get; set; }
+
         public DateTime ValidTo { get; set; }
     }
 }

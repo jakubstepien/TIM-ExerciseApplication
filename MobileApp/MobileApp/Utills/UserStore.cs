@@ -11,13 +11,15 @@ namespace MobileApp.Utills
     {
         private const string appName = "TIM-ExerciseApp";
         private const string tokenKey = "token";
+        private const string idKey = "id";
         private const string tokenEndDateKey = "tokenEndDateKey";
 
-        public static async Task SaveUser(string login, string token, DateTime tokenEndDate)
+        public static async Task SaveUser(Guid id, string login, string token, DateTime tokenEndDate)
         {
             var account = new Account { Username = login };
             account.Properties.Add(tokenKey, token);
             account.Properties.Add(tokenEndDateKey, tokenEndDate.ToString());
+            account.Properties.Add(idKey, id.ToString());
 
             await AccountStore.Create().SaveAsync(account, appName);
         }
@@ -56,6 +58,16 @@ namespace MobileApp.Utills
             if (IsTokenValid(account))
             {
                 return account.Properties[tokenKey];
+            }
+            return null;
+        }
+
+        public static Guid? GetId()
+        {
+            var account = GetAccount();
+            if (IsTokenValid(account))
+            {
+                return Guid.Parse(account.Properties[idKey]);
             }
             return null;
         }
