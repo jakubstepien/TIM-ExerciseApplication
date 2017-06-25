@@ -14,10 +14,11 @@ namespace ApiClients
         {
         }
 
-        public async Task<Response> AddTraining(TrainingDTO exercise)
+        public async Task<Response> AddTraining(TrainingDTO training)
         {
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(training);
             string url = "api/Trainings/";
-            var response = await SendRequest(HttpMethod.Post, url, exercise);
+            var response = await SendRequest(HttpMethod.Post, url, training);
             return response;
         }
     }

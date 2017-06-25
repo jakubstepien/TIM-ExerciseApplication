@@ -3,6 +3,7 @@ using MobileApp.Services;
 using MobileApp.Services.Account;
 using MobileApp.Services.Excercise;
 using MobileApp.Services.Statistics;
+using MobileApp.Services.Training;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,7 @@ namespace MobileApp.Utills.Autofac
             builder.RegisterType<AccountService>().As<IAccountService>().InstancePerDependency();
             builder.RegisterType<ExcerciseService>().As<IExcerciseService>().InstancePerDependency();
             builder.RegisterType<StatisticsService>().As<IStatisticsService>().InstancePerDependency();
+            builder.RegisterType<TrainingService>().As<ITrainingService>().InstancePerDependency();
 
         }
 

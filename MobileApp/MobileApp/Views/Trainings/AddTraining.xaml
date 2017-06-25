@@ -70,7 +70,7 @@
                 </ListView>
             </ScrollView>
             <StackLayout Grid.Row="2">
-                <Button Text="Zapisz trening" />
+                <Button Text="Zapisz trening" Clicked="SaveTraining"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

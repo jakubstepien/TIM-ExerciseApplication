@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Plugin.Toasts;
 
 namespace MobileApp.iOS
 {
@@ -23,6 +24,8 @@ namespace MobileApp.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            global::Xamarin.Forms.DependencyService.Register<ToastNotification>();
+            ToastNotification.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
