@@ -1,10 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MobileApp.Views.Trainings.AddTraining">
+             x:Class="MobileApp.Views.Trainings.AddTraining"
+             xmlns:timeInput="clr-namespace:MobileApp.Utills.TimeInput">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Add training" />
-        </StackLayout>
+        <Grid Padding="5,0,5,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0"  VerticalOptions="Center" Text="Nazwa treningu" Margin="0,0,0,10"/>
+                <Entry Grid.Row="0" Grid.Column="1"  VerticalOptions="Center" Text="{Binding Name}"/>
+                <Label Grid.Row="1" Grid.Column="0"  VerticalOptions="Center" Text="Ćwiczenie"/>
+                <Picker Grid.Row="1" Grid.Column="1" VerticalOptions="Center" SelectedItem="{Binding SelectedExcerciseType}" ItemDisplayBinding="{Binding Key}" ItemsSource="{Binding ExcercisesTypes}"/>
+                <Label Grid.Row="2" Grid.Column="0"  VerticalOptions="Center" Text="Liczba serii"/>
+                <Entry Grid.Row="2" Grid.Column="1"  VerticalOptions="Center" Text="{Binding ExcerciseForm.SeriesNumber}"/>
+                <Label Grid.Row="3" Grid.Column="0"  VerticalOptions="Center" Text="Czas trwania ćwiczenia"/>
+                <timeInput:TimeEntry Grid.Row="3" Grid.Column="1"  VerticalOptions="Center" Text="{Binding ExcerciseForm.SeriesTime}"/>
+                <Label Grid.Row="4" Grid.Column="0"  VerticalOptions="Center" Text="Interwał"/>
+                <timeInput:TimeEntry Grid.Row="4" Grid.Column="1"  VerticalOptions="Center" Text="{Binding ExcerciseForm.IntervalTime}"/>
+                <Button Grid.Row="5" Text="Dodaj ćwiczenie" Command="{Binding AddExcercise}" />
+            </Grid>
+            <ScrollView Grid.Row="1">
+                <ListView VerticalOptions="FillAndExpand" ItemsSource="{Binding Excercises}" HasUnevenRows="True">
+                    <ListView.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Text="Nazwa ćwiczenia" />
+                            <Label Grid.Column="1" Text="Liczba serii" />
+                            <Label Grid.Column="2" Text="Czas serii" />
+                            <Label Grid.Column="3" Text="Interwał" />
+                        </Grid>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Text="{Binding Name}" />
+                                    <Label Grid.Column="1" Text="{Binding SeriesNumber}" />
+                                    <Label Grid.Column="2" Text="{Binding SeriesTime}" />
+                                    <Label Grid.Column="3" Text="{Binding IntervalTime}" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollView>
+            <StackLayout Grid.Row="2">
+                <Button Text="Zapisz trening" />
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -61,6 +61,8 @@
     <Compile Include="ViewModels\MasterDetail\MasterDetailPageMasterViewModel.cs" />
     <Compile Include="ViewModels\Statistics\FinishedExcercise.cs" />
     <Compile Include="ViewModels\Statistics\SummaryViewModel.cs" />
+    <Compile Include="ViewModels\Trainings\TrainingExerciseViewModel.cs" />
+    <Compile Include="ViewModels\Trainings\AddTrainingViewModel.cs" />
     <Compile Include="Views\Account\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
