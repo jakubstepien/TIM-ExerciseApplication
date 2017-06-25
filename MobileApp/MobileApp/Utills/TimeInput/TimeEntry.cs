@@ -40,5 +40,10 @@ namespace MobileApp.Utills.TimeInput
             }
             return oldTextValue;
         }
+
+        public int GetSeconds()
+        {
+            return Text.GetSecondsFromTimeString();
+        }
     }
 }

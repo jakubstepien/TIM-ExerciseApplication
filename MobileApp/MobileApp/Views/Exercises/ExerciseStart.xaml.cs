@@ -54,8 +54,8 @@ namespace MobileApp.Views.Exercises
                 ToggleExercising(true);
 
                 int currentSeries = 1;
-                int seriesTime = this.seriesSpan.Text.GetSecondsFromTimeString();
-                int interval = this.interval.Text.GetSecondsFromTimeString();
+                int seriesTime = this.seriesSpan.GetSeconds();
+                int interval = this.interval.GetSeconds();
 
                 if (seriesTime == 00)
                 {
