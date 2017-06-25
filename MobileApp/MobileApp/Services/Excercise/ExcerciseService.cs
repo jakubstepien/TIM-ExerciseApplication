@@ -24,20 +24,25 @@ namespace MobileApp.Services.Excercise
         {
             var client = new ApiClients.ExcerciseClient(token);
             var response = await client.GetExercises(userId);
+            
             if (response.Success)
             {
-                var exercises = response.Data;
-                var viewModels = exercises
-                    .Select(s => new ExcerciseViewModel
-                    {
-                        Id = s.IdExercise,
-                        Name = s.Name,
-                        Description = s.Description,
-                        DetailsVisable = false,
-                        ImageName = s.ImageName,
-                        CaloriesPerHour = s.CaloriesPerHour
-                    })
-                    .ToArray();
+                ExcerciseViewModel[] viewModels = null;
+                await Task.Factory.StartNew(() =>
+                {
+                    var exercises = response.Data;
+                    viewModels = exercises
+                        .Select(s => new ExcerciseViewModel
+                        {
+                            Id = s.IdExercise,
+                            Name = s.Name,
+                            Description = s.Description,
+                            DetailsVisable = false,
+                            ImageName = s.ImageName,
+                            CaloriesPerHour = s.CaloriesPerHour
+                        })
+                        .ToArray();
+                });
                 return new ServiceResult<IEnumerable<ExcerciseViewModel>> { Success = true, Result = viewModels, Message = response.Message };
             }
             return new ServiceResult<IEnumerable<ExcerciseViewModel>> { Success = false, Message = response.Message };
