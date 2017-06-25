@@ -10,6 +10,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Database;
 using Database.Repositories;
+using ApiClients.Model.DTO;
+using WebApplication.Helpers;
 
 namespace WebApplication.Controllers.Api
 {
@@ -23,9 +25,9 @@ namespace WebApplication.Controllers.Api
         }
 
         // GET: api/Trainings
-        public IQueryable<Training> GetTrainings()
+        public IEnumerable<TrainingDTO> GetTrainings()
         {
-            return db.GetAll();
+            return db.GetAll().ToArray().Select(s => s.ToDTO());
         }
 
         // GET: api/Trainings/5
@@ -38,54 +40,56 @@ namespace WebApplication.Controllers.Api
                 return NotFound();
             }
 
-            return Ok(training);
+            return Ok(training.ToDTO());
         }
 
-        // PUT: api/Trainings/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutTraining(Guid id, Training training)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// PUT: api/Trainings/5
+        //[Route("user/{userId}/")]
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PutTraining(Guid id, Training training)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != training.IdTraining)
-            {
-                return BadRequest();
-            }
+        //    if (id != training.IdTraining)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            db.Update(training);
+        //    db.Update(training);
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TrainingExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!TrainingExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
         // POST: api/Trainings
         [ResponseType(typeof(Training))]
-        public IHttpActionResult PostTraining(Training training)
+        public IHttpActionResult PostTraining(TrainingDTO training)
         {
+            var entity = training.ToEntity();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Add(training);
+            db.Add(entity);
 
             try
             {
@@ -93,7 +97,7 @@ namespace WebApplication.Controllers.Api
             }
             catch (DbUpdateException)
             {
-                if (TrainingExists(training.IdTraining))
+                if (TrainingExists(entity.IdTraining))
                 {
                     return Conflict();
                 }

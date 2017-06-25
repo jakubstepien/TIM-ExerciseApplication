@@ -8,7 +8,7 @@ namespace ApiClients.Model.DTO
 {
     public class TrainingExcerciseDTO
     {
-        public ExerciseDTO Exercise { get; set; }
+        public Guid IdExcercise { get; set; }
 
         public int Series { get; set; }
 

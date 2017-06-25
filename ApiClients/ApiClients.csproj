@@ -48,6 +48,7 @@
     <Compile Include="Models\DTO\TrainingExcerciseDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Response.cs" />
+    <Compile Include="TrainingClient.cs" />
     <Compile Include="ValuesClient.cs" />
   </ItemGroup>
   <ItemGroup>
