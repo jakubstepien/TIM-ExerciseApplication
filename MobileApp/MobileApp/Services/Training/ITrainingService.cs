@@ -12,5 +12,7 @@ namespace MobileApp.Services.Training
         Task<ServiceResult> AddTraining(AddTrainingViewModel traing);
 
         Task<ServiceResult<IEnumerable<TrainingListItemViewModel>>> GetTrainingList();
+
+        Task<ServiceResult> DeleteTraining(Guid id);
     }
 }

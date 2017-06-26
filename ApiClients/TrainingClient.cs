@@ -28,5 +28,12 @@ namespace ApiClients
             var response = await SendRequest<IEnumerable<TrainingDTO>>(HttpMethod.Get, url);
             return response;
         }
+
+        public async Task<Response> DeleteTraining(Guid id)
+        {
+            string url = "api/Trainings/" + id.ToString() + "/";
+            var response = await SendRequest(HttpMethod.Delete, url);
+            return response;
+        }
     }
 }

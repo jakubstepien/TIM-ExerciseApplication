@@ -54,8 +54,17 @@ namespace MobileApp.Views.Trainings
                 var action = await DisplayAlert("Usunięcie treningu","Czy napewno chcesz usunąć trening", "Tak", "Nie");
                 if (action)
                 {
-                    var viewModel = BindingContext as TrainingListViewModel;
-                    await viewModel.RemoveById(trainingId);
+                    var deleteResult = await trainingService.DeleteTraining(trainingId);
+                    if (deleteResult.Success)
+                    {
+                        var viewModel = BindingContext as TrainingListViewModel;
+                        await viewModel.RemoveById(trainingId);
+                        await Utills.ToastHelper.ShowToast("Trening został ununięty.");
+                    }
+                    else
+                    {
+                        await Utills.ToastHelper.ShowToast("Nie udało się usunąć treningu.");
+                    }
                 }
             }
         }

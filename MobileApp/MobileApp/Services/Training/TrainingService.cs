@@ -8,7 +8,7 @@ using MobileApp.Utills.TimeInput;
 
 namespace MobileApp.Services.Training
 {
-    public class TrainingService : AuthorizedService,ITrainingService
+    public class TrainingService : AuthorizedService, ITrainingService
     {
         public async Task<ServiceResult> AddTraining(AddTrainingViewModel training)
         {
@@ -48,6 +48,13 @@ namespace MobileApp.Services.Training
                 });
             }
             return result;
+        }
+
+        public async Task<ServiceResult> DeleteTraining(Guid id)
+        {
+            var client = new ApiClients.TrainingClient(token);
+            var response = await client.DeleteTraining(id);
+            return new ServiceResult { Success = response.Success, Message = response.Message };
         }
     }
 }
