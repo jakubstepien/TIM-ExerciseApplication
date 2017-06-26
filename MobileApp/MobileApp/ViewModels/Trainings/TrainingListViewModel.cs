@@ -7,11 +7,16 @@ using System.Threading.Tasks;
 
 namespace MobileApp.ViewModels.Trainings
 {
-    class TrainingListViewModel : BaseViewModel
+    public class TrainingListViewModel : BaseViewModel
     {
         public TrainingListViewModel(IEnumerable<TrainingListItemViewModel> trainings)
         {
             Trainings = new ObservableCollection<TrainingListItemViewModel>(trainings);
+        }
+
+        public TrainingListViewModel()
+        {
+
         }
 
         private ObservableCollection<TrainingListItemViewModel> trainings;
@@ -39,7 +44,7 @@ namespace MobileApp.ViewModels.Trainings
         }
     }
 
-    class TrainingListItemViewModel : BaseViewModel
+    public class TrainingListItemViewModel : BaseViewModel
     {
         private Guid id;
         public Guid Id

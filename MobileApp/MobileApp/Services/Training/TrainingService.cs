@@ -34,5 +34,20 @@ namespace MobileApp.Services.Training
             var response = await client.AddTraining(dto);
             return new ServiceResult { Success = response.Success, Message = response.Message };
         }
+
+        public async Task<ServiceResult<IEnumerable<TrainingListItemViewModel>>> GetTrainingList()
+        {
+            var client = new ApiClients.TrainingClient(token);
+            var response = await client.GetTrainings(userId);
+            var result = new ServiceResult<IEnumerable<TrainingListItemViewModel>> { Success = response.Success, Message = response.Message };
+            if (response.Success)
+            {
+                await Task.Factory.StartNew(() =>
+                {
+                    result.Result = response.Data.Select(s => new TrainingListItemViewModel { Id = s.IdTraining, Name = s.Name });
+                });
+            }
+            return result;
+        }
     }
 }

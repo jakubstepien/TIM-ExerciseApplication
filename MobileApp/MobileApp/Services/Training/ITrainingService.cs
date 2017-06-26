@@ -10,5 +10,7 @@ namespace MobileApp.Services.Training
     public interface ITrainingService
     {
         Task<ServiceResult> AddTraining(AddTrainingViewModel traing);
+
+        Task<ServiceResult<IEnumerable<TrainingListItemViewModel>>> GetTrainingList();
     }
 }
