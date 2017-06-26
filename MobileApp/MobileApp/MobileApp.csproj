@@ -38,6 +38,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Slide.cs" />
     <Compile Include="Models\TrainingExerciseModel.cs" />
     <Compile Include="Models\TrainingModel.cs" />
     <Compile Include="Services\Account\AccountService.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Utills\TimeInput\TimeInputHelper.cs" />
     <Compile Include="Utills\TimeInput\TimeEntry.cs" />
     <Compile Include="Utills\ToastHelper.cs" />
+    <Compile Include="Utills\TrainingSlideCreator.cs" />
     <Compile Include="Utills\UserStore.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Exercises\ExerciseList.cs" />
@@ -172,6 +174,10 @@
   <ItemGroup>
     <Reference Include="Autofac, Version=4.6.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Autofac.4.6.0\lib\netstandard1.1\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PCLCrypto, Version=2.0.0.0, Culture=neutral, PublicKeyToken=d4421c8a4786956c, processorArchitecture=MSIL">

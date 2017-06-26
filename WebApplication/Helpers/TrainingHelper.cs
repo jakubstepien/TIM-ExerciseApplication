@@ -44,7 +44,9 @@ namespace WebApplication.Helpers
                     Series = s.Series,
                     TimeSpan = s.TimeSpan,
                     IntervalBeforeNextExercise = s.IntervalBeforeNextExercise,
-                    CalloriesPerHour = s.Excercise?.CaloriesPerHour
+                    CalloriesPerHour = s.Excercise?.CaloriesPerHour,
+                    ImageName = s.Excercise?.ImageName,
+                    Name = s.Excercise?.Name
                 }).ToArray()
             };
         }

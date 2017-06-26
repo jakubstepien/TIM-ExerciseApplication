@@ -67,22 +67,27 @@ namespace MobileApp.Services.Training
             var result = new ServiceResult<TrainingModel> { Success = response.Success, Message = response.Message };
             if (response.Success)
             {
-                result.Result = new TrainingModel
+                await Task.Factory.StartNew(() =>
                 {
-                    Id = response.Data.IdTraining,
-                    Name = response.Data.Name,
-                    Exercises = response.Data.Excercises
-                        .Select(s => new TrainingExerciseModel
-                        {
-                            Id = s.IdExcercise,
-                            CalloriesPerHour = s.CalloriesPerHour.Value,
-                            Interval = s.Interval,
-                            Name = s.Name,
-                            NextExerciseInterval = s.IntervalBeforeNextExercise,
-                            SeriesNumber = s.Series,
-                            SeriesTime = s.TimeSpan
-                        }).ToArray()
-                };
+
+                    result.Result = new TrainingModel
+                    {
+                        Id = response.Data.IdTraining,
+                        Name = response.Data.Name,
+                        Exercises = response.Data.Excercises
+                            .Select(s => new TrainingExerciseModel
+                            {
+                                Id = s.IdExcercise,
+                                CalloriesPerHour = s.CalloriesPerHour.Value,
+                                Interval = s.Interval,
+                                Name = s.Name,
+                                NextExerciseInterval = s.IntervalBeforeNextExercise,
+                                SeriesNumber = s.Series,
+                                SeriesTime = s.TimeSpan,
+                                ImageName = s.ImageName,
+                            }).ToArray()
+                    };
+                });
             }
             return result;
         }

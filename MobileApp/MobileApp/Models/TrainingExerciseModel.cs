@@ -21,5 +21,7 @@ namespace MobileApp.Models
         public int SeriesTime { get; set; }
 
         public int CalloriesPerHour { get; set; }
+
+        public string ImageName { get; set; }
     }
 }

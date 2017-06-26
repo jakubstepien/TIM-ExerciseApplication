@@ -17,14 +17,16 @@ namespace MobileApp.Views.Trainings
     {
         ITrainingService trainingService;
         IExcerciseService excerciseService;
+        Utills.IApp app;
 
         public TrainingsList()
         {
             InitializeComponent();
         }
 
-        public TrainingsList(ITrainingService trainingService, IExcerciseService excerciseService)
+        public TrainingsList(Utills.IApp app, ITrainingService trainingService, IExcerciseService excerciseService)
         {
+            this.app = app;
             this.trainingService = trainingService;
             this.excerciseService = excerciseService;
             InitializeComponent();
@@ -78,7 +80,7 @@ namespace MobileApp.Views.Trainings
             Guid trainingId;
             if (id != null && Guid.TryParse(id.ToString(), out trainingId))
             {
-                var startPage = new TrainingStart(trainingService,trainingId);
+                var startPage = new TrainingStart(app, trainingService,excerciseService, trainingId);
                 await Navigation.PushAsync(startPage);
             }
         }
