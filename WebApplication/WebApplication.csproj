@@ -258,7 +258,6 @@
     <Compile Include="Controllers\WebSite\ControllerHelper.cs" />
     <Compile Include="Controllers\WebSite\ExcerciseController.cs" />
     <Compile Include="Controllers\WebSite\HomeController.cs" />
-    <Compile Include="Controllers\Api\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

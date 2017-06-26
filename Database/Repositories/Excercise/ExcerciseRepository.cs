@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Database.Repositories
+namespace Database.Repositories.Excercise
 {
     public class ExcerciseRepository : GenericRepository<Exercise>, IExcerciseRepository
     {
@@ -32,9 +32,9 @@ namespace Database.Repositories
             return GetById(id);
         }
 
-        public IEnumerable<UserExcercise> GetExercisesForUser(Guid IdUser)
+        public IEnumerable<Database.UserExcercise> GetExercisesForUser(Guid IdUser)
         {
-            return db.Set<UserExcercise>()
+            return db.Set<Database.UserExcercise>()
                 .AsNoTracking()
                 .Include(i => i.Exercise)
                 .Where(w => w.UserId == IdUser)

@@ -54,9 +54,9 @@ namespace WebApplication
         private static void RegisterRepositories(ContainerBuilder builder)
         {
             builder.RegisterType<Database.ApplicationDbContext>().As<System.Data.Entity.DbContext>().InstancePerRequest();
-            builder.RegisterType<Database.Repositories.ExcerciseRepository>().As<Database.Repositories.IExcerciseRepository>().InstancePerRequest();
-            builder.RegisterType<Database.Repositories.UserExcerciseRepository>().As<Database.Repositories.IUserExcerciseRepository>().InstancePerRequest();
-            builder.RegisterType<Database.Repositories.StatisticRepository>().As<Database.Repositories.IStatisticRepository>().InstancePerRequest();
+            builder.RegisterType<Database.Repositories.Excercise.ExcerciseRepository>().As<Database.Repositories.Excercise.IExcerciseRepository>().InstancePerRequest();
+            builder.RegisterType<Database.Repositories.UserExcercise.UserExcerciseRepository>().As<Database.Repositories.UserExcercise.IUserExcerciseRepository>().InstancePerRequest();
+            builder.RegisterType<Database.Repositories.Statistic.StatisticRepository>().As<Database.Repositories.Statistic.IStatisticRepository>().InstancePerRequest();
             builder.RegisterType<Database.Repositories.TrainingRepository>().As<Database.Repositories.ITrainingRepository>().InstancePerRequest();
         }
 

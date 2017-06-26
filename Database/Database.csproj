@@ -58,8 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
-    <Compile Include="ApplicationUser.cs" />
-    <Compile Include="Exercise.cs" />
+    <Compile Include="Entities\ApplicationUser.cs" />
+    <Compile Include="Entities\Exercise.cs" />
     <Compile Include="Migrations\201706041236320_InitalCreate.cs" />
     <Compile Include="Migrations\201706041236320_InitalCreate.Designer.cs">
       <DependentUpon>201706041236320_InitalCreate.cs</DependentUpon>
@@ -73,21 +73,21 @@
       <DependentUpon>201706241520340_ChangedDescriptionLength.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Repositories\ExcerciseRepository.cs" />
+    <Compile Include="Repositories\Excercise\ExcerciseRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
-    <Compile Include="Repositories\IExcerciseRepository.cs" />
+    <Compile Include="Repositories\Excercise\IExcerciseRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\IStatisticRepository.cs" />
-    <Compile Include="Repositories\ITrainingRepository.cs" />
-    <Compile Include="Repositories\IUserExcerciseRepository.cs" />
-    <Compile Include="Repositories\StatisticRepository.cs" />
-    <Compile Include="Repositories\TrainingRepository.cs" />
-    <Compile Include="Repositories\UserExcerciseRepository.cs" />
-    <Compile Include="Statistic.cs" />
-    <Compile Include="Training.cs" />
-    <Compile Include="TrainingExcercisecs.cs" />
-    <Compile Include="UserExcercise.cs" />
+    <Compile Include="Repositories\Statistic\IStatisticRepository.cs" />
+    <Compile Include="Repositories\Training\ITrainingRepository.cs" />
+    <Compile Include="Repositories\UserExcercise\IUserExcerciseRepository.cs" />
+    <Compile Include="Repositories\Statistic\StatisticRepository.cs" />
+    <Compile Include="Repositories\Training\TrainingRepository.cs" />
+    <Compile Include="Repositories\UserExcercise\UserExcerciseRepository.cs" />
+    <Compile Include="Entities\Statistic.cs" />
+    <Compile Include="Entities\Training.cs" />
+    <Compile Include="Entities\TrainingExcercisecs.cs" />
+    <Compile Include="Entities\UserExcercise.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -16,9 +16,11 @@ using WebApplication.Helpers;
 using WebApplication.Services;
 using System.Web;
 using Microsoft.AspNet.Identity;
-using ApiClients.Models.DTO;
 using ApiClients.Models.Account;
 using ApiClients.Models;
+using Database.Repositories.Excercise;
+using Database.Repositories.UserExcercise;
+using Database.Repositories.Statistic;
 
 namespace WebApplication.Controllers.Api
 {
