@@ -8,5 +8,6 @@ namespace Database.Repositories
 {
     public interface ITrainingRepository : IRepository<Training,Guid>
     {
+        IEnumerable<Training> GetTrainingsForUser(Guid userId);
     }
 }

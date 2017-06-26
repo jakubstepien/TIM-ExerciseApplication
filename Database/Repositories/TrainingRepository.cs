@@ -12,5 +12,10 @@ namespace Database.Repositories
         public TrainingRepository(DbContext context) : base(context)
         {
         }
+
+        public IEnumerable<Training> GetTrainingsForUser(Guid userId)
+        {
+            return db.Set<Training>().AsNoTracking().Where(w => w.IdUser == userId).ToArray();
+        }
     }
 }

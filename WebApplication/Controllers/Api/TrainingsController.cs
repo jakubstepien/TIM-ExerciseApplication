@@ -15,6 +15,7 @@ using WebApplication.Helpers;
 
 namespace WebApplication.Controllers.Api
 {
+    [RoutePrefix("api/trainings")]
     public class TrainingsController : ApiController
     {
         private ITrainingRepository db;
@@ -28,6 +29,12 @@ namespace WebApplication.Controllers.Api
         public IEnumerable<TrainingDTO> GetTrainings()
         {
             return db.GetAll().ToArray().Select(s => s.ToDTO());
+        }
+
+        [Route("user/{userId}")]
+        public IEnumerable<TrainingDTO> GetTrainingsForUser(Guid userId)
+        {
+            return db.GetTrainingsForUser(userId).Select(s => s.ToDTO());
         }
 
         // GET: api/Trainings/5
