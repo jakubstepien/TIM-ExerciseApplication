@@ -20,7 +20,7 @@
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <Label VerticalTextAlignment="Center" Grid.Column="0" x:Name="name" Text="{Binding Name}" />
-                                    <Button Grid.Column="1" Command="{Binding FavouriteCommand}" Image="{Binding FavouriteIcon, Mode=TwoWay}" WidthRequest="50" 
+                                    <Button Grid.Column="1" Command="{Binding FavouriteCommand}" Image="{Binding FavouriteIcon}" WidthRequest="50" 
                                             BorderRadius="100"
                                             BackgroundColor="AliceBlue"/>
                                 </Grid>
