@@ -13,6 +13,7 @@ namespace MobileApp.Utills.TimeInput
         {
             TextChanged += FormatText;
             Text = "00h 00m 00s";
+            Keyboard = Keyboard.Numeric;
         }
 
         private void FormatText(object sender, TextChangedEventArgs e)
