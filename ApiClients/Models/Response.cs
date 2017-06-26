@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiClients
+namespace ApiClients.Models
 {
     public class Response
     {

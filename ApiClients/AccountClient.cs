@@ -1,4 +1,5 @@
-﻿using ApiClients.Models.Account;
+﻿using ApiClients.Models;
+using ApiClients.Models.Account;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;

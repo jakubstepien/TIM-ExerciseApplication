@@ -23,15 +23,15 @@ namespace MobileApp.Services.Training
         {
             var client = new ApiClients.TrainingClient(token);
             var id = Guid.NewGuid();
-            ApiClients.Model.DTO.TrainingDTO dto = null;
+            ApiClients.Models.DTO.TrainingDTO dto = null;
             await Task.Factory.StartNew(() =>
             {
-                dto = new ApiClients.Model.DTO.TrainingDTO
+                dto = new ApiClients.Models.DTO.TrainingDTO
                 {
                     IdTraining = id,
                     IdUser = userId,
                     Name = training.Name,
-                    Excercises = training.Excercises.Select(s => new ApiClients.Model.DTO.TrainingExcerciseDTO
+                    Excercises = training.Excercises.Select(s => new ApiClients.Models.DTO.TrainingExcerciseDTO
                     {
                         IdExcercise = s.IdExcercise,
                         Interval = s.IntervalTime.GetSecondsFromTimeString(),

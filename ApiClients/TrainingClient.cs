@@ -1,4 +1,5 @@
-﻿using ApiClients.Model.DTO;
+﻿using ApiClients.Models;
+using ApiClients.Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;

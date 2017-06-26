@@ -256,7 +256,6 @@
     <Compile Include="Controllers\Api\TrainingsController.cs" />
     <Compile Include="Controllers\WebSite\AccountController.cs" />
     <Compile Include="Controllers\WebSite\ControllerHelper.cs" />
-    <Compile Include="Controllers\WebSite\ExampleController.cs" />
     <Compile Include="Controllers\WebSite\ExcerciseController.cs" />
     <Compile Include="Controllers\WebSite\HomeController.cs" />
     <Compile Include="Controllers\Api\ValuesController.cs" />

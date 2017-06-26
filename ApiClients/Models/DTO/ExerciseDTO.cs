@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiClients.Model.DTO
+namespace ApiClients.Models.DTO
 {
     public class ExerciseDTO
     {

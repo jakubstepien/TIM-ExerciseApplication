@@ -1,5 +1,4 @@
-﻿using ApiClients.Model.DTO;
-using ApiClients.Models;
+﻿using ApiClients.Models;
 using ApiClients.Models.Account;
 using ApiClients.Models.DTO;
 using System;

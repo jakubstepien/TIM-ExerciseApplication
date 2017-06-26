@@ -11,7 +11,7 @@ using System.Web.Http.Description;
 using Database;
 using Database.Repositories;
 using WebApplication.Models;
-using ApiClients.Model.DTO;
+using ApiClients.Models.DTO;
 using WebApplication.Helpers;
 using WebApplication.Services;
 using System.Web;

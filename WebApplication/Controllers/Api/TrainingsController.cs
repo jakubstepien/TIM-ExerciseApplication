@@ -10,7 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Database;
 using Database.Repositories;
-using ApiClients.Model.DTO;
+using ApiClients.Models.DTO;
 using WebApplication.Helpers;
 
 namespace WebApplication.Controllers.Api
