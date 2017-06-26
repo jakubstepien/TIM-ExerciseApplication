@@ -12,6 +12,6 @@ namespace MobileApp.Models
 
         public string Name { get; set; }
 
-
+        public TrainingExerciseModel[] Exercises { get; set; }
     }
 }

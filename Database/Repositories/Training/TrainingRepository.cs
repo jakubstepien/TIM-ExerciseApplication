@@ -15,7 +15,10 @@ namespace Database.Repositories
 
         public override Training GetById(Guid id)
         {
-            return db.Set<Training>().Include(i => i.Excercises).SingleOrDefault(s => s.IdTraining == id);
+            return db.Set<Training>()
+                .Include(i => i.Excercises)
+                .Include(i => i.Excercises.Select(s => s.Excercise))
+                .SingleOrDefault(s => s.IdTraining == id);
         }
 
         public IEnumerable<Training> GetTrainingsForUser(Guid userId)

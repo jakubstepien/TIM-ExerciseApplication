@@ -19,5 +19,9 @@ namespace ApiClients.Models.DTO
         public int TimeSpan { get; set; }
 
         public int IntervalBeforeNextExercise { get; set; }
+
+        public int? CalloriesPerHour { get; set; }
+
+        public string Name { get; set; }
     }
 }

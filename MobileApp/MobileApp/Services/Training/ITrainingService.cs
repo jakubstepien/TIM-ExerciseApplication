@@ -1,4 +1,5 @@
-﻿using MobileApp.ViewModels.Trainings;
+﻿using MobileApp.Models;
+using MobileApp.ViewModels.Trainings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,6 @@ namespace MobileApp.Services.Training
 
         Task<ServiceResult> DeleteTraining(Guid id);
 
-
+        Task<ServiceResult<TrainingModel>> GetTraining(Guid id);
     }
 }

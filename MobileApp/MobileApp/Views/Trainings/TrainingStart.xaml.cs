@@ -14,25 +14,23 @@ namespace MobileApp.Views.Trainings
     public partial class TrainingStart : ContentPage
     {
         ITrainingService trainingService;
-
+        Guid trainingId;
         public TrainingStart()
         {
             InitializeComponent();
         }
 
-        public TrainingStart(ITrainingService trainingService, string trainingName)
+        public TrainingStart(ITrainingService trainingService, Guid id)
         {
-            Title = trainingName;
+            Title = "Trening";
+            trainingId = id;
             this.trainingService = trainingService;
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
-            currentExerciseName.Text = "Pompki";
-            status.Text = "2/5";
-            series.Text = "Seria 1/2";
-            timer.Text = "80";
+            var result = await trainingService.GetTraining(trainingId);
             base.OnAppearing();
         }
 

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MobileApp.ViewModels.Trainings;
 using MobileApp.Utills.TimeInput;
+using MobileApp.Models;
 
 namespace MobileApp.Services.Training
 {
@@ -29,7 +30,7 @@ namespace MobileApp.Services.Training
                         Interval = s.IntervalTime.GetSecondsFromTimeString(),
                         Series = s.SeriesNumber,
                         TimeSpan = s.SeriesTime.GetSecondsFromTimeString(),
-                        IntervalBeforeNextExercise = s.IntervalBetweenExcercises.GetSecondsFromTimeString()
+                        IntervalBeforeNextExercise = s.IntervalBetweenExcercises.GetSecondsFromTimeString(),
                     }).ToArray()
                 };
             });
@@ -57,6 +58,33 @@ namespace MobileApp.Services.Training
             var client = new ApiClients.TrainingClient(token);
             var response = await client.DeleteTraining(id);
             return new ServiceResult { Success = response.Success, Message = response.Message };
+        }
+
+        public async Task<ServiceResult<TrainingModel>> GetTraining(Guid id)
+        {
+            var client = new ApiClients.TrainingClient(token);
+            var response = await client.GetTraining(id);
+            var result = new ServiceResult<TrainingModel> { Success = response.Success, Message = response.Message };
+            if (response.Success)
+            {
+                result.Result = new TrainingModel
+                {
+                    Id = response.Data.IdTraining,
+                    Name = response.Data.Name,
+                    Exercises = response.Data.Excercises
+                        .Select(s => new TrainingExerciseModel
+                        {
+                            Id = s.IdExcercise,
+                            CalloriesPerHour = s.CalloriesPerHour.Value,
+                            Interval = s.Interval,
+                            Name = s.Name,
+                            NextExerciseInterval = s.IntervalBeforeNextExercise,
+                            SeriesNumber = s.Series,
+                            SeriesTime = s.TimeSpan
+                        }).ToArray()
+                };
+            }
+            return result;
         }
     }
 }

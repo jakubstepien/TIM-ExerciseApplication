@@ -54,7 +54,7 @@ namespace MobileApp.Views.Trainings
             Guid trainingId;
             if (id != null && Guid.TryParse(id.ToString(), out trainingId))
             {
-                var action = await DisplayAlert("Usunięcie treningu","Czy napewno chcesz usunąć trening", "Tak", "Nie");
+                var action = await DisplayAlert("Usunięcie treningu", "Czy napewno chcesz usunąć trening", "Tak", "Nie");
                 if (action)
                 {
                     var deleteResult = await trainingService.DeleteTraining(trainingId);
@@ -74,14 +74,22 @@ namespace MobileApp.Views.Trainings
 
         private async void StartTraining(object sender, EventArgs e)
         {
-            var startPage = new TrainingStart();
-            await Navigation.PushAsync(startPage);
+            var id = (sender as Button).CommandParameter;
+            Guid trainingId;
+            if (id != null && Guid.TryParse(id.ToString(), out trainingId))
+            {
+                var startPage = new TrainingStart(trainingService,trainingId);
+                await Navigation.PushAsync(startPage);
+            }
         }
 
         private async void AddNewTraining(object sender, EventArgs e)
         {
+
             var addTraingPage = new AddTraining(excerciseService, trainingService);
             await Navigation.PushAsync(addTraingPage);
+
+
         }
     }
 }
