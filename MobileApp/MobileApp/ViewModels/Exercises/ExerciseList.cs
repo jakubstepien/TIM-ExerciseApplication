@@ -44,5 +44,14 @@ namespace MobileApp.ViewModels.Exercises
             await navigation.PushAsync(view);
         }
 
+        public async void ReorderList()
+        {
+            IOrderedEnumerable<ExcerciseViewModel> ordered = null;
+            await Task.Factory.StartNew(() =>
+            {
+                ordered = Excercises.OrderByDescending(o => o.Favourite);
+            });
+            Excercises = new ObservableCollection<ExcerciseViewModel>(ordered);
+        }
     }
 }

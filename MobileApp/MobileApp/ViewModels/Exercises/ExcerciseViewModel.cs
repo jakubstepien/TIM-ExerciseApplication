@@ -73,6 +73,7 @@ namespace MobileApp.ViewModels.Exercises
             {
                 favourite = result.Result;
                 OnPropertyChanged("FavouriteIcon");
+                Parent.ReorderList();
             }
         }
 
