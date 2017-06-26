@@ -68,5 +68,11 @@ namespace MobileApp.Views.Trainings
                 }
             }
         }
+
+        private async void StartTraining(object sender, EventArgs e)
+        {
+            var startPage = new TrainingStart();
+            await Navigation.PushAsync(startPage);
+        }
     }
 }

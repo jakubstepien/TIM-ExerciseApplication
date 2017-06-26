@@ -12,9 +12,11 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="5*" />
                                     <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Text="{Binding Name}" VerticalOptions="Center" />
-                                <Button Grid.Column="1" Clicked="DeleteTraining" CommandParameter="{Binding Id}" Image="ic_delete_black_24dp.png" VerticalOptions="Center" BorderColor="Transparent" BackgroundColor="Transparent" BorderWidth="0"/>
+                                <Button Grid.Column="1" Clicked="StartTraining" CommandParameter="{Binding Id}" Image="ic_play_arrow_black_24dp" VerticalOptions="Center" BorderColor="Transparent" BackgroundColor="Transparent" BorderWidth="0"/>
+                                <Button Grid.Column="2" Clicked="DeleteTraining" CommandParameter="{Binding Id}" Image="ic_delete_black_24dp.png" VerticalOptions="Center" BorderColor="Transparent" BackgroundColor="Transparent" BorderWidth="0"/>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
