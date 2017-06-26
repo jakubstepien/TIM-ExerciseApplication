@@ -19,5 +19,7 @@ namespace ApiClients.Model.DTO
         public string ImageName { get; set; }
 
         public int CaloriesPerHour { get; set; }
+
+        public bool IsFavourite { get; set; }
     }
 }

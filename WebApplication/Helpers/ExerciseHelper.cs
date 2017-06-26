@@ -34,5 +34,19 @@ namespace WebApplication.Helpers
                 ImageName = exercise.ImageName
             };
         }
+
+        public static ExerciseDTO ToDTO(this UserExcercise exercise)
+        {
+            return new ExerciseDTO
+            {
+                CaloriesPerHour = exercise.Exercise.CaloriesPerHour,
+                Description = exercise.Exercise.Description,
+                IdExercise = exercise.Exercise.IdExercise,
+                Image = exercise.Exercise.Image,
+                Name = exercise.Exercise.Name,
+                ImageName = exercise.Exercise.ImageName,
+                IsFavourite = exercise.IsFavourite
+            };
+        }
     }
 }

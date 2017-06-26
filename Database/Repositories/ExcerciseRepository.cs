@@ -32,11 +32,13 @@ namespace Database.Repositories
             return GetById(id);
         }
 
-        public IEnumerable<Exercise> GetExercisesForUser(Guid IdUser)
+        public IEnumerable<UserExcercise> GetExercisesForUser(Guid IdUser)
         {
-            return db.Set<Exercise>()
+            return db.Set<UserExcercise>()
                 .AsNoTracking()
-                .Where(w => w.UserExcercise.Any(a => a.UserId == IdUser))
+                .Include(i => i.Exercise)
+                .Where(w => w.UserId == IdUser)
+                .OrderByDescending(o => o.IsFavourite)
                 .ToArray();
         }
     }

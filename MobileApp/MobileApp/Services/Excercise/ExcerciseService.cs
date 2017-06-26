@@ -39,7 +39,8 @@ namespace MobileApp.Services.Excercise
                             Description = s.Description,
                             DetailsVisable = false,
                             ImageName = s.ImageName,
-                            CaloriesPerHour = s.CaloriesPerHour
+                            CaloriesPerHour = s.CaloriesPerHour,
+                            Favourite = s.IsFavourite
                         })
                         .ToArray();
                 });

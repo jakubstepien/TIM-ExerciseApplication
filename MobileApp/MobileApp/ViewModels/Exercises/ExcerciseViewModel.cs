@@ -44,10 +44,11 @@ namespace MobileApp.ViewModels.Exercises
         }
 
 
-        private bool favouriteIcon;
+        private bool favourite;
+        public bool Favourite { get { return favourite; } set { favourite = value; OnPropertyChanged("FavouriteIcon"); } }
         public string FavouriteIcon
         {
-            get { return favouriteIcon ? FavouriedIcon : NotFavouriedIcon; }
+            get { return favourite ? FavouriedIcon : NotFavouriedIcon; }
         }
 
 
@@ -70,7 +71,7 @@ namespace MobileApp.ViewModels.Exercises
             var result = await Parent.ExcerciseService.SetAsFavourite(Id);
             if (result.Success)
             {
-                favouriteIcon = result.Result;
+                favourite = result.Result;
                 OnPropertyChanged("FavouriteIcon");
             }
         }
