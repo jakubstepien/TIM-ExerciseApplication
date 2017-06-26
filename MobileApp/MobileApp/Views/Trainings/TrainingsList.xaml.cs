@@ -1,4 +1,5 @@
-﻿using MobileApp.Services.Training;
+﻿using MobileApp.Services.Excercise;
+using MobileApp.Services.Training;
 using MobileApp.ViewModels.Trainings;
 using System;
 using System.Collections.Generic;
@@ -15,15 +16,17 @@ namespace MobileApp.Views.Trainings
     public partial class TrainingsList : ContentPage
     {
         ITrainingService trainingService;
+        IExcerciseService excerciseService;
 
         public TrainingsList()
         {
             InitializeComponent();
         }
 
-        public TrainingsList(ITrainingService trainingService)
+        public TrainingsList(ITrainingService trainingService, IExcerciseService excerciseService)
         {
             this.trainingService = trainingService;
+            this.excerciseService = excerciseService;
             InitializeComponent();
         }
 
@@ -73,6 +76,12 @@ namespace MobileApp.Views.Trainings
         {
             var startPage = new TrainingStart();
             await Navigation.PushAsync(startPage);
+        }
+
+        private async void AddNewTraining(object sender, EventArgs e)
+        {
+            var addTraingPage = new AddTraining(excerciseService, trainingService);
+            await Navigation.PushAsync(addTraingPage);
         }
     }
 }

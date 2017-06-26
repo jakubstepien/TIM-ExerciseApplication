@@ -29,6 +29,7 @@ namespace MobileApp.Views.Trainings
         {
             this.excerciseService = excerciseService;
             this.trainingService = trainingService;
+            Title = "Dodaj nowy trening";
             InitializeComponent();
         }
 
