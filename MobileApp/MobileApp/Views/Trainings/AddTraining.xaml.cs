@@ -18,6 +18,7 @@ namespace MobileApp.Views.Trainings
     {
         IExcerciseService excerciseService;
         ITrainingService trainingService;
+        bool isSaving = false;
 
         public AddTraining()
         {
@@ -37,7 +38,8 @@ namespace MobileApp.Views.Trainings
             if (result.Success)
             {
                 AddTrainingViewModel viewmodel = null;
-                await Task.Factory.StartNew(() => {
+                await Task.Factory.StartNew(() =>
+                {
                     viewmodel = new AddTrainingViewModel(result.Result);
                 });
                 this.BindingContext = viewmodel;
@@ -46,20 +48,19 @@ namespace MobileApp.Views.Trainings
 
         private async void SaveTraining(object sender, EventArgs e)
         {
-            var viewModel = BindingContext as AddTrainingViewModel;
-            if(viewModel != null && !string.IsNullOrEmpty(viewModel.Name))
+            if (!isSaving)
             {
-                var result = await trainingService.AddTraining(viewModel);
-                var notificator = DependencyService.Get<IToastNotificator>();
-
-                var options = new NotificationOptions()
+                isSaving = true;
+                var viewModel = BindingContext as AddTrainingViewModel;
+                if (viewModel != null && !string.IsNullOrEmpty(viewModel.Name))
                 {
-                    Title = "TIM-ExcerciseApp",
-                    Description = result.Success ? "Trening został dodany." : "Nie udało się dodać treningu"
-                };
 
-                var toast = await notificator.Notify(options);
+                    var result = await trainingService.AddTraining(viewModel);
+                    var toast = await Utills.ToastHelper.ShowToast(result.Success ? "Trening został dodany." : "Nie udało się dodać treningu.");
+                    isSaving = false;
+                }
             }
+
         }
     }
 }

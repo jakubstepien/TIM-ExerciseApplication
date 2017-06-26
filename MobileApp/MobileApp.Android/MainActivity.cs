@@ -22,7 +22,9 @@ namespace MobileApp.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             global::Xamarin.Forms.DependencyService.Register<ToastNotification>();
-            ToastNotification.Init(this);
+            var options = new PlatformOptions();
+            options.Style = NotificationStyle.Snackbar;
+            ToastNotification.Init(this, options);
             LoadApplication(new App());
         }
     }
