@@ -23,8 +23,6 @@ namespace MobileApp.Views.Trainings
         TrainingModel training;
 
 
-
-
         public TrainingStart()
         {
             InitializeComponent();
@@ -86,7 +84,16 @@ namespace MobileApp.Views.Trainings
                     if (currentSlide == slides.Length)
                     {
                         currentExerciseName.Text = "Trening zakończony";
+                        series.Text = "Zapisywanie wyników";
                         timer.Text = "";
+                        Task.Factory.StartNew(async () =>
+                        {
+                            await trainingService.AddFinishedTraining(training);
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
+                                series.Text = "Zapisano wynik.";
+                            });
+                        });
                         ToggleExercising(false);
                         return false;
                     }

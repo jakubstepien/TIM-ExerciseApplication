@@ -91,5 +91,26 @@ namespace MobileApp.Services.Training
             }
             return result;
         }
+
+        public async Task<ServiceResult> AddFinishedTraining(TrainingModel training)
+        {
+            var client = new ApiClients.TrainingClient(token);
+            ApiClients.Models.DTO.FinishedTrainingDTO dto = null;
+            await Task.Factory.StartNew(() =>
+            {
+                dto = new ApiClients.Models.DTO.FinishedTrainingDTO
+                {
+                    Exercises = training.Exercises.Select(s => new ApiClients.Models.DTO.FinishedExerciseDTO
+                    {
+                        Date = DateTime.Now,
+                        Name = training.Name + " - " + s.Name,
+                        UserId = userId,
+                        Callories = (decimal)s.SeriesTime * s.SeriesNumber * s.CalloriesPerHour / 3600m
+                    }).ToArray()
+                };
+            });
+            var response = await client.AddFinishedTraining(userId, dto);
+            return new ServiceResult { Success = response.Success, Message = response.Message };
+        }
     }
 }

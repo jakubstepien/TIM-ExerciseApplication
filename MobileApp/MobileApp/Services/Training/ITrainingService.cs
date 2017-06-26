@@ -17,5 +17,7 @@ namespace MobileApp.Services.Training
         Task<ServiceResult> DeleteTraining(Guid id);
 
         Task<ServiceResult<TrainingModel>> GetTraining(Guid id);
+
+        Task<ServiceResult> AddFinishedTraining(TrainingModel training);
     }
 }

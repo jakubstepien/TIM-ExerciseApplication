@@ -12,36 +12,40 @@ using Database;
 using Database.Repositories;
 using ApiClients.Models.DTO;
 using WebApplication.Helpers;
+using Database.Repositories.Statistic;
 
 namespace WebApplication.Controllers.Api
 {
     [RoutePrefix("api/trainings")]
     public class TrainingsController : ApiController
     {
-        private ITrainingRepository db;
+        private ITrainingRepository trainingRepo;
+        private IStatisticRepository statisticsRepo;
 
-        public TrainingsController(ITrainingRepository db)
+        public TrainingsController(ITrainingRepository trainingRepo, IStatisticRepository statisticRepo)
         {
-            this.db = db;
+            this.trainingRepo = trainingRepo;
+            this.statisticsRepo = statisticRepo;
         }
+
 
         // GET: api/Trainings
         public IEnumerable<TrainingDTO> GetTrainings()
         {
-            return db.GetAll().ToArray().Select(s => s.ToDTO());
+            return trainingRepo.GetAll().ToArray().Select(s => s.ToDTO());
         }
 
         [Route("user/{userId}")]
         public IEnumerable<TrainingDTO> GetTrainingsForUser(Guid userId)
         {
-            return db.GetTrainingsForUser(userId).Select(s => s.ToDTO());
+            return trainingRepo.GetTrainingsForUser(userId).Select(s => s.ToDTO());
         }
 
         // GET: api/Trainings/5
         [ResponseType(typeof(Training))]
         public IHttpActionResult GetTraining(Guid id)
         {
-            Training training = db.GetById(id);
+            Training training = trainingRepo.GetById(id);
             if (training == null)
             {
                 return NotFound();
@@ -96,11 +100,11 @@ namespace WebApplication.Controllers.Api
                 return BadRequest(ModelState);
             }
 
-            db.Add(entity);
+            trainingRepo.Add(entity);
 
             try
             {
-                db.SaveChanges();
+                trainingRepo.SaveChanges();
             }
             catch (DbUpdateException)
             {
@@ -117,18 +121,37 @@ namespace WebApplication.Controllers.Api
             return CreatedAtRoute("DefaultApi", new { id = training.IdTraining }, training);
         }
 
+        [Route("finished/user/{userId}/")]
+        public IHttpActionResult PostFinishedTraining(Guid userId, FinishedTrainingDTO finishedTraining)
+        {
+            foreach (var exercise in finishedTraining.Exercises)
+            {
+                statisticsRepo.Add(new Statistic
+                {
+                    Callories = exercise.Callories,
+                    Date = exercise.Date,
+                    ExerciseName = exercise.Name,
+                    IdUser = exercise.UserId,
+                    IdStatistic = Guid.NewGuid()
+                });
+            }
+            statisticsRepo.SaveChanges();
+            return Ok();
+        }
+
+
         // DELETE: api/Trainings/5
         [ResponseType(typeof(Training))]
         public IHttpActionResult DeleteTraining(Guid id)
         {
-            Training training = db.GetById(id);
+            Training training = trainingRepo.GetById(id);
             if (training == null)
             {
                 return NotFound();
             }
 
-            db.Remove(training);
-            db.SaveChanges();
+            trainingRepo.Remove(training);
+            trainingRepo.SaveChanges();
 
             return Ok(training);
         }
@@ -137,14 +160,14 @@ namespace WebApplication.Controllers.Api
         {
             if (disposing)
             {
-                db.Dispose();
+                trainingRepo.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool TrainingExists(Guid id)
         {
-            return db.Exists(id);
+            return trainingRepo.Exists(id);
         }
     }
 }

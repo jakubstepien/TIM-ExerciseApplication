@@ -42,5 +42,12 @@ namespace ApiClients
             var response = await SendRequest(HttpMethod.Delete, url);
             return response;
         }
+
+        public async Task<Response> AddFinishedTraining(Guid userId, FinishedTrainingDTO finishedTraining)
+        {
+            string url = "api/Trainings/finished/user/" + userId + "/";
+            var response = await SendRequest(HttpMethod.Post, url, finishedTraining);
+            return response;
+        }
     }
 }
