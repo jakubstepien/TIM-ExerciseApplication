@@ -33,7 +33,7 @@ namespace MobileApp.Views.MasterDetail
             MasterPage.BindingContext = masterViewModel;
         }
 
-        public void ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        public async void ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             Type type = null;
             string title = string.Empty;
@@ -46,7 +46,7 @@ namespace MobileApp.Views.MasterDetail
                 title = item.Name;
                 if (e.SelectedItem is MasterDetailMenuItem)
                 {
-                    RefreshList(item as MasterDetailMenuItem);
+                    await RefreshList(item as MasterDetailMenuItem);
                 }
             }
             else
@@ -55,35 +55,40 @@ namespace MobileApp.Views.MasterDetail
             }
             if(type != null)
             {
-                ChangeDetail(type, title);
+                await ChangeDetail(type, title);
             }
 
             MasterPage.MenuItems.SelectedItem = null;
         }
 
-        public void ChangeDetail(Type type, string title)
+        public async Task ChangeDetail(Type type, string title)
         {
-            var page = (Page)lifetimeScope.Resolve(type);
-            page.Title = title;
-
-            Detail = new NavigationPage(page);
+            Page page = null;
+            await Task.Factory.StartNew(() =>
+            {
+                page = (Page)lifetimeScope.Resolve(type);
+                page.Title = title;
+                page = new NavigationPage(page);
+            });
+            Detail = page;
             IsPresented = false;
         }
 
-        private void RefreshList(MasterDetailMenuItem item)
+        private async Task RefreshList(MasterDetailMenuItem item)
         {
             var masterViewModel = MasterPage.BindingContext as MasterDetailPageMasterViewModel;
             try
             {
-
                 MasterPage.MenuItems.BatchBegin();
-                if (masterViewModel != null)
-                {
-                    foreach (var listItem in masterViewModel.MenuItems)
+                await Task.Factory.StartNew(() => {
+                    if (masterViewModel != null)
                     {
-                        listItem.ShowSubItems = listItem.SubItems != null && listItem.SubItems.Length != 00 && listItem.Id == item.Id && !listItem.ShowSubItems;
+                        foreach (var listItem in masterViewModel.MenuItems)
+                        {
+                            listItem.ShowSubItems = listItem.SubItems != null && listItem.SubItems.Length != 00 && listItem.Id == item.Id && !listItem.ShowSubItems;
+                        }
                     }
-                }
+                });
             }
             catch (Exception ex)
             {
