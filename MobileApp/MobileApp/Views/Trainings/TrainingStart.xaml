@@ -14,7 +14,9 @@
             </Grid.RowDefinitions>
             <Label x:Name="status" Grid.Row="0" VerticalOptions="Start" HorizontalOptions="End" FontSize="11"/>
             <Label x:Name="currentExerciseName" Grid.Row="1" VerticalOptions="Center" HorizontalOptions="Center" FontSize="28"/>
-            <Image x:Name="image" Grid.Row="2"  VerticalOptions="Center" HorizontalOptions="Center" />
+            <StackLayout  Grid.Row="2" >
+                <Image x:Name="image" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="150"/>
+            </StackLayout>
             <Button x:Name="startButton" Grid.Row="3" Clicked="Start" Text="Zacznij trening" HorizontalOptions="Center"/>
             <Label x:Name="series" Grid.Row="4"  VerticalOptions="Center" HorizontalOptions="Center" FontSize="20" />
             <Label x:Name="timer"  Grid.Row="5" VerticalOptions="Center" HorizontalOptions="Center"  FontSize="48" Margin="0, 20, 0, 0"/>

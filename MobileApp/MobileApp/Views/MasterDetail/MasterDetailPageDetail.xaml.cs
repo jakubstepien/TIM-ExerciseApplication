@@ -15,6 +15,12 @@ namespace MobileApp.Views.MasterDetail
         public MasterDetailPageDetail()
         {
             InitializeComponent();
+            var tapGestureRecognizer = new TapGestureRecognizer();
+            tapGestureRecognizer.Tapped += (s, e) =>
+            {
+                Device.OpenUri(new Uri("http://" + link.Text));
+            };
+            link.GestureRecognizers.Add(tapGestureRecognizer);
         }
 
     }

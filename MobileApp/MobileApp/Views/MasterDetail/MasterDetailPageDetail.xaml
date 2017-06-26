@@ -2,8 +2,16 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileApp.Views.MasterDetail.MasterDetailPageDetail"
-             Title="Detail">
+             Title="ExcerciseApp">
   <StackLayout Padding="10">
-        <Label Text="This is a detail page. To get the 'triple' line icon on each platform add a icon to each platform and update the 'Master' page with an Icon that references it."/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+        </Grid>
+        <Label x:Name="text" Text="Aplikacja do ćwiczeń i treningów indor."/>
+        <Label Text="Aby dodać ćwiczenia wejdź na stonę:" Margin="0,10,0,0"/>
+        <Label x:Name="link" Text="10.0.2.2:8080" TextColor="Blue" />
     </StackLayout>
 </ContentPage>
