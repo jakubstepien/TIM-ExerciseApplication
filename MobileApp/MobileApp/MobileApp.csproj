@@ -40,12 +40,11 @@
     </Compile>
     <Compile Include="Services\Account\AccountService.cs" />
     <Compile Include="Services\Account\IAccountService.cs" />
+    <Compile Include="Services\AuthorizedService.cs" />
     <Compile Include="Services\Excercise\ExcerciseService.cs" />
     <Compile Include="Services\Excercise\IExcerciseService.cs" />
-    <Compile Include="Services\ITestService.cs" />
     <Compile Include="Services\Statistics\IStatisticsService.cs" />
     <Compile Include="Services\Statistics\StatisticsService.cs" />
-    <Compile Include="Services\TestService.cs" />
     <Compile Include="Services\Training\ITrainingService.cs" />
     <Compile Include="Services\Training\TrainingService.cs" />
     <Compile Include="Utills\Autofac\AppModule.cs" />

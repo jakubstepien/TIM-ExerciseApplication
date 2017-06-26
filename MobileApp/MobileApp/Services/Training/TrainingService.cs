@@ -8,17 +8,8 @@ using MobileApp.Utills.TimeInput;
 
 namespace MobileApp.Services.Training
 {
-    public class TrainingService : ITrainingService
+    public class TrainingService : AuthorizedService,ITrainingService
     {
-        private readonly Guid userId;
-        private readonly string token;
-
-        public TrainingService()
-        {
-            token = Utills.UserStore.GetToken();
-            userId = Utills.UserStore.GetId().Value;
-        }
-
         public async Task<ServiceResult> AddTraining(AddTrainingViewModel training)
         {
             var client = new ApiClients.TrainingClient(token);

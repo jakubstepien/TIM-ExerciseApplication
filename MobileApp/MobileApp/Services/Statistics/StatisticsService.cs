@@ -8,16 +8,8 @@ using ApiClients;
 
 namespace MobileApp.Services.Statistics
 {
-    public class StatisticsService : IStatisticsService
+    public class StatisticsService : AuthorizedService, IStatisticsService
     {
-        private readonly Guid userId;
-        private readonly string token;
-
-        public StatisticsService()
-        {
-            token = Utills.UserStore.GetToken();
-            userId = Utills.UserStore.GetId().Value;
-        }
 
         public async Task<ServiceResult<IEnumerable<FinishedExcercise>>> GetBetweenDate(DateTime after, DateTime before)
         {

@@ -7,16 +7,12 @@ using MobileApp.ViewModels.Exercises;
 
 namespace MobileApp.Services.Excercise
 {
-    public class ExcerciseService : IExcerciseService
+    public class ExcerciseService : AuthorizedService,IExcerciseService
     {
-        private readonly Guid userId;
-        private readonly string token;
         Utills.IApp app;
 
         public ExcerciseService(Utills.IApp app)
         {
-            token = Utills.UserStore.GetToken();
-            userId = Utills.UserStore.GetId().Value;
             this.app = app;
         }
 
