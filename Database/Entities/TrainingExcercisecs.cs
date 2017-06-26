@@ -12,13 +12,13 @@ namespace Database
     {
         [Key]
         [Column(Order = 0)]
+        public Guid Id { get; set; }
+
         public Guid IdExercise { get; set; }
 
         [ForeignKey("IdExercise")]
         public Exercise Excercise { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
         public Guid IdTraining { get; set; }
 
         [ForeignKey("IdTraining")]
@@ -29,5 +29,7 @@ namespace Database
         public int Interval { get; set; }
 
         public int TimeSpan { get; set; }
+
+        public int IntervalBeforeNextExercise { get; set; }
     }
 }

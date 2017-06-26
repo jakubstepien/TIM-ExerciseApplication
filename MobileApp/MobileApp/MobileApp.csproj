@@ -38,6 +38,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\TrainingExerciseModel.cs" />
+    <Compile Include="Models\TrainingModel.cs" />
     <Compile Include="Services\Account\AccountService.cs" />
     <Compile Include="Services\Account\IAccountService.cs" />
     <Compile Include="Services\AuthorizedService.cs" />

@@ -72,6 +72,14 @@
     <Compile Include="Migrations\201706241520340_ChangedDescriptionLength.Designer.cs">
       <DependentUpon>201706241520340_ChangedDescriptionLength.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706261630525_AddTrainingExerciseIntervalBetweenExercises.cs" />
+    <Compile Include="Migrations\201706261630525_AddTrainingExerciseIntervalBetweenExercises.Designer.cs">
+      <DependentUpon>201706261630525_AddTrainingExerciseIntervalBetweenExercises.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706261635050_TrainingExcercsieRemoveCompositeKey.cs" />
+    <Compile Include="Migrations\201706261635050_TrainingExcercsieRemoveCompositeKey.Designer.cs">
+      <DependentUpon>201706261635050_TrainingExcercsieRemoveCompositeKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Repositories\Excercise\ExcerciseRepository.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />
@@ -102,6 +110,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706241520340_ChangedDescriptionLength.resx">
       <DependentUpon>201706241520340_ChangedDescriptionLength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706261630525_AddTrainingExerciseIntervalBetweenExercises.resx">
+      <DependentUpon>201706261630525_AddTrainingExerciseIntervalBetweenExercises.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706261635050_TrainingExcercsieRemoveCompositeKey.resx">
+      <DependentUpon>201706261635050_TrainingExcercsieRemoveCompositeKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

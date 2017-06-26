@@ -13,6 +13,11 @@ namespace Database.Repositories
         {
         }
 
+        public override Training GetById(Guid id)
+        {
+            return db.Set<Training>().Include(i => i.Excercises).SingleOrDefault(s => s.IdTraining == id);
+        }
+
         public IEnumerable<Training> GetTrainingsForUser(Guid userId)
         {
             return db.Set<Training>().AsNoTracking().Where(w => w.IdUser == userId).ToArray();

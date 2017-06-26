@@ -24,10 +24,12 @@ namespace MobileApp.Services.Training
                     Name = training.Name,
                     Excercises = training.Excercises.Select(s => new ApiClients.Models.DTO.TrainingExcerciseDTO
                     {
+                        Id = Guid.NewGuid(),
                         IdExcercise = s.IdExcercise,
                         Interval = s.IntervalTime.GetSecondsFromTimeString(),
                         Series = s.SeriesNumber,
-                        TimeSpan = s.SeriesTime.GetSecondsFromTimeString()
+                        TimeSpan = s.SeriesTime.GetSecondsFromTimeString(),
+                        IntervalBeforeNextExercise = s.IntervalBetweenExcercises.GetSecondsFromTimeString()
                     }).ToArray()
                 };
             });

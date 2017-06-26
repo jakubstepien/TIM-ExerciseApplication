@@ -18,10 +18,12 @@ namespace WebApplication.Helpers
                 Name = training.Name,
                 Excercises = training.Excercises.Select(s => new TrainingExcercise
                 {
+                    Id = s.Id,
                     IdTraining = training.IdTraining,
                     IdExercise = s.IdExcercise,
                     Interval = s.Interval,
                     Series = s.Series,
+                    IntervalBeforeNextExercise = s.IntervalBeforeNextExercise,
                     TimeSpan = s.TimeSpan
                 }).ToArray()
             };
@@ -36,10 +38,12 @@ namespace WebApplication.Helpers
                 Name = training.Name,
                 Excercises = training.Excercises.Select(s => new TrainingExcerciseDTO
                 {
+                    Id = s.Id,
                     IdExcercise = s.IdExercise,
                     Interval = s.Interval,
                     Series = s.Series,
-                    TimeSpan = s.TimeSpan
+                    TimeSpan = s.TimeSpan,
+                    IntervalBeforeNextExercise = s.IntervalBeforeNextExercise,
                 }).ToArray()
             };
         }

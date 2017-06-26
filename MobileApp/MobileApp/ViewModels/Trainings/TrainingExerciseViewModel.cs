@@ -35,20 +35,29 @@ namespace MobileApp.ViewModels.Trainings
         }
 
         private string seriesTime;
-
+        public string SeriesTimeSec { get { return SeriesTime.GetSecondsFromTimeString() + "s"; } }
         public string SeriesTime
         {
             get { return seriesTime; }
-            set { seriesTime = value; OnPropertyChanged(); }
+            set { seriesTime = value; OnPropertyChanged(); OnPropertyChanged("SeriesTimeSec"); }
         }
 
         private string intervalTime;
-
+        public string IntervalTimeSec { get { return IntervalTime.GetSecondsFromTimeString() + "s"; } }
         public string IntervalTime
         {
             get { return intervalTime; }
-            set { intervalTime = value; OnPropertyChanged(); }
+            set { intervalTime = value; OnPropertyChanged(); OnPropertyChanged("IntervalTimeSec"); }
         }
+
+        private string intervalBetweenExcercises;
+        public string IntervalBetweenExcercisesSec { get { return IntervalBetweenExcercises.GetSecondsFromTimeString() + "s"; } }
+        public string IntervalBetweenExcercises
+        {
+            get { return intervalBetweenExcercises; }
+            set { intervalBetweenExcercises = value; OnPropertyChanged(); OnPropertyChanged("IntervalBetweenExcercisesSec"); }
+        }
+
 
         public bool IsOk()
         {
@@ -68,6 +77,7 @@ namespace MobileApp.ViewModels.Trainings
             {
                 return false;
             }
+
             return true;
         }
 

@@ -8,6 +8,8 @@ namespace ApiClients.Models.DTO
 {
     public class TrainingExcerciseDTO
     {
+        public Guid Id { get; set; }
+
         public Guid IdExcercise { get; set; }
 
         public int Series { get; set; }
@@ -15,5 +17,7 @@ namespace ApiClients.Models.DTO
         public int Interval { get; set; }
 
         public int TimeSpan { get; set; }
+
+        public int IntervalBeforeNextExercise { get; set; }
     }
 }

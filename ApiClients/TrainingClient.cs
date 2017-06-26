@@ -22,10 +22,17 @@ namespace ApiClients
             return response;
         }
 
-        public async Task<Response<IEnumerable<TrainingDTO>>> GetTrainings(Guid id)
+        public async Task<Response<IEnumerable<TrainingDTO>>> GetTrainings(Guid userId)
         {
-            string url = "api/Trainings/user/" + id.ToString() + "/";
+            string url = "api/Trainings/user/" + userId.ToString() + "/";
             var response = await SendRequest<IEnumerable<TrainingDTO>>(HttpMethod.Get, url);
+            return response;
+        }
+
+        public async Task<Response<TrainingDTO>> GetTraining(Guid id)
+        {
+            string url = "api/Trainings/" + id.ToString() + "/";
+            var response = await SendRequest<TrainingDTO>(HttpMethod.Get, url);
             return response;
         }
 
