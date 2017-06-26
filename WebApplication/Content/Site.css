@@ -30,9 +30,14 @@ textarea {
 }
 
 .exercise-img{
-    height:150px;
+    height: auto;
+    width: 100%;
 }
 
 .table.exercise tr td{
     text-align:center;
+}
+
+.table.exercise .btn.btn-default{
+    margin:10px;
 }

@@ -917,6 +917,7 @@
     <Content Include="Content\kendo\2017.2.504\Uniform\sprite_2x.png" />
     <Content Include="Content\kendo\2017.2.504\Uniform\sprite_kpi.png" />
     <Content Include="Content\kendo\2017.2.504\Uniform\sprite_kpi_2x.png" />
+    <Content Include="Content\theme.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
