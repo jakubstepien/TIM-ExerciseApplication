@@ -1,0 +1,86 @@
+﻿@import "colors.less";
+
+form {
+    .group {
+        margin-bottom: 15px;
+
+        label, input {
+            margin-bottom: 5px;
+            display: block;
+        }
+    }
+}
+
+.form-input {
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    padding: 5px 5px;
+}
+
+.form-input:active,
+.form-input:focus {
+    border-color: @main;
+}
+
+.btn-main {
+    margin: 5px 0;
+    padding: 8px 15px;
+    border-radius: 5px;
+    background-color: @main;
+    display: inline-block;
+    color: #fff;
+    cursor: pointer;
+    -webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,0.75);
+    transition: box-shadow 0.3s;
+    user-select: none;
+
+    &:hover {
+        background-color: @main-hover;
+    }
+
+    &:active {
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+    }
+}
+
+.checkbox {
+    margin: 5px 0;
+
+    input[type="checkbox"] {
+        position: fixed;
+        left: -99999999999999%;
+        top: -999999999999%;
+    }
+
+
+    input[type=checkbox] + label:before {
+        content: '';
+        height: 20px;
+        width: 20px;
+        border: 1px solid #ddd;
+        display: inline-block;
+        border-radius: 10px;
+        vertical-align: middle;
+        position: absolute;
+        margin-left: -25px;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: background 0.75s;
+    }
+
+    input[type=checkbox]:checked + label:before {
+        background-image: url('icons/ic_done_white_18dp_1x.png');
+        background-color: @main;
+    }
+
+    label {
+        padding-left: 25px;
+        vertical-align: middle;
+        user-select: none;
+        position: relative;
+    }
+}
