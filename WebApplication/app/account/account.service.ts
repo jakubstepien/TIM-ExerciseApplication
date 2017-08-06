@@ -4,10 +4,11 @@ import 'rxjs/add/operator/toPromise';
 
 import { Token, TokenError } from './Token';
 import { Result } from '../common/Result';
+import { HttpService } from '../common/http.service';
 
 @Injectable()
 export class AccountService{
-    constructor(private http: Http) { };
+    constructor(private http: HttpService) { };
 
     login(login: string, password: string): Promise<Result> {
         let body = 'grant_type=password&username=' + login + '&password=' + password;

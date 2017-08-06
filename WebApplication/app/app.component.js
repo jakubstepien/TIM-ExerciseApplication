@@ -23,7 +23,7 @@ System.register(["@angular/core"], function (exports_1, context_1) {
             AppComponent = __decorate([
                 core_1.Component({
                     selector: 'my-app',
-                    template: "\n    <app-nav></app-nav>\n    <div class=\"main-container\">\n        <notification></notification>\n        <router-outlet></router-outlet>\n    </div>\n  ",
+                    template: "\n    <app-nav></app-nav>\n    <loader></loader>\n    <div class=\"main-container\">\n        <notification></notification>\n        <router-outlet></router-outlet>\n    </div>\n  ",
                 })
             ], AppComponent);
             exports_1("AppComponent", AppComponent);

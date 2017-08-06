@@ -101,6 +101,7 @@ namespace WebApplication.Providers
 
         public static AuthenticationProperties CreateProperties(string userName)
         {
+            System.Threading.Thread.Sleep(2000);
             IDictionary<string, string> data = new Dictionary<string, string>
             {
                 { "userName", userName }

@@ -71,9 +71,9 @@ a {
 
 .notification {
     position: fixed;
-    width:100%;
+    width: 100%;
     max-width: 1060px;
-    margin:auto;
+    margin: auto;
 
     .modal {
         margin-top: 10px auto 0 auto;
@@ -85,7 +85,7 @@ a {
         right: 5%;
         max-width: 300px;
         padding: 5px 20px 10px 20px;
-        float:right;
+        float: right;
         -webkit-box-shadow: 6px 6px 23px -10px rgba(0,0,0,1);
         -moz-box-shadow: 6px 6px 23px -10px rgba(0,0,0,1);
         box-shadow: 6px 6px 23px -10px rgba(0,0,0,1);
@@ -106,7 +106,7 @@ a {
 
 .notification-head {
     padding: 5px 0;
-    border-bottom:1px #ddd solid;
+    border-bottom: 1px #ddd solid;
 
     .close {
         background-image: url(icons/ic_clear_white_24dp_1x.png);
@@ -122,4 +122,50 @@ a {
 
 .notification-body {
     padding: 10px 0;
+}
+
+.loader {
+    width: 100%;
+    height: 10px;
+    margin-top: 10px;
+    position: absolute;
+    left: 0;
+
+    &:after {
+        position: absolute;
+        width: 30%;
+        height: 10px;
+        color: red;
+        display: inline-block;
+        animation: ajax-loader;
+        background: #e4f5fc;
+        background: -moz-linear-gradient(-45deg, #e4f5fc 0%, #bfe8f9 33%, #2ab0ed 89%);
+        background: -webkit-linear-gradient(-45deg, #e4f5fc 0%,#bfe8f9 33%,#2ab0ed 89%);
+        background: linear-gradient(135deg, #e4f5fc 0%,#bfe8f9 33%,#2ab0ed 89%);
+        animation-duration: 2s;
+        animation-play-state: paused;
+        animation-iteration-count: infinite;
+        left: 0%;
+    }
+
+    &.active {
+        background-color: #f6f6f6;
+        overflow-x: hidden;
+
+        &:after {
+            content: '';
+            animation-play-state: running;
+            border-radius: 10px;
+        }
+    }
+}
+
+@keyframes ajax-loader {
+    0% {
+        transform: translate3d(-100%,0,0);
+    }
+
+    100% {
+        transform: translate3d(333%,0,0);
+    }
 }

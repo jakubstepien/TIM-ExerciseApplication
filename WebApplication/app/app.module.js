@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/platform-browser", "@angular/forms", "@angular/http", "./app.component", "./common/notification/notification.component", "./app-navigation.component", "./home/home.component", "./exercise/exercises.component", "./exercise/exercise-detail.component", "./account/login.component", "./account/register.component", "./account/account.service", "./common/notification/notification.service", "./app-routing.module"], function (exports_1, context_1) {
+System.register(["@angular/core", "@angular/platform-browser", "@angular/forms", "@angular/http", "./app.component", "./common/loader.component", "./common/notification/notification.component", "./app-navigation.component", "./home/home.component", "./exercise/exercises.component", "./exercise/exercise-detail.component", "./account/login.component", "./account/register.component", "./common/http.service", "./account/account.service", "./common/notification/notification.service", "./app-routing.module"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/forms",
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, platform_browser_1, forms_1, http_1, app_component_1, notification_component_1, app_navigation_component_1, home_component_1, exercises_component_1, exercise_detail_component_1, login_component_1, register_component_1, account_service_1, notification_service_1, app_routing_module_1, AppModule;
+    var core_1, platform_browser_1, forms_1, http_1, app_component_1, loader_component_1, notification_component_1, app_navigation_component_1, home_component_1, exercises_component_1, exercise_detail_component_1, login_component_1, register_component_1, http_service_1, account_service_1, notification_service_1, app_routing_module_1, AppModule;
     return {
         setters: [
             function (core_1_1) {
@@ -24,6 +24,9 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/forms",
             },
             function (app_component_1_1) {
                 app_component_1 = app_component_1_1;
+            },
+            function (loader_component_1_1) {
+                loader_component_1 = loader_component_1_1;
             },
             function (notification_component_1_1) {
                 notification_component_1 = notification_component_1_1;
@@ -46,6 +49,9 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/forms",
             function (register_component_1_1) {
                 register_component_1 = register_component_1_1;
             },
+            function (http_service_1_1) {
+                http_service_1 = http_service_1_1;
+            },
             function (account_service_1_1) {
                 account_service_1 = account_service_1_1;
             },
@@ -67,15 +73,26 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/forms",
                     imports: [platform_browser_1.BrowserModule, app_routing_module_1.AppRoutingModule, forms_1.FormsModule, http_1.HttpModule],
                     declarations: [
                         app_component_1.AppComponent,
+                        loader_component_1.LoaderComponent,
                         home_component_1.HomeComponent,
                         notification_component_1.NotificationComponent,
                         exercises_component_1.ExercisesComponent,
                         exercise_detail_component_1.ExercseDetailComponent,
                         app_navigation_component_1.AppNavigationComponent,
                         login_component_1.LoginComponent,
-                        register_component_1.RegisterComponent
+                        register_component_1.RegisterComponent,
                     ],
-                    providers: [account_service_1.AccountService, notification_service_1.NotificationService],
+                    providers: [
+                        account_service_1.AccountService,
+                        notification_service_1.NotificationService,
+                        {
+                            provide: http_service_1.HttpService,
+                            useFactory: function (backend, options) {
+                                return new http_service_1.HttpService(backend, options);
+                            },
+                            deps: [http_1.XHRBackend, http_1.RequestOptions]
+                        }
+                    ],
                     bootstrap: [app_component_1.AppComponent]
                 })
             ], AppModule);

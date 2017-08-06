@@ -379,6 +379,8 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app\account\login.component.ts" />
+    <TypeScriptCompile Include="app\common\http.service.ts" />
+    <TypeScriptCompile Include="app\common\loader.component.ts" />
     <TypeScriptCompile Include="app\common\Result.ts" />
     <TypeScriptCompile Include="app\account\register.component.ts" />
     <TypeScriptCompile Include="app\account\Token.ts" />

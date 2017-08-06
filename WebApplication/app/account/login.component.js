@@ -32,8 +32,6 @@ System.register(["@angular/core", "./account.service", "../common/notification/n
                 ;
                 LoginComponent.prototype.signIn = function () {
                     var _this = this;
-                    console.log(this.login);
-                    console.log(this.password);
                     this.accountService.login(this.login, this.password).then(function (result) {
                         if (result.success) {
                             _this.notificationService.info("Udało się", "kokokokok");
