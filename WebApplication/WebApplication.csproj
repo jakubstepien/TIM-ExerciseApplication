@@ -264,6 +264,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ExerciseHelper.cs" />
+    <Compile Include="Helpers\LinqHelpers.cs" />
     <Compile Include="Helpers\TrainingHelper.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -276,9 +277,13 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="app\account\account.service.ts" />
     <Content Include="app\account\login.component.html" />
     <Content Include="app\app-navigation.component.html" />
+    <Content Include="app\common\notification\notivication.template.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\icons\ic_clear_white_24dp_1x.png" />
+    <Content Include="Content\icons\ic_clear_white_24dp_2x.png" />
     <Content Include="Content\icons\ic_done_white_18dp_1x.png" />
     <Content Include="Content\site.css">
       <DependentUpon>site.less</DependentUpon>
@@ -374,14 +379,19 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app\account\login.component.ts" />
+    <TypeScriptCompile Include="app\common\Result.ts" />
     <TypeScriptCompile Include="app\account\register.component.ts" />
+    <TypeScriptCompile Include="app\account\Token.ts" />
     <TypeScriptCompile Include="app\app-navigation.component.ts" />
     <TypeScriptCompile Include="app\app-routing.module.ts" />
     <TypeScriptCompile Include="app\app.component.ts" />
     <TypeScriptCompile Include="app\app.module.ts" />
+    <TypeScriptCompile Include="app\common\notification\notification.service.ts" />
+    <TypeScriptCompile Include="app\common\notification\Notification.ts" />
     <TypeScriptCompile Include="app\home\home.component.ts" />
     <TypeScriptCompile Include="app\exercise\exercise-detail.component.ts" />
     <TypeScriptCompile Include="app\exercise\exercises.component.ts" />
+    <TypeScriptCompile Include="app\common\notification\notification.component.ts" />
     <TypeScriptCompile Include="main.ts" />
   </ItemGroup>
   <ItemGroup>

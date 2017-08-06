@@ -1,0 +1,13 @@
+﻿<div class="notification" *ngIf="show && notification">
+    <div class="modal" [ngClass]="{'info':notification.type == 0, 'warning':notification.type == 1,'error':notification.type == 2}">
+        <div class="notification-head">
+            <div class="close" (click)="close()"></div>
+            <div class="notification-title" *ngIf="notification.title">
+                {{notification.title}}
+            </div>
+        </div>
+        <div class="notification-body">
+            {{notification.message}}
+        </div>
+    </div>
+</div>
