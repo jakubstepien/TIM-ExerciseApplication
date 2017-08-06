@@ -46,9 +46,21 @@ namespace WebApplication.Providers
                 CookieAuthenticationDefaults.AuthenticationType);
 
             AuthenticationProperties properties = CreateProperties(user.UserName);
+            AddRolesToToken(user, properties);
+
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
             context.Request.Context.Authentication.SignIn(cookiesIdentity);
+        }
+
+        private static void AddRolesToToken(ApplicationUser user, AuthenticationProperties properties)
+        {
+            var roleStore = new RoleStore<GuidIdentityRole, Guid, GuidIdentityUserRole>(new ApplicationDbContext());
+            var roleManager = new RoleManager<GuidIdentityRole, Guid>(roleStore);
+            var ids = user.Roles.Select(s => s.RoleId).ToArray();
+            var roleNames = roleManager.Roles.Where(w => ids.Contains(w.Id)).Select(s => s.Name);
+
+            properties.Dictionary.Add("roles", string.Join(";", roleNames));
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)
