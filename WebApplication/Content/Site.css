@@ -176,9 +176,10 @@ a {
   position: absolute;
   left: 0;
 }
-.loader:after {
+.loader:after,
+.loader:before {
   position: absolute;
-  width: 30%;
+  width: 40%;
   height: 10px;
   color: red;
   display: inline-block;
@@ -192,11 +193,15 @@ a {
   animation-iteration-count: infinite;
   left: 0%;
 }
+.loader:before {
+  animation-delay: -1s;
+}
 .loader.active {
   background-color: #f6f6f6;
   overflow-x: hidden;
 }
-.loader.active:after {
+.loader.active:after,
+.loader.active:before {
   content: '';
   animation-play-state: running;
   border-radius: 10px;
@@ -206,6 +211,6 @@ a {
     transform: translate3d(-100%, 0, 0);
   }
   100% {
-    transform: translate3d(333%, 0, 0);
+    transform: translate3d(250%, 0, 0);
   }
 }

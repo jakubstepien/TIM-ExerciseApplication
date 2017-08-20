@@ -131,9 +131,9 @@ a {
     position: absolute;
     left: 0;
 
-    &:after {
+    &:after, &:before {
         position: absolute;
-        width: 30%;
+        width: 40%;
         height: 10px;
         color: red;
         display: inline-block;
@@ -148,11 +148,15 @@ a {
         left: 0%;
     }
 
+    &:before{
+        animation-delay: -1s;
+    }
+
     &.active {
         background-color: #f6f6f6;
         overflow-x: hidden;
 
-        &:after {
+        &:after, &:before {
             content: '';
             animation-play-state: running;
             border-radius: 10px;
@@ -166,6 +170,6 @@ a {
     }
 
     100% {
-        transform: translate3d(333%,0,0);
+        transform: translate3d(250%,0,0);
     }
 }
