@@ -1,4 +1,6 @@
-﻿import { Component } from "@angular/core";
+﻿import { Component, OnInit } from "@angular/core";
+
+import { ExercisesService } from './exercises.service';
 
 @Component({
     template: `<h1>{{title}}</h1>
@@ -6,6 +8,12 @@
     <router-outlet></router-outlet>
     `
 })
-export class ExercisesComponent {
+export class ExercisesComponent implements OnInit {
     title = "Exercises";
+
+    constructor(private exercisesService: ExercisesService) { };
+
+    ngOnInit() {
+        this.exercisesService.getExercises();
+    }
 }

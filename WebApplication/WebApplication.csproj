@@ -379,6 +379,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app\account\login.component.ts" />
+    <TypeScriptCompile Include="app\common\user.service.ts" />
     <TypeScriptCompile Include="app\common\http.service.ts" />
     <TypeScriptCompile Include="app\common\loader.component.ts" />
     <TypeScriptCompile Include="app\common\Result.ts" />
@@ -390,6 +391,8 @@
     <TypeScriptCompile Include="app\app.module.ts" />
     <TypeScriptCompile Include="app\common\notification\notification.service.ts" />
     <TypeScriptCompile Include="app\common\notification\Notification.ts" />
+    <TypeScriptCompile Include="app\exercise\exercise.ts" />
+    <TypeScriptCompile Include="app\exercise\exercises.service.ts" />
     <TypeScriptCompile Include="app\home\home.component.ts" />
     <TypeScriptCompile Include="app\exercise\exercise-detail.component.ts" />
     <TypeScriptCompile Include="app\exercise\exercises.component.ts" />

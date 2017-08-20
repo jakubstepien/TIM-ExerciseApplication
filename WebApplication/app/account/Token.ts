@@ -11,4 +11,5 @@ export interface Token {
     roles: string;
     ".issued": string;
     ".expires": string;
+    userId: string;
 }

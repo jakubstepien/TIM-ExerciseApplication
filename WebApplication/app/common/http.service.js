@@ -26,8 +26,10 @@ System.register(["rxjs/Subject", "rxjs/add/operator/finally", "@angular/http"], 
         execute: function () {
             HttpService = (function (_super) {
                 __extends(HttpService, _super);
-                function HttpService(backend, options) {
+                function HttpService(backend, options, userService) {
                     var _this = _super.call(this, backend, options) || this;
+                    _this.backend = backend;
+                    _this.userService = userService;
                     _this.runningRequest = new Subject_1.Subject();
                     return _this;
                 }
@@ -38,25 +40,39 @@ System.register(["rxjs/Subject", "rxjs/add/operator/finally", "@angular/http"], 
                     enumerable: true,
                     configurable: true
                 });
-                HttpService.prototype.get = function (url, options) {
+                HttpService.prototype.get = function (url, authorized, options) {
                     var _this = this;
                     this.onStart();
+                    options = this.getAuthorizedOptions(authorized, options);
                     return _super.prototype.get.call(this, url, options).finally(function () { return _this.onEnd(); });
                 };
-                HttpService.prototype.post = function (url, body, options) {
+                HttpService.prototype.post = function (url, body, authorized, options) {
                     var _this = this;
                     this.onStart();
+                    options = this.getAuthorizedOptions(authorized, options);
                     return _super.prototype.post.call(this, url, body, options).finally(function () { return _this.onEnd(); });
                 };
-                HttpService.prototype.put = function (url, body, options) {
+                HttpService.prototype.put = function (url, body, authorized, options) {
                     var _this = this;
                     this.onStart();
+                    options = this.getAuthorizedOptions(authorized, options);
                     return _super.prototype.put.call(this, url, body, options).finally(function () { return _this.onEnd(); });
                 };
-                HttpService.prototype.delete = function (url, options) {
+                HttpService.prototype.delete = function (url, authorized, options) {
                     var _this = this;
                     this.onStart();
+                    options = this.getAuthorizedOptions(authorized, options);
                     return _super.prototype.delete.call(this, url, options).finally(function () { return _this.onEnd(); });
+                };
+                HttpService.prototype.getAuthorizedOptions = function (authorized, options) {
+                    if (authorized) {
+                        options = options || { headers: new http_1.Headers() };
+                        var token = this.userService.getToken();
+                        if (token) {
+                            options.headers.append("Authorization", "bearer " + token);
+                        }
+                    }
+                    return options;
                 };
                 HttpService.prototype.onStart = function () {
                     this.runningRequest.next(true);

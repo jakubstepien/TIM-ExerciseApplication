@@ -24,6 +24,7 @@ using Database.Repositories.Statistic;
 
 namespace WebApplication.Controllers.Api
 {
+    [Authorize]
     [RoutePrefix("api/exercises")]
     public class ExercisesController : ApiController
     {
@@ -54,17 +55,24 @@ namespace WebApplication.Controllers.Api
                     ImageName = s.ImageName
                 }).ToList();
 
-            exercises.ForEach(f => SaveExerciseImageToDrive(f));
+            exercises.ForEach(f =>
+            {
+                SaveExerciseImageToDrive(f);
+                //nie ma po co przesyłąc zawsze całego obrazu
+                f.Image = null;
+            });
             return exercises;
         }
 
         [Route("user/{userId}")]
         public IEnumerable<ExerciseDTO> GetExerciseForUser(Guid userId)
         {
-            var exercises = excerciseRepo.GetExercisesForUser(userId).Select(s => s.ToDTO());
+            var exercises = excerciseRepo.GetExercisesForUser(userId).Select(s => s.ToDTO()).ToArray();
             foreach (var exercise in exercises)
             {
                 SaveExerciseImageToDrive(exercise);
+                //nie ma po co przesyłąc zawsze całego obrazu
+                exercise.Image = null;
             }
             return exercises;
         }

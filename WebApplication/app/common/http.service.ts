@@ -2,6 +2,8 @@
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/finally';
+import { UserService } from '../common/user.service';
+
 
 import {
     Http,
@@ -21,28 +23,43 @@ export class HttpService extends Http {
         return this.runningRequest;
     }
 
-    constructor(backend: XHRBackend, options: RequestOptions) {
+    constructor(private backend: XHRBackend, options: RequestOptions, private userService: UserService) {
         super(backend, options);
     }
 
-    get(url: string, options?: RequestOptionsArgs): Observable<Response> {
+    get(url: string, authorized?: boolean, options?: RequestOptionsArgs): Observable<Response> {
         this.onStart();
+        options = this.getAuthorizedOptions(authorized, options);
         return super.get(url, options).finally(() => this.onEnd());
     }
 
-    post(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+    post(url: string, body: any, authorized?: boolean, options?: RequestOptionsArgs): Observable<Response> {
         this.onStart();
+        options = this.getAuthorizedOptions(authorized, options);
         return super.post(url, body, options).finally(() => this.onEnd());
     }
 
-    put(url: string, body: any, options?: RequestOptionsArgs): Observable<Response> {
+    put(url: string, body: any, authorized?: boolean, options?: RequestOptionsArgs): Observable<Response> {
         this.onStart();
+        options = this.getAuthorizedOptions(authorized, options);
         return super.put(url, body, options).finally(() => this.onEnd());
     }
 
-    delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
+    delete(url: string, authorized?: boolean, options?: RequestOptionsArgs): Observable<Response> {
         this.onStart();
+        options = this.getAuthorizedOptions(authorized, options);
         return super.delete(url, options).finally(() => this.onEnd());
+    }
+
+    private getAuthorizedOptions(authorized?: boolean, options?: RequestOptionsArgs): RequestOptionsArgs {
+        if (authorized) {
+            options = options || { headers: new Headers() }
+            var token = this.userService.getToken();
+            if (token) {
+                options.headers.append("Authorization", "bearer " + token);
+            }
+        }
+        return options;
     }
 
     onStart(): void {

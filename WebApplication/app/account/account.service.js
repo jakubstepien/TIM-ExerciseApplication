@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/http", "rxjs/add/operator/toPromise", "../common/http.service"], function (exports_1, context_1) {
+System.register(["@angular/core", "@angular/http", "rxjs/add/operator/toPromise", "../common/http.service", "../common/user.service"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,7 +10,7 @@ System.register(["@angular/core", "@angular/http", "rxjs/add/operator/toPromise"
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, http_1, http_service_1, AccountService;
+    var core_1, http_1, http_service_1, user_service_1, AccountService;
     return {
         setters: [
             function (core_1_1) {
@@ -23,21 +23,27 @@ System.register(["@angular/core", "@angular/http", "rxjs/add/operator/toPromise"
             },
             function (http_service_1_1) {
                 http_service_1 = http_service_1_1;
+            },
+            function (user_service_1_1) {
+                user_service_1 = user_service_1_1;
             }
         ],
         execute: function () {
             AccountService = (function () {
-                function AccountService(http) {
+                function AccountService(http, userService) {
                     this.http = http;
+                    this.userService = userService;
                 }
                 ;
                 AccountService.prototype.login = function (login, password) {
+                    var _this = this;
                     var body = 'grant_type=password&username=' + login + '&password=' + password;
                     var headers = new http_1.Headers();
                     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-                    return this.http.post('/token', body, { headers: headers, body: body })
+                    return this.http.post('/token', body, false, { headers: headers, body: body })
                         .toPromise()
                         .then(function (response) {
+                        _this.userService.storeToken(response.json());
                         return { success: true };
                     })
                         .catch(function (reason) {
@@ -48,7 +54,7 @@ System.register(["@angular/core", "@angular/http", "rxjs/add/operator/toPromise"
             }());
             AccountService = __decorate([
                 core_1.Injectable(),
-                __metadata("design:paramtypes", [http_service_1.HttpService])
+                __metadata("design:paramtypes", [http_service_1.HttpService, user_service_1.UserService])
             ], AccountService);
             exports_1("AccountService", AccountService);
         }

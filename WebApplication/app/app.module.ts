@@ -15,13 +15,16 @@ import { LoginComponent } from './account/login.component';
 import { RegisterComponent } from './account/register.component';
 
 import { HttpService } from './common/http.service';
+import { UserService } from './common/user.service';
 import { AccountService } from './account/account.service';
+import { ExercisesService } from './exercise/exercises.service';
 import { NotificationService } from './common/notification/notification.service';
 
 import { AppRoutingModule } from './app-routing.module';
+import { CookieModule } from 'ngx-cookie';
 
 @NgModule({
-    imports: [BrowserModule, AppRoutingModule, FormsModule, HttpModule],
+    imports: [BrowserModule, AppRoutingModule, FormsModule, HttpModule, CookieModule.forRoot()],
     declarations: [
         AppComponent,
         LoaderComponent,
@@ -36,12 +39,14 @@ import { AppRoutingModule } from './app-routing.module';
     providers: [
         AccountService,
         NotificationService,
+        ExercisesService,
+        UserService,
         {
             provide: HttpService,
-            useFactory: (backend: XHRBackend, options: RequestOptions) => {
-                return new HttpService(backend, options);
+            useFactory: (backend: XHRBackend, options: RequestOptions, userService: UserService) => {
+                return new HttpService(backend, options, userService);
             },
-            deps: [XHRBackend, RequestOptions]
+            deps: [XHRBackend, RequestOptions, UserService]
         }
     ],
     bootstrap: [AppComponent]

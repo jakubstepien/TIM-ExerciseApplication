@@ -47,6 +47,7 @@ namespace WebApplication.Providers
 
             AuthenticationProperties properties = CreateProperties(user.UserName);
             AddRolesToToken(user, properties);
+            properties.Dictionary.Add("userId", user.Id.ToString());
 
             AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
             context.Validated(ticket);
