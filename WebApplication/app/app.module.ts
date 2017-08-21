@@ -20,7 +20,7 @@ import { AccountService } from './account/account.service';
 import { ExercisesService } from './exercise/exercises.service';
 import { NotificationService } from './common/notification/notification.service';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './routing/app-routing.module';
 import { CookieModule } from 'ngx-cookie';
 
 @NgModule({

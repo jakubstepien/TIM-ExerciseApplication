@@ -27,6 +27,18 @@ export class UserService {
         this.cookie.putObject(this.tokenKey, token);
     }
 
+    public isLoggedIn(): boolean {
+        return this.getTokenObject() != null;
+    }
+
+    public isInRole(role: string): boolean {
+        var tokenObj = this.getTokenObject();
+        if (!tokenObj) {
+            return false;
+        }
+        return tokenObj.roles.split(';').some((userRole) => userRole === role);
+    }
+
     private getTokenObject(): Token {
         return this.cookie.getObject(this.tokenKey) as Token;
     }

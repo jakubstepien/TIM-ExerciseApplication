@@ -41,6 +41,16 @@ System.register(["@angular/core", "ngx-cookie"], function (exports_1, context_1)
                 UserService.prototype.storeToken = function (token) {
                     this.cookie.putObject(this.tokenKey, token);
                 };
+                UserService.prototype.isLoggedIn = function () {
+                    return this.getTokenObject() != null;
+                };
+                UserService.prototype.isInRole = function (role) {
+                    var tokenObj = this.getTokenObject();
+                    if (!tokenObj) {
+                        return false;
+                    }
+                    return tokenObj.roles.split(';').some(function (userRole) { return userRole === role; });
+                };
                 UserService.prototype.getTokenObject = function () {
                     return this.cookie.getObject(this.tokenKey);
                 };

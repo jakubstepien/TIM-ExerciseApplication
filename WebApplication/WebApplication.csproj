@@ -386,7 +386,7 @@
     <TypeScriptCompile Include="app\account\register.component.ts" />
     <TypeScriptCompile Include="app\account\Token.ts" />
     <TypeScriptCompile Include="app\app-navigation.component.ts" />
-    <TypeScriptCompile Include="app\app-routing.module.ts" />
+    <TypeScriptCompile Include="app\routing\app-routing.module.ts" />
     <TypeScriptCompile Include="app\app.component.ts" />
     <TypeScriptCompile Include="app\app.module.ts" />
     <TypeScriptCompile Include="app\common\notification\notification.service.ts" />
@@ -397,6 +397,8 @@
     <TypeScriptCompile Include="app\exercise\exercise-detail.component.ts" />
     <TypeScriptCompile Include="app\exercise\exercises.component.ts" />
     <TypeScriptCompile Include="app\common\notification\notification.component.ts" />
+    <TypeScriptCompile Include="app\routing\loggedin-guard.ts" />
+    <TypeScriptCompile Include="app\routing\role-guard.ts" />
     <TypeScriptCompile Include="main.ts" />
   </ItemGroup>
   <ItemGroup>
