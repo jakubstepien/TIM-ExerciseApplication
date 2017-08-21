@@ -13,7 +13,7 @@ export class RoleGuard implements CanActivate {
         if (role) {
             var isInRole = this.userService.isInRole(role);
             if (!isInRole) {
-                this.router.navigate(['login']);
+                this.router.navigate(['login'], { queryParams: { 'redirect': state.url } });
             }
             return isInRole;
         }

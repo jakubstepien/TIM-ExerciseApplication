@@ -33,7 +33,7 @@ System.register(["@angular/core", "@angular/router", "../common/user.service"], 
                     if (this.userService.isLoggedIn()) {
                         return true;
                     }
-                    this.router.navigate(['login']);
+                    this.router.navigate(['login'], { queryParams: { 'redirect': state.url } });
                     return false;
                 };
                 return LoggedInGuard;
