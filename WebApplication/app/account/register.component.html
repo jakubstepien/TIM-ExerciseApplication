@@ -1,0 +1,16 @@
+﻿<h1>Zarejestruj się</h1>
+<form id="login-form">
+    <div class="group">
+        <label for="login">Login</label>
+        <input [(ngModel)]="login" class="form-input" type="text" id="login" name="login" />
+    </div>
+    <div class="group">
+        <label for="password">Hasło</label>
+        <input [(ngModel)]="password" class="form-input" type="password" id="password" name="password"/>
+    </div>
+    <div class="group">
+        <label for="passwordConfirm">Hasło</label>
+        <input [(ngModel)]="passwordConfirm" class="form-input" type="password" id="password" name="password" />
+    </div>
+    <div (click)="register()" class="btn-main">Zarejestruj się</div>
+</form>

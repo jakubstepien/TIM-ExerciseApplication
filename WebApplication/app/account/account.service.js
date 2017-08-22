@@ -47,8 +47,31 @@ System.register(["@angular/core", "@angular/http", "rxjs/add/operator/toPromise"
                         return { success: true };
                     })
                         .catch(function (reason) {
-                        return { success: false, error: "Nieprawidłowe dane logowania." };
+                        var error = _this.getError(reason.json(), 'Nieprawidłowe dane logowania.');
+                        return { success: false, error: error };
                     });
+                };
+                AccountService.prototype.register = function (login, password, passwordConfirm) {
+                    var _this = this;
+                    return this.http.post('/api/account/register', { Email: login, Password: password, ConfirmPassword: passwordConfirm })
+                        .toPromise()
+                        .then(function (response) {
+                        return _this.login(login, password);
+                    })
+                        .catch(function (reason) {
+                        var errorJson = reason.json();
+                        var error = _this.getError(errorJson);
+                        return { success: false, error: error };
+                    });
+                };
+                AccountService.prototype.getError = function (modelError, errorMessage) {
+                    if (errorMessage === void 0) { errorMessage = ''; }
+                    if (modelError && modelError.ModelState) {
+                        var modelState_1 = modelError.ModelState;
+                        var modelErrors = Object.keys(modelState_1).map(function (m) { return modelState_1[m]; }).reduce(function (a, b) { return a.concat(b); });
+                        return modelErrors.reduce(function (a, b) { return a + "\r\n" + b; });
+                    }
+                    return errorMessage;
                 };
                 return AccountService;
             }());

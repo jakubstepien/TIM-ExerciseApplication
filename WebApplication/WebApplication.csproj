@@ -278,6 +278,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app\account\account.service.ts" />
+    <Content Include="app\account\register.component.html" />
     <Content Include="app\account\login.component.html" />
     <Content Include="app\app-navigation.component.html" />
     <Content Include="app\common\notification\notivication.template.html" />
@@ -379,6 +380,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app\account\login.component.ts" />
+    <TypeScriptCompile Include="app\common\ModelError.ts" />
     <TypeScriptCompile Include="app\common\user.service.ts" />
     <TypeScriptCompile Include="app\common\http.service.ts" />
     <TypeScriptCompile Include="app\common\loader.component.ts" />
@@ -440,6 +442,11 @@
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
+  <Import Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="'$(SQLDBExtensionsRefPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="'$(SQLDBExtensionsRefPath)' == ''" />
+  <PropertyGroup>
+    <SsdtUnitTestVersion>2.0</SsdtUnitTestVersion>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

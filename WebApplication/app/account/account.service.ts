@@ -7,8 +7,11 @@ import { Result } from '../common/Result';
 import { HttpService } from '../common/http.service';
 import { UserService } from '../common/user.service';
 
+import { ModelError } from '../common/ModelError';
+
+
 @Injectable()
-export class AccountService{
+export class AccountService {
 
     constructor(private http: HttpService, private userService: UserService) { };
 
@@ -23,7 +26,31 @@ export class AccountService{
                 return { success: true } as Result;
             })
             .catch(reason => {
-                return { success: false, error: "Nieprawidłowe dane logowania." } as Result;
+                var error = this.getError(reason.json() as ModelError, 'Nieprawidłowe dane logowania.')
+                return { success: false, error: error } as Result;
             });
     }
+
+    register(login: string, password: string, passwordConfirm: string): Promise<Result> {
+        return this.http.post('/api/account/register', { Email: login, Password: password, ConfirmPassword: passwordConfirm })
+            .toPromise()
+            .then(response => {
+                return this.login(login, password);
+            })
+            .catch(reason => {
+                var errorJson = reason.json() as ModelError;
+                var error = this.getError(errorJson);
+                return { success: false, error: error } as Result;
+            });
+    }
+
+    private getError(modelError: ModelError, errorMessage: string = ''): string {
+        if (modelError && modelError.ModelState) {
+            let modelState = modelError.ModelState;
+            let modelErrors = Object.keys(modelState).map(m => modelState[m]).reduce((a: Array<string>, b: Array<string>) => a.concat(b));
+            return modelErrors.reduce((a: string, b: string) => a + "\r\n" + b);
+        }
+        return errorMessage;
+    }
+
 } 
