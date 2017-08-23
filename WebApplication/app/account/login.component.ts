@@ -1,4 +1,5 @@
 ﻿import { Component, OnInit } from "@angular/core";
+import { NgForm } from "@angular/forms";
 
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
         });
     }
 
-    signIn(): void {
+    signIn(form: NgForm): void {
         this.accountService.login(this.login, this.password).then(result => {
             if (result.success) {
                 this.router.navigateByUrl(this.redirectUrl);

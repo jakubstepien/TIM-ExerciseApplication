@@ -1,16 +1,27 @@
 ﻿<h1>Zaloguj się</h1>
-<form id="login-form">
+<form #f="ngForm" (ngSubmit)="signIn(f)">
     <div class="group">
         <label for="login">Login</label>
-        <input [(ngModel)]="login" class="form-input" type="text" id="login" name="login" />
+        <input [(ngModel)]="login" class="form-input" email required type="text" id="login" name="login" #mail="ngModel" />
+        <div *ngIf="mail.invalid && (mail.dirty || mail.touched)">
+            <div [hidden]="!mail.errors.required" class="alert alert-danger">
+                Login jest wymagany
+            </div>
+            <div [hidden]="mail.errors.required || !mail.errors.email" class="alert alert-danger">
+                Nieprawidłowy format email.
+            </div>
+        </div>
     </div>
     <div class="group">
         <label for="password">Hasło</label>
-        <input [(ngModel)]="password" class="form-input" type="password" id="password" name="password"/>
+        <input [(ngModel)]="password" class="form-input" required type="password" id="password" name="password" #pass="ngModel" />
+        <div [hidden]="pass.valid || pass.pristine" class="alert alert-danger">
+            Hasło jest wymagane.
+        </div>
     </div>
     <div class="checkbox">
         <input type="checkbox" id="remember" name="remember" />
         <label for="remember">Zapamiętaj mnie</label>
     </div>
-    <div (click)="signIn()" class="btn-main">Zaloguj</div>
+    <button type="submit" class="btn-main" [disabled]="!f.form.valid">Zaloguj</button>
 </form>

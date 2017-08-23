@@ -33,7 +33,7 @@ System.register(["@angular/core", "@angular/router", "./account.service", "../co
                     this.notificationService = notificationService;
                     this.router = router;
                 }
-                RegisterComponent.prototype.register = function () {
+                RegisterComponent.prototype.register = function (f) {
                     var _this = this;
                     this.accountService.register(this.login, this.password, this.passwordConfirm)
                         .then(function (response) {
