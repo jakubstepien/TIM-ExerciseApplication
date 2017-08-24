@@ -39,7 +39,7 @@ System.register(["@angular/core", "ngx-cookie"], function (exports_1, context_1)
                     }
                 };
                 UserService.prototype.storeToken = function (token) {
-                    this.cookie.putObject(this.tokenKey, token);
+                    this.cookie.putObject(this.tokenKey, token, { expires: token['.expires'] });
                 };
                 UserService.prototype.isLoggedIn = function () {
                     return this.getTokenObject() != null;

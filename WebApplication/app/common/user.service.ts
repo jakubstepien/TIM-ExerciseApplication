@@ -24,7 +24,7 @@ export class UserService {
     }
 
     public storeToken(token: Token) {
-        this.cookie.putObject(this.tokenKey, token);
+        this.cookie.putObject(this.tokenKey, token, { expires: token['.expires'] });
     }
 
     public isLoggedIn(): boolean {
