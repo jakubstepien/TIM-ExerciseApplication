@@ -8,7 +8,7 @@ namespace Database.Repositories.Excercise
 {
     public interface IExcerciseRepository : IRepository<Exercise, Guid>
     {
-        IEnumerable<Database.UserExcercise> GetExercisesForUser(Guid IdUser);
+        IEnumerable<Database.UserExcercise> GetExercisesForUser(Guid IdUser, int page = 0, int pageSize = int.MaxValue);
         Exercise GetById(Guid id, bool v);
     }
 }

@@ -13,12 +13,13 @@ import { RoleGuard } from './role-guard';
 const routes: Routes = [
     { path: '', component: HomeComponent },
     {
-        path: 'exercises', component: ExercisesComponent,
+        path: 'exercises/:page', component: ExercisesComponent,
         canActivate: [LoggedInGuard],
         children: [{
             path: "details", component: ExercseDetailComponent
         }]
     },
+    { path: 'exercises', redirectTo: 'exercises/1' },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
 ];

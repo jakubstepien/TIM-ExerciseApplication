@@ -42,12 +42,13 @@ System.register(["@angular/core", "@angular/router", "../home/home.component", "
             routes = [
                 { path: '', component: home_component_1.HomeComponent },
                 {
-                    path: 'exercises', component: exercises_component_1.ExercisesComponent,
+                    path: 'exercises/:page', component: exercises_component_1.ExercisesComponent,
                     canActivate: [loggedin_guard_1.LoggedInGuard],
                     children: [{
                             path: "details", component: exercise_detail_component_1.ExercseDetailComponent
                         }]
                 },
+                { path: 'exercises', redirectTo: 'exercises/1' },
                 { path: 'login', component: login_component_1.LoginComponent },
                 { path: 'register', component: register_component_1.RegisterComponent },
             ];

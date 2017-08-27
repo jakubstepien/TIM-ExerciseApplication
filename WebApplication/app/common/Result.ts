@@ -1,8 +1,8 @@
-﻿export class Result {
+﻿export interface Result {
     success: boolean;
     error: string;
 }
 
-export class DataResult<T> extends Result {
+export interface DataResult<T> extends Result {
     data:T
 }

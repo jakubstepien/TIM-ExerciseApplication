@@ -53,7 +53,14 @@ export class HttpService extends Http {
 
     private getAuthorizedOptions(authorized?: boolean, options?: RequestOptionsArgs): RequestOptionsArgs {
         if (authorized) {
-            options = options || { headers: new Headers() }
+            if (options) {
+                if (!options.headers) {
+                    options.headers = new Headers();
+                }
+            }
+            else {
+                options = { headers: new Headers() }
+            }
             var token = this.userService.getToken();
             if (token) {
                 options.headers.append("Authorization", "bearer " + token);

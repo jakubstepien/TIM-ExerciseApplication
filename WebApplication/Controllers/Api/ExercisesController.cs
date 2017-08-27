@@ -65,16 +65,17 @@ namespace WebApplication.Controllers.Api
         }
 
         [Route("user/{userId}")]
-        public IEnumerable<ExerciseDTO> GetExerciseForUser(Guid userId)
+        public PagedList<ExerciseDTO> GetExerciseForUser(Guid userId, int page = 1, int pageSize = int.MaxValue)
         {
-            var exercises = excerciseRepo.GetExercisesForUser(userId).Select(s => s.ToDTO()).ToArray();
+            var exercises = excerciseRepo.GetExercisesForUser(userId, page, pageSize).Select(s => s.ToDTO()).ToArray();
             foreach (var exercise in exercises)
             {
                 SaveExerciseImageToDrive(exercise);
                 //nie ma po co przesyłąc zawsze całego obrazu
                 exercise.Image = null;
             }
-            return exercises;
+            var total = excerciseRepo.Count(e => e.UserExcercise.Any(a => a.UserId == userId));
+            return new PagedList<ExerciseDTO> { CurrentPage = page, PageSize = pageSize, Items = exercises, TotalCount = total };
         }
 
         // GET: api/Exercises/5

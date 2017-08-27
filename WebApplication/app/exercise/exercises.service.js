@@ -29,12 +29,18 @@ System.register(["@angular/core", "../common/http.service", "../common/user.serv
                     this.http = http;
                     this.userService = userService;
                 }
-                ExercisesService.prototype.getExercises = function () {
+                ExercisesService.prototype.getExercises = function (page, pageSize) {
                     var userId = this.userService.getUserId();
                     if (userId) {
-                        var promise = this.http.get('/api/exercises/user/' + userId, true).toPromise();
-                        promise.then(function (response) { return console.log(response); });
+                        var promise = this.http.get('/api/exercises/user/' + userId, true, { params: { page: page.toString(), pageSize: pageSize.toString() } }).toPromise();
+                        return promise.then(function (response) {
+                            return { data: response.json(), success: true };
+                        })
+                            .catch(function (reason) {
+                            return { success: false };
+                        });
                     }
+                    return Promise.resolve({ success: false });
                 };
                 return ExercisesService;
             }());

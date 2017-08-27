@@ -10,6 +10,8 @@ namespace WebApplication.Controllers
 {
     public class HomeController : Controller
     {
+        [Route("", Order = -1)]
+        [Route("{*url}", Order = 1000)]
         public ActionResult Index()
         {
             return View("index");

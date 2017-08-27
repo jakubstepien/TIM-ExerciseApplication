@@ -26,7 +26,7 @@ namespace MobileApp.Services.Excercise
                 ExcerciseViewModel[] viewModels = null;
                 await Task.Factory.StartNew(() =>
                 {
-                    var exercises = response.Data;
+                    var exercises = response.Data.Items;
                     viewModels = exercises
                         .Select(s => new ExcerciseViewModel
                         {

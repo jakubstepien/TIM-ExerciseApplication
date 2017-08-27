@@ -12,6 +12,7 @@ namespace WebApplication
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapMvcAttributeRoutes();
 
             //routes.MapRoute(
             //    name: "Default",
@@ -19,7 +20,7 @@ namespace WebApplication
             //    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             //);
 
-                routes.MapRoute(
+            routes.MapRoute(
                    name: "Home",
                    url: "",
                    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

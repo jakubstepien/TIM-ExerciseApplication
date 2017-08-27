@@ -32,13 +32,15 @@ namespace Database.Repositories.Excercise
             return GetById(id);
         }
 
-        public IEnumerable<Database.UserExcercise> GetExercisesForUser(Guid IdUser)
+        public IEnumerable<Database.UserExcercise> GetExercisesForUser(Guid IdUser, int page = 1, int pageSize = int.MaxValue)
         {
             return db.Set<Database.UserExcercise>()
                 .AsNoTracking()
                 .Include(i => i.Exercise)
                 .Where(w => w.UserId == IdUser)
                 .OrderByDescending(o => o.IsFavourite)
+                .Skip((page - 1) * pageSize)
+                .Take(page * pageSize)
                 .ToArray();
         }
     }

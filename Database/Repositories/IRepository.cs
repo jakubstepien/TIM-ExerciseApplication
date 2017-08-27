@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,6 +22,10 @@ namespace Database
         bool Remove(TEntity entitiy);
 
         bool Remove(TKey id);
+
+        int Count();
+
+        int Count(Expression<Func<TEntity, bool>> predicate);
 
         void SaveChanges();
     }

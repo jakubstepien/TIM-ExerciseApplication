@@ -1,0 +1,46 @@
+﻿<h1>{{title}}</h1>
+<a routerLink="details">Test</a>
+<router-outlet></router-outlet>
+<div *ngIf="exercises">
+    <table class="exercise-table">
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Opis</th>
+                <th>Obraz</th>
+                <th>Kalorie na godzine</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let exercise of exercises">
+                <th>{{exercise.Name}}</th>
+                <th>{{exercise.Description}}</th>
+                <th>
+                    <div class="exercise-img" *ngIf="exercise.ImageName">
+                        <img src="/images/{{exercise.IdExercise}}/{{exercise.ImageName}}" />
+                    </div>
+                </th>
+                <th>{{exercise.CaloriesPerHour}}</th>
+                <th>Przyciski!!!!</th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="pager" *ngIf="lastPage">
+    <ul>
+        <li routerLink="/exercises/1" *ngIf="currentPage != 1"><a>1</a></li>
+        <ng-container *ngFor="let index of [currentPage-2,currentPage-1]">
+            <li *ngIf="index > 1">
+                <a routerLink="/exercises/{{index}}">{{index}}</a>
+            </li>
+        </ng-container>
+        <li class="active">{{currentPage}}</li>
+        <ng-container *ngFor="let index of [currentPage+1,currentPage+2]">
+            <li *ngIf="index < lastPage">
+                <a routerLink="/exercises/{{index}}">{{index}}</a>
+            </li>
+        </ng-container>
+        <li *ngIf="currentPage != lastPage"><a routerLink="/exercises/{{lastPage}}">{{lastPage}}</a></li>
+    </ul>
+</div>

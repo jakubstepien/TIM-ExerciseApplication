@@ -282,6 +282,7 @@
     <Content Include="app\account\login.component.html" />
     <Content Include="app\app-navigation.component.html" />
     <Content Include="app\common\notification\notivication.template.html" />
+    <Content Include="app\exercise\exercises.component.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\icons\ic_clear_white_24dp_1x.png" />
     <Content Include="Content\icons\ic_clear_white_24dp_2x.png" />
@@ -350,6 +351,7 @@
     <Content Include="fonts\Roboto-ThinItalic.ttf" />
     <Content Include="Content\forms.less" />
     <Content Include="Content\colors.less" />
+    <Content Include="Content\exercises.less" />
     <None Include="Views\Shared\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -381,6 +383,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app\account\login.component.ts" />
     <TypeScriptCompile Include="app\common\ModelError.ts" />
+    <TypeScriptCompile Include="app\common\pagedList.ts" />
     <TypeScriptCompile Include="app\common\user.service.ts" />
     <TypeScriptCompile Include="app\common\http.service.ts" />
     <TypeScriptCompile Include="app\common\loader.component.ts" />

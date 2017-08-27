@@ -66,7 +66,14 @@ System.register(["rxjs/Subject", "rxjs/add/operator/finally", "@angular/http"], 
                 };
                 HttpService.prototype.getAuthorizedOptions = function (authorized, options) {
                     if (authorized) {
-                        options = options || { headers: new http_1.Headers() };
+                        if (options) {
+                            if (!options.headers) {
+                                options.headers = new http_1.Headers();
+                            }
+                        }
+                        else {
+                            options = { headers: new http_1.Headers() };
+                        }
                         var token = this.userService.getToken();
                         if (token) {
                             options.headers.append("Authorization", "bearer " + token);

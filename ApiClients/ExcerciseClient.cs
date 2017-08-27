@@ -16,10 +16,10 @@ namespace ApiClients
         {
         }
 
-        public async Task<Response<IEnumerable<ExerciseDTO>>> GetExercises(Guid userId)
+        public async Task<Response<PagedList<ExerciseDTO>>> GetExercises(Guid userId)
         {
             string url = "api/exercises/user/" + userId + "/";
-            var response = await SendRequest<IEnumerable<ExerciseDTO>>(HttpMethod.Get, url);
+            var response = await SendRequest<PagedList<ExerciseDTO>>(HttpMethod.Get, url);
             return response;
         }
 

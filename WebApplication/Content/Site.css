@@ -80,6 +80,13 @@ form .group input {
   user-select: none;
   position: relative;
 }
+.exercise-table {
+  width: 100%;
+}
+.exercise-table .exercise-img img {
+  max-width: 200px;
+  max-height: 200px;
+}
 @font-face {
   font-family: "Roboto";
   src: url(../fonts/Roboto-Light.ttf) format("truetype");
@@ -87,6 +94,14 @@ form .group input {
 body {
   font-family: Roboto;
   margin: 10px;
+}
+ul {
+  list-style: none;
+}
+a,
+a:focus,
+a:hover {
+  color: inherit;
 }
 .main-container,
 .nav-content {
@@ -225,4 +240,13 @@ a {
   100% {
     transform: translate3d(250%, 0, 0);
   }
+}
+.pager ul li {
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid #3080e8;
+}
+.pager ul li.active {
+  background-color: #3080e8;
+  color: #fff;
 }
