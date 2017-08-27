@@ -122,6 +122,7 @@ nav ul li {
   display: inline-block;
 }
 nav ul li:hover {
+  color: #fff;
   background-color: #106BE1;
 }
 nav a {
@@ -243,8 +244,18 @@ a {
 }
 .pager ul li {
   display: inline-block;
-  padding: 5px 10px;
   border: 1px solid #3080e8;
+  padding: 5px 0;
+}
+.pager ul li:first-of-type {
+  margin-right: 5px;
+}
+.pager ul li:last-of-type {
+  margin-left: 5px;
+}
+.pager ul li a,
+.pager ul li span {
+  padding: 5px 10px;
 }
 .pager ul li.active {
   background-color: #3080e8;

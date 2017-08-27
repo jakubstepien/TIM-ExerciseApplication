@@ -6,6 +6,7 @@ import { HttpModule, XHRBackend, RequestOptions } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { LoaderComponent } from './common/loader.component';
+import { PagerComponent } from './common/pager/pager.component';
 import { NotificationComponent } from './common/notification/notification.component';
 import { AppNavigationComponent } from './app-navigation.component';
 import { HomeComponent } from './home/home.component';
@@ -35,6 +36,7 @@ import { CookieModule } from 'ngx-cookie';
         AppNavigationComponent,
         LoginComponent,
         RegisterComponent,
+        PagerComponent,
     ],
     providers: [
         AccountService,

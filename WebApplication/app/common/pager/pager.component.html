@@ -1,0 +1,17 @@
+﻿<div class="pager" *ngIf="lastPage">
+    <ul>
+        <li routerLink="{{baseUrl}}/1" *ngIf="currentPage != 1"><a>1</a></li>
+        <ng-container *ngFor="let index of [currentPage-2,currentPage-1]">
+            <li *ngIf="index > 1">
+                <a routerLink="{{baseUrl}}/{{index}}">{{index}}</a>
+            </li>
+        </ng-container>
+        <li class="active"><span>{{currentPage}}</span></li>
+        <ng-container *ngFor="let index of [currentPage+1,currentPage+2]">
+            <li *ngIf="index < lastPage">
+                <a routerLink="{{baseUrl}}/{{index}}">{{index}}</a>
+            </li>
+        </ng-container>
+        <li *ngIf="currentPage != lastPage"><a routerLink="{{baseUrl}}/{{lastPage}}">{{lastPage}}</a></li>
+    </ul>
+</div>

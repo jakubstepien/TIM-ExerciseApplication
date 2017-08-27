@@ -1,7 +1,9 @@
 ﻿<h1>{{title}}</h1>
 <a routerLink="details">Test</a>
 <router-outlet></router-outlet>
+
 <div *ngIf="exercises">
+    <pager [currentPage]="currentPage" [pageSize]="pageSize" [lastPage]="lastPage" [total]="total" baseUrl="/exercises"></pager>
     <table class="exercise-table">
         <thead>
             <tr>
@@ -26,21 +28,5 @@
             </tr>
         </tbody>
     </table>
-</div>
-<div class="pager" *ngIf="lastPage">
-    <ul>
-        <li routerLink="/exercises/1" *ngIf="currentPage != 1"><a>1</a></li>
-        <ng-container *ngFor="let index of [currentPage-2,currentPage-1]">
-            <li *ngIf="index > 1">
-                <a routerLink="/exercises/{{index}}">{{index}}</a>
-            </li>
-        </ng-container>
-        <li class="active">{{currentPage}}</li>
-        <ng-container *ngFor="let index of [currentPage+1,currentPage+2]">
-            <li *ngIf="index < lastPage">
-                <a routerLink="/exercises/{{index}}">{{index}}</a>
-            </li>
-        </ng-container>
-        <li *ngIf="currentPage != lastPage"><a routerLink="/exercises/{{lastPage}}">{{lastPage}}</a></li>
-    </ul>
+    <pager [currentPage]="currentPage" [pageSize]="pageSize" [lastPage]="lastPage" [total]="total" baseUrl="/exercises"></pager>
 </div>

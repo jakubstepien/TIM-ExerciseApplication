@@ -282,6 +282,7 @@
     <Content Include="app\account\login.component.html" />
     <Content Include="app\app-navigation.component.html" />
     <Content Include="app\common\notification\notivication.template.html" />
+    <Content Include="app\common\pager\pager.component.html" />
     <Content Include="app\exercise\exercises.component.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\icons\ic_clear_white_24dp_1x.png" />
@@ -384,6 +385,7 @@
     <TypeScriptCompile Include="app\account\login.component.ts" />
     <TypeScriptCompile Include="app\common\ModelError.ts" />
     <TypeScriptCompile Include="app\common\pagedList.ts" />
+    <TypeScriptCompile Include="app\common\pager\pager.component.ts" />
     <TypeScriptCompile Include="app\common\user.service.ts" />
     <TypeScriptCompile Include="app\common\http.service.ts" />
     <TypeScriptCompile Include="app\common\loader.component.ts" />

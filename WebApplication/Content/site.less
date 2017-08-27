@@ -42,6 +42,7 @@ nav {
             display: inline-block;
 
             &:hover {
+                color: #fff;
                 background-color: #106BE1;
             }
         }
@@ -187,8 +188,20 @@ a {
 .pager {
     ul li {
         display: inline-block;
-        padding: 5px 10px;
         border: 1px solid @main;
+        padding: 5px 0;
+
+        &:first-of-type {
+            margin-right: 5px;
+        }
+
+        &:last-of-type {
+            margin-left: 5px;
+        }
+
+        a, span {
+            padding: 5px 10px;
+        }
 
         &.active {
             background-color: @main;
