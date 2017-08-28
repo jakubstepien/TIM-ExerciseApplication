@@ -51,6 +51,9 @@ System.register(["@angular/core", "ngx-cookie"], function (exports_1, context_1)
                     }
                     return tokenObj.roles.split(';').some(function (userRole) { return userRole === role; });
                 };
+                UserService.prototype.logout = function () {
+                    this.cookie.remove(this.tokenKey);
+                };
                 UserService.prototype.getTokenObject = function () {
                     return this.cookie.getObject(this.tokenKey);
                 };

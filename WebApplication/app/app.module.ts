@@ -14,6 +14,7 @@ import { ExercisesComponent } from './exercise/exercises.component';
 import { ExercseDetailComponent } from './exercise/exercise-detail.component';
 import { LoginComponent } from './account/login.component';
 import { RegisterComponent } from './account/register.component';
+import { LogoutComponent } from './account/logout.component';
 
 import { HttpService } from './common/http.service';
 import { UserService } from './common/user.service';
@@ -37,6 +38,7 @@ import { CookieModule } from 'ngx-cookie';
         LoginComponent,
         RegisterComponent,
         PagerComponent,
+        LogoutComponent,
     ],
     providers: [
         AccountService,

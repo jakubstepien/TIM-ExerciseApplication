@@ -4,16 +4,19 @@
             <li>
                 <a routerLink="/" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">Training App</a>
             </li>
-            <li>
-                <a routerLink="exercises" routerLinkActive="active">Ćwiczenia</a>
+            <li *ngIf="isLoggedIn()">
+                <a  routerLink="exercises" routerLinkActive="active">Ćwiczenia</a>
             </li>
         </ul>
         <ul class="nav-right">
-            <li>
-                <a routerLink="login" routerLinkActive="active">Zaloguj się</a>
+            <li *ngIf="!isLoggedIn()">
+                <a  routerLink="login" routerLinkActive="active">Zaloguj się</a>
             </li>
-            <li>
-                <a routerLink="register" routerLinkActive="active">Zajerestruje się</a>
+            <li *ngIf="!isLoggedIn()">
+                <a  routerLink="register" routerLinkActive="active">Zajerestruje się</a>
+            </li>
+            <li *ngIf="isLoggedIn()">
+                <a routerLink="logout" routerLinkActive="active">Wyloguj się</a>
             </li>
         </ul>
     </div>

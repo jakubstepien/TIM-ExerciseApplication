@@ -6,6 +6,7 @@ import { ExercisesComponent } from '../exercise/exercises.component';
 import { ExercseDetailComponent } from '../exercise/exercise-detail.component';
 import { LoginComponent } from '../account/login.component';
 import { RegisterComponent } from '../account/register.component';
+import { LogoutComponent } from '../account/logout.component';
 
 import { LoggedInGuard } from './loggedin-guard';
 import { RoleGuard } from './role-guard';
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: 'exercises', redirectTo: 'exercises/1' },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+    { path: 'logout', component: LogoutComponent }
 ];
 
 @NgModule({

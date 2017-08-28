@@ -39,6 +39,10 @@ export class UserService {
         return tokenObj.roles.split(';').some((userRole) => userRole === role);
     }
 
+    public logout() {
+        this.cookie.remove(this.tokenKey);
+    }
+
     private getTokenObject(): Token {
         return this.cookie.getObject(this.tokenKey) as Token;
     }

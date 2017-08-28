@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/router", "../home/home.component", "../exercise/exercises.component", "../exercise/exercise-detail.component", "../account/login.component", "../account/register.component", "./loggedin-guard", "./role-guard"], function (exports_1, context_1) {
+System.register(["@angular/core", "@angular/router", "../home/home.component", "../exercise/exercises.component", "../exercise/exercise-detail.component", "../account/login.component", "../account/register.component", "../account/logout.component", "./loggedin-guard", "./role-guard"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["@angular/core", "@angular/router", "../home/home.component", "
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, router_1, home_component_1, exercises_component_1, exercise_detail_component_1, login_component_1, register_component_1, loggedin_guard_1, role_guard_1, routes, AppRoutingModule;
+    var core_1, router_1, home_component_1, exercises_component_1, exercise_detail_component_1, login_component_1, register_component_1, logout_component_1, loggedin_guard_1, role_guard_1, routes, AppRoutingModule;
     return {
         setters: [
             function (core_1_1) {
@@ -31,6 +31,9 @@ System.register(["@angular/core", "@angular/router", "../home/home.component", "
             function (register_component_1_1) {
                 register_component_1 = register_component_1_1;
             },
+            function (logout_component_1_1) {
+                logout_component_1 = logout_component_1_1;
+            },
             function (loggedin_guard_1_1) {
                 loggedin_guard_1 = loggedin_guard_1_1;
             },
@@ -51,6 +54,7 @@ System.register(["@angular/core", "@angular/router", "../home/home.component", "
                 { path: 'exercises', redirectTo: 'exercises/1' },
                 { path: 'login', component: login_component_1.LoginComponent },
                 { path: 'register', component: register_component_1.RegisterComponent },
+                { path: 'logout', component: logout_component_1.LogoutComponent }
             ];
             AppRoutingModule = (function () {
                 function AppRoutingModule() {

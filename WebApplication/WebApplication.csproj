@@ -383,6 +383,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app\account\login.component.ts" />
+    <TypeScriptCompile Include="app\account\logout.component.ts" />
     <TypeScriptCompile Include="app\common\ModelError.ts" />
     <TypeScriptCompile Include="app\common\pagedList.ts" />
     <TypeScriptCompile Include="app\common\pager\pager.component.ts" />

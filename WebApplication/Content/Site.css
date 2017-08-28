@@ -120,6 +120,7 @@ nav ul {
 }
 nav ul li {
   display: inline-block;
+  color: #fff;
 }
 nav ul li:hover {
   color: #fff;
