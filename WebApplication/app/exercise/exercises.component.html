@@ -7,28 +7,28 @@
     <table class="exercise-table">
         <thead>
             <tr>
-                <th>Nazwa</th>
-                <th>Opis</th>
-                <th>Obraz</th>
-                <th>Kalorie na godzine</th>
-                <th></th>
+                <th class="col-name">Nazwa</th>
+                <th class="col-description">Opis</th>
+                <th class="col-picture">Obraz</th>
+                <th class="col-callories">cal / h</th>
+                <th class="col-buttons"></th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let exercise of exercises">
-                <th>{{exercise.Name}}</th>
-                <th>{{exercise.Description}}</th>
-                <th>
+                <td>{{exercise.Name}}</td>
+                <td>{{exercise.Description | truncate :250}}</td>
+                <td>
                     <div class="exercise-img" *ngIf="exercise.ImageName">
                         <img src="/images/{{exercise.IdExercise}}/{{exercise.ImageName}}" />
                     </div>
-                </th>
-                <th>{{exercise.CaloriesPerHour}}</th>
-                <th>
+                </td>
+                <td>{{exercise.CaloriesPerHour}}</td>
+                <td>
                     <div class="buttons">
                         <div class="btn-error" (click)="delete(exercise.IdExercise)">Usuń</div>
                     </div>
-                </th>
+                </td>
             </tr>
         </tbody>
     </table>

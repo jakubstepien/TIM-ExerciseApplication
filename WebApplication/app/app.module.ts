@@ -25,6 +25,8 @@ import { NotificationService } from './common/notification/notification.service'
 import { AppRoutingModule } from './routing/app-routing.module';
 import { CookieModule } from 'ngx-cookie';
 
+import { TruncatePipe } from './common/truncate.pipe';
+
 @NgModule({
     imports: [BrowserModule, AppRoutingModule, FormsModule, HttpModule, CookieModule.forRoot()],
     declarations: [
@@ -39,6 +41,7 @@ import { CookieModule } from 'ngx-cookie';
         RegisterComponent,
         PagerComponent,
         LogoutComponent,
+        TruncatePipe,
     ],
     providers: [
         AccountService,

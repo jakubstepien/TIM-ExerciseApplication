@@ -187,26 +187,30 @@ a {
 }
 
 .pager {
-    ul li {
-        display: inline-block;
-        border: 1px solid @main;
-        padding: 5px 0;
+    ul {
+        padding: 0;
 
-        &:first-of-type {
-            margin-right: 5px;
-        }
+        li {
+            display: inline-block;
+            border: 1px solid @main;
+            padding: 5px 0;
 
-        &:last-of-type {
-            margin-left: 5px;
-        }
+            &:first-of-type {
+                margin-right: 5px;
+            }
 
-        a, span {
-            padding: 5px 10px;
-        }
+            &:last-of-type {
+                margin-left: 5px;
+            }
 
-        &.active {
-            background-color: @main;
-            color: #fff;
+            a, span {
+                padding: 5px 10px;
+            }
+
+            &.active {
+                background-color: @main;
+                color: #fff;
+            }
         }
     }
 }

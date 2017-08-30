@@ -1,8 +1,45 @@
 ﻿.exercise-table {
     width: 100%;
+    border-collapse: collapse;
 
     .exercise-img img {
         max-width: 200px;
         max-height: 200px;
+    }
+
+    tr {
+        border-bottom: 1px solid #ddd;
+        padding: 10px 0;
+
+        td {
+            padding: 5px 10px;
+        }
+    }
+
+    tr:nth-child(2n+1) {
+        background-color: #f5f5f5;
+    }
+
+    th {
+        background-color: #fff;
+        text-align: left;
+    }
+    .col-name{
+        width:15%;
+    }
+    .col-description{
+        width:30%;
+
+    }
+    .col-picture{
+        width:20%;
+
+    }
+    .col-callories{
+        width:10%;
+
+    }
+    .col-buttons{
+        width:15%;
     }
 }

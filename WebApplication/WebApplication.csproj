@@ -387,6 +387,7 @@
     <TypeScriptCompile Include="app\common\ModelError.ts" />
     <TypeScriptCompile Include="app\common\pagedList.ts" />
     <TypeScriptCompile Include="app\common\pager\pager.component.ts" />
+    <TypeScriptCompile Include="app\common\truncate.pipe.ts" />
     <TypeScriptCompile Include="app\common\user.service.ts" />
     <TypeScriptCompile Include="app\common\http.service.ts" />
     <TypeScriptCompile Include="app\common\loader.component.ts" />
