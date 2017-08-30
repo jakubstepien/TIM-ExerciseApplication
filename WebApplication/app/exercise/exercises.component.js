@@ -58,8 +58,23 @@ System.register(["@angular/core", "@angular/router", "./exercises.service", "../
                     })
                         .catch(function (reason) {
                         console.log(reason);
-                        _this.notificationService.error("Błąd pobierania ćwiczeń", '');
+                        _this.notificationService.error("Błąd pobierania ćwiczeń");
                     });
+                };
+                ExercisesComponent.prototype.delete = function (id) {
+                    var _this = this;
+                    var promise = this.exercisesService.deleteExercise(id);
+                    var showError = function () { return _this.notificationService.error("Błąd usuwania ćwiczenia"); };
+                    promise.then(function (result) {
+                        if (result.success) {
+                            _this.notificationService.info("Ćwiczenie zostało usunięte");
+                            _this.loadExercises();
+                            ;
+                        }
+                        else {
+                            showError();
+                        }
+                    }).catch(function (reason) { return showError(); });
                 };
                 return ExercisesComponent;
             }());

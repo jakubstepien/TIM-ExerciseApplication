@@ -4,6 +4,6 @@
             <div class="close" (click)="close()"></div>
             <div class="notification-title" *ngIf="notification.title">{{notification.title}}</div>
         </div>
-        <div class="notification-body">{{notification.message}}</div>
+        <div class="notification-body" *ngIf="notification.message">{{notification.message}}</div>
     </div>
 </div>

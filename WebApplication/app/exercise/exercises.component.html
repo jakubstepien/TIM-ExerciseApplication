@@ -1,5 +1,5 @@
 ﻿<h1>{{title}}</h1>
-<a routerLink="details">Test</a>
+<a routerLink="details"></a>
 <router-outlet></router-outlet>
 
 <div *ngIf="exercises">
@@ -24,7 +24,11 @@
                     </div>
                 </th>
                 <th>{{exercise.CaloriesPerHour}}</th>
-                <th>Przyciski!!!!</th>
+                <th>
+                    <div class="buttons">
+                        <div class="btn-error" (click)="delete(exercise.IdExercise)">Usuń</div>
+                    </div>
+                </th>
             </tr>
         </tbody>
     </table>

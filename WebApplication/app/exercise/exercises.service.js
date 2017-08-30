@@ -42,6 +42,18 @@ System.register(["@angular/core", "../common/http.service", "../common/user.serv
                     }
                     return Promise.resolve({ success: false });
                 };
+                ExercisesService.prototype.deleteExercise = function (id) {
+                    var userId = this.userService.getUserId();
+                    if (userId && id) {
+                        var promise = this.http.delete("api/exercises/" + id + "/user/" + userId, true).toPromise();
+                        return promise.then(function (response) {
+                            return { success: true };
+                        }).catch(function (reason) {
+                            return { success: false };
+                        });
+                    }
+                    return Promise.resolve({ success: false });
+                };
                 return ExercisesService;
             }());
             ExercisesService = __decorate([

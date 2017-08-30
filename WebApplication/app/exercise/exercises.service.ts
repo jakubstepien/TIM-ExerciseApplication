@@ -23,4 +23,17 @@ export class ExercisesService {
         }
         return Promise.resolve({ success: false } as DataResult<PagedList<ExerciseDTO>>);
     }
+
+    deleteExercise(id: string): Promise<Result> {
+        var userId = this.userService.getUserId();
+        if (userId && id) {
+            var promise = this.http.delete("api/exercises/" + id + "/user/" + userId, true).toPromise();
+            return promise.then(response => {
+                return { success: true } as Result;
+            }).catch(reason => {
+                return { success: false } as Result;
+            })
+        }
+        return Promise.resolve({ success: false } as Result)
+    }
 }

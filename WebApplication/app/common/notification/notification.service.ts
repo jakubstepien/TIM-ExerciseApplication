@@ -13,19 +13,19 @@ export class NotificationService {
         return this.data;
     }
 
-    info(title: string, message: string): void {
-        this.alert(title, message, NotificationType.Info);
+    info(title: string, message: string = ""): void {
+        this.alert(NotificationType.Info, title, message);
     }
 
-    warning(title: string, message: string): void {
-        this.alert(title, message, NotificationType.Warning);
+    warning(title: string, message: string = ""): void {
+        this.alert(NotificationType.Warning,title, message);
     }
 
-    error(title: string, message: string): void {
-        this.alert(title, message, NotificationType.Error);
+    error(title: string, message: string = ""): void {
+        this.alert(NotificationType.Error, title, message);
     }
 
-    alert(title: string, message: string, type: NotificationType): void {
+    alert( type: NotificationType, title: string, message: string = ""): void {
         this.data.next({ message: message, title: title, type: type });
     }
 }

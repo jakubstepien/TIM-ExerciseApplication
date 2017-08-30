@@ -39,7 +39,21 @@ export class ExercisesComponent implements OnInit {
         })
             .catch(reason => {
                 console.log(reason);
-                this.notificationService.error("Błąd pobierania ćwiczeń", '');
+                this.notificationService.error("Błąd pobierania ćwiczeń");
             });
+    }
+
+    delete(id: string) {
+        var promise = this.exercisesService.deleteExercise(id);
+        let showError = () => this.notificationService.error("Błąd usuwania ćwiczenia");
+        promise.then(result => {
+            if (result.success) {
+                this.notificationService.info("Ćwiczenie zostało usunięte");
+                this.loadExercises();;
+            }
+            else {
+                showError();
+            }
+        }).catch(reason => showError());
     }
 }

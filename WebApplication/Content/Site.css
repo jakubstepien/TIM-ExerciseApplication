@@ -45,6 +45,66 @@ form .group input {
 .btn-main[disabled]:hover {
   background-color: #3080e8;
 }
+.btn-warning {
+  margin: 5px 0;
+  padding: 8px 15px;
+  border-radius: 5px;
+  background-color: #f89406;
+  display: inline-block;
+  color: #fff;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.75);
+  transition: box-shadow 0.3s;
+  user-select: none;
+  border: 1px solid #f89406;
+}
+.btn-warning:hover {
+  background-color: #106be1;
+}
+.btn-warning:active {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.btn-warning[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.btn-warning[disabled]:hover {
+  background-color: #f89406;
+}
+.btn-error {
+  margin: 5px 0;
+  padding: 8px 15px;
+  border-radius: 5px;
+  background-color: #ce3f38;
+  display: inline-block;
+  color: #fff;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.75);
+  transition: box-shadow 0.3s;
+  user-select: none;
+  border: 1px solid #ce3f38;
+}
+.btn-error:hover {
+  background-color: #bd362f;
+}
+.btn-error:active {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.btn-error[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.btn-error[disabled]:hover {
+  background-color: #ce3f38;
+}
 .alert-danger {
   color: #d9534f;
 }
@@ -178,7 +238,7 @@ a {
   background-color: #f89406;
 }
 .notification .modal.error {
-  background-color: #bd362f;
+  background-color: #ce3f38;
 }
 .notification-head {
   padding: 5px 0;

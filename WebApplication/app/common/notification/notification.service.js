@@ -33,15 +33,19 @@ System.register(["@angular/core", "rxjs/Subject", "./Notification"], function (e
                     configurable: true
                 });
                 NotificationService.prototype.info = function (title, message) {
-                    this.alert(title, message, Notification_1.NotificationType.Info);
+                    if (message === void 0) { message = ""; }
+                    this.alert(Notification_1.NotificationType.Info, title, message);
                 };
                 NotificationService.prototype.warning = function (title, message) {
-                    this.alert(title, message, Notification_1.NotificationType.Warning);
+                    if (message === void 0) { message = ""; }
+                    this.alert(Notification_1.NotificationType.Warning, title, message);
                 };
                 NotificationService.prototype.error = function (title, message) {
-                    this.alert(title, message, Notification_1.NotificationType.Error);
+                    if (message === void 0) { message = ""; }
+                    this.alert(Notification_1.NotificationType.Error, title, message);
                 };
-                NotificationService.prototype.alert = function (title, message, type) {
+                NotificationService.prototype.alert = function (type, title, message) {
+                    if (message === void 0) { message = ""; }
                     this.data.next({ message: message, title: title, type: type });
                 };
                 return NotificationService;
