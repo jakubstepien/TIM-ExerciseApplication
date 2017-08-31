@@ -283,6 +283,7 @@
     <Content Include="app\app-navigation.component.html" />
     <Content Include="app\common\notification\notivication.template.html" />
     <Content Include="app\common\pager\pager.component.html" />
+    <Content Include="app\exercise\exercise-detail.component.html" />
     <Content Include="app\exercise\exercises.component.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\icons\ic_clear_white_24dp_1x.png" />

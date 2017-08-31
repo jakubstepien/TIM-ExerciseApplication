@@ -36,4 +36,18 @@ export class ExercisesService {
         }
         return Promise.resolve({ success: false } as Result)
     }
+
+    saveImage(image: File, exerciseId?: string, fileName?: string) {
+        let formData: FormData = new FormData();
+        formData.append('image', image, image.name);
+        if (exerciseId) {
+            formData.append('excerciseId', exerciseId);
+
+        }
+        if (!fileName) {
+            fileName = image.name;
+        }
+        formData.append('fileName', fileName);
+        return this.http.post('/api/exercises/image', formData, true).toPromise();
+    }
 }

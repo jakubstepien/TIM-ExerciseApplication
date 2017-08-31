@@ -43,6 +43,27 @@ namespace WebApplication.Services
             }
         }
 
+        public bool SaveImage(HttpServerUtilityBase server, byte[] file, Guid id, string fileName)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(fileName) && file != null)
+                {
+                    var path = GetFolderPath(server, id);
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+                    File.WriteAllBytes(GetFilePath(server, id, fileName), file);
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+            }
+            return false;
+        }
+
         private static string GetFilePath(HttpServerUtilityBase server, Guid id, string pic)
         {
             return Path.Combine(server.MapPath("~/images/" + id.ToString()), pic);
@@ -66,17 +87,6 @@ namespace WebApplication.Services
             }
         }
 
-        public void SaveImage(HttpServerUtilityBase server, byte[] file, Guid id, string fileName)
-        {
-            if (!string.IsNullOrEmpty(fileName) && file != null)
-            {
-                var path = GetFolderPath(server, id);
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
-                File.WriteAllBytes(GetFilePath(server, id, fileName), file);
-            }
-        }
+
     }
 }

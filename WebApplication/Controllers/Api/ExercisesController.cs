@@ -21,10 +21,11 @@ using ApiClients.Models;
 using Database.Repositories.Excercise;
 using Database.Repositories.UserExcercise;
 using Database.Repositories.Statistic;
+using System.Threading.Tasks;
 
 namespace WebApplication.Controllers.Api
 {
-    [Authorize]
+    //[Authorize]
     [RoutePrefix("api/exercises")]
     public class ExercisesController : ApiController
     {
@@ -251,6 +252,21 @@ namespace WebApplication.Controllers.Api
                 UserId = s.IdUser
             });
             return finishedExcercises;
+        }
+
+        [HttpPost]
+        [Route("image/")]
+        public async Task<IHttpActionResult> SaveExerciseImage()
+        {
+            byte[] imagebytes = await Request.Content.ReadAsByteArrayAsync();
+            var exerciseId = HttpContext.Current.Request.Params["excerciseId"];
+            Guid id = Guid.Empty;
+            if(!string.IsNullOrEmpty(exerciseId) && !Guid.TryParse(exerciseId, out id)){
+                id = Guid.NewGuid();
+            }
+            var fileName = HttpContext.Current.Request.Params["fileName"];
+            var success = imageService.SaveImage(new HttpServerUtilityWrapper(HttpContext.Current.Server), imagebytes, id, fileName);
+            return Json(new { Success = success, Id = id });
         }
 
         private void SaveExerciseImageToDrive(ExerciseDTO exercise)

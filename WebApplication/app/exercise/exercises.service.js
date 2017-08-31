@@ -54,6 +54,18 @@ System.register(["@angular/core", "../common/http.service", "../common/user.serv
                     }
                     return Promise.resolve({ success: false });
                 };
+                ExercisesService.prototype.saveImage = function (image, exerciseId, fileName) {
+                    var formData = new FormData();
+                    formData.append('image', image, image.name);
+                    if (exerciseId) {
+                        formData.append('excerciseId', exerciseId);
+                    }
+                    if (!fileName) {
+                        fileName = image.name;
+                    }
+                    formData.append('fileName', fileName);
+                    return this.http.post('/api/exercises/image', formData, true).toPromise();
+                };
                 return ExercisesService;
             }());
             ExercisesService = __decorate([
