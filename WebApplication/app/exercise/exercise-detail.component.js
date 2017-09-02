@@ -25,9 +25,17 @@ System.register(["@angular/core", "./exercises.service"], function (exports_1, c
                 function ExercseDetailComponent(exercisesService) {
                     this.exercisesService = exercisesService;
                 }
+                ExercseDetailComponent.prototype.ngOnInit = function () {
+                    this.exercise = { CaloriesPerHour: null, Description: "", IdExercise: "", ImageName: "", Name: "", IsFavourite: false };
+                    this.show = true;
+                };
                 ExercseDetailComponent.prototype.uploadImage = function (event) {
                     var file = event.target.files[0];
                     this.exercisesService.saveImage(file, "83CBF1FC-BDC6-457B-850E-E34D56122AF6");
+                };
+                ExercseDetailComponent.prototype.saveExercise = function (form) {
+                    console.log(form);
+                    console.log(this.exercise);
                 };
                 return ExercseDetailComponent;
             }());

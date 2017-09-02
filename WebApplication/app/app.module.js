@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/platform-browser", "@angular/forms", "@angular/http", "./app.component", "./common/loader.component", "./common/pager/pager.component", "./common/notification/notification.component", "./app-navigation.component", "./home/home.component", "./exercise/exercises.component", "./exercise/exercise-detail.component", "./account/login.component", "./account/register.component", "./account/logout.component", "./common/http.service", "./common/user.service", "./account/account.service", "./exercise/exercises.service", "./common/notification/notification.service", "./routing/app-routing.module", "ngx-cookie", "./common/truncate.pipe"], function (exports_1, context_1) {
+System.register(["@angular/core", "@angular/platform-browser", "@angular/forms", "@angular/http", "./app.component", "./common/loader.component", "./common/modal/modal.component", "./common/pager/pager.component", "./common/notification/notification.component", "./app-navigation.component", "./home/home.component", "./exercise/exercises.component", "./exercise/exercise-detail.component", "./account/login.component", "./account/register.component", "./account/logout.component", "./common/http.service", "./common/user.service", "./account/account.service", "./exercise/exercises.service", "./common/notification/notification.service", "./routing/app-routing.module", "ngx-cookie", "./common/truncate.pipe", "./common/validators/minValue.validator", "./common/validators/number.validator"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/forms",
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, platform_browser_1, forms_1, http_1, app_component_1, loader_component_1, pager_component_1, notification_component_1, app_navigation_component_1, home_component_1, exercises_component_1, exercise_detail_component_1, login_component_1, register_component_1, logout_component_1, http_service_1, user_service_1, account_service_1, exercises_service_1, notification_service_1, app_routing_module_1, ngx_cookie_1, truncate_pipe_1, AppModule;
+    var core_1, platform_browser_1, forms_1, http_1, app_component_1, loader_component_1, modal_component_1, pager_component_1, notification_component_1, app_navigation_component_1, home_component_1, exercises_component_1, exercise_detail_component_1, login_component_1, register_component_1, logout_component_1, http_service_1, user_service_1, account_service_1, exercises_service_1, notification_service_1, app_routing_module_1, ngx_cookie_1, truncate_pipe_1, minValue_validator_1, number_validator_1, AppModule;
     return {
         setters: [
             function (core_1_1) {
@@ -27,6 +27,9 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/forms",
             },
             function (loader_component_1_1) {
                 loader_component_1 = loader_component_1_1;
+            },
+            function (modal_component_1_1) {
+                modal_component_1 = modal_component_1_1;
             },
             function (pager_component_1_1) {
                 pager_component_1 = pager_component_1_1;
@@ -78,6 +81,12 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/forms",
             },
             function (truncate_pipe_1_1) {
                 truncate_pipe_1 = truncate_pipe_1_1;
+            },
+            function (minValue_validator_1_1) {
+                minValue_validator_1 = minValue_validator_1_1;
+            },
+            function (number_validator_1_1) {
+                number_validator_1 = number_validator_1_1;
             }
         ],
         execute: function () {
@@ -92,6 +101,7 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/forms",
                     declarations: [
                         app_component_1.AppComponent,
                         loader_component_1.LoaderComponent,
+                        modal_component_1.ModalComponent,
                         home_component_1.HomeComponent,
                         notification_component_1.NotificationComponent,
                         exercises_component_1.ExercisesComponent,
@@ -102,6 +112,8 @@ System.register(["@angular/core", "@angular/platform-browser", "@angular/forms",
                         pager_component_1.PagerComponent,
                         logout_component_1.LogoutComponent,
                         truncate_pipe_1.TruncatePipe,
+                        minValue_validator_1.MinValueDirective,
+                        number_validator_1.NumberDirective
                     ],
                     providers: [
                         account_service_1.AccountService,

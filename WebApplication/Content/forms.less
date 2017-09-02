@@ -4,9 +4,25 @@ form {
     .group {
         margin-bottom: 15px;
 
-        label, input {
+        label, input, textarea, select {
             margin-bottom: 5px;
             display: block;
+        }
+    }
+
+    &.inline {
+        display: table;
+        border-collapse: separate;
+        border-spacing: 10px;
+
+        .group {
+            display: table-row;
+
+            label, input, textarea, select {
+                display: table-cell;
+                vertical-align: middle;
+            }
+
         }
     }
 }
@@ -23,20 +39,25 @@ form {
 }
 
 .btn-main {
-   .btn(@main,@main-hover);
+    .btn(@main,@main-hover);
 }
 
-.btn-warning{
-   .btn(@warning,@main-hover);
+.btn-default {
+    .btn(#fff,@default);
+    color: #000;
 }
 
-.btn-error{
-   .btn(@error,@error-hover);
-
+.btn-warning {
+    .btn(@warning,@main-hover);
 }
 
-.btn(@color,@color-hover){
+.btn-error {
+    .btn(@error,@error-hover);
+}
+
+.btn(@color,@color-hover) {
     margin: 5px 0;
+    font-size: 13px;
     padding: 8px 15px;
     border-radius: 5px;
     background-color: @color;

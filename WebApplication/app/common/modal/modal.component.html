@@ -1,0 +1,10 @@
+﻿<div class="modal" *ngIf="show">
+    <div class="modal-head">
+        <div class="modal-title">{{header}}</div>
+        <div class="modal-close" (click)="close()">✕</div>
+    </div>
+    <div class="modal-body">
+        <ng-content></ng-content>
+    </div>
+</div>
+<div class="modal-overlay" *ngIf="show"></div>

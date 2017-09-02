@@ -6,6 +6,7 @@ import { HttpModule, XHRBackend, RequestOptions } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { LoaderComponent } from './common/loader.component';
+import { ModalComponent } from './common/modal/modal.component';
 import { PagerComponent } from './common/pager/pager.component';
 import { NotificationComponent } from './common/notification/notification.component';
 import { AppNavigationComponent } from './app-navigation.component';
@@ -26,12 +27,15 @@ import { AppRoutingModule } from './routing/app-routing.module';
 import { CookieModule } from 'ngx-cookie';
 
 import { TruncatePipe } from './common/truncate.pipe';
+import { MinValueDirective } from './common/validators/minValue.validator';
+import { NumberDirective } from './common/validators/number.validator';
 
 @NgModule({
     imports: [BrowserModule, AppRoutingModule, FormsModule, HttpModule, CookieModule.forRoot()],
     declarations: [
         AppComponent,
         LoaderComponent,
+        ModalComponent,
         HomeComponent,
         NotificationComponent,
         ExercisesComponent,
@@ -42,6 +46,8 @@ import { TruncatePipe } from './common/truncate.pipe';
         PagerComponent,
         LogoutComponent,
         TruncatePipe,
+        MinValueDirective,
+        NumberDirective
     ],
     providers: [
         AccountService,
