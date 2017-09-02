@@ -30,7 +30,6 @@ System.register(["@angular/core", "@angular/forms"], function (exports_1, contex
                     if (c.value && parseFloat(c.value)) {
                         var num = parseFloat(c.value);
                         if (num < parseFloat(this.minValue)) {
-                            console.log(c.errors);
                             return { minValue: 'error' };
                         }
                     }

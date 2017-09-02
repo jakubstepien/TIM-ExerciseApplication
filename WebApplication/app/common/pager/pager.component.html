@@ -1,4 +1,4 @@
-﻿<div class="pager" *ngIf="lastPage">
+﻿<div class="pager" *ngIf="lastPage && lastPage != 1">
     <ul>
         <li routerLink="{{baseUrl}}/1" *ngIf="currentPage != 1"><a>1</a></li>
         <ng-container *ngFor="let index of [currentPage-2,currentPage-1]">

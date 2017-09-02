@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="checkbox">
-        <input type="checkbox" id="remember" name="remember" />
+        <input [(ngModel)]="remember" type="checkbox" id="remember" name="remember" />
         <label for="remember">Zapamiętaj mnie</label>
     </div>
     <button type="submit" class="btn-main" [disabled]="!f.form.valid">Zaloguj</button>

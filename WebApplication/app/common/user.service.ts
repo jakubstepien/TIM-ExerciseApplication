@@ -23,8 +23,11 @@ export class UserService {
         }
     }
 
-    public storeToken(token: Token) {
-        this.cookie.putObject(this.tokenKey, token, { expires: token['.expires'] });
+    public storeToken(token: Token, remember: boolean) {
+        if (remember)
+            this.cookie.putObject(this.tokenKey, token, { expires: token['.expires'] });
+        else
+            this.cookie.putObject(this.tokenKey, token);
     }
 
     public isLoggedIn(): boolean {

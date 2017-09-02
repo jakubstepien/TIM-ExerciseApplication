@@ -45,7 +45,7 @@ System.register(["@angular/core", "@angular/router", "./account.service", "../co
                 };
                 LoginComponent.prototype.signIn = function (form) {
                     var _this = this;
-                    this.accountService.login(this.login, this.password).then(function (result) {
+                    this.accountService.login(this.login, this.password, this.remember).then(function (result) {
                         if (result.success) {
                             _this.router.navigateByUrl(_this.redirectUrl);
                         }

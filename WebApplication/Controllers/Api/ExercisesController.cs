@@ -256,17 +256,27 @@ namespace WebApplication.Controllers.Api
 
         [HttpPost]
         [Route("image/")]
-        public async Task<IHttpActionResult> SaveExerciseImage()
+        public IHttpActionResult SaveExerciseImage()
         {
-            byte[] imagebytes = await Request.Content.ReadAsByteArrayAsync();
-            var exerciseId = HttpContext.Current.Request.Params["excerciseId"];
-            Guid id = Guid.Empty;
-            if(!string.IsNullOrEmpty(exerciseId) && !Guid.TryParse(exerciseId, out id)){
-                id = Guid.NewGuid();
+            var image = HttpContext.Current.Request.Files["image"];
+            if(image != null)
+            {
+                byte[] imagebytes;
+                using (var stream = new System.IO.BinaryReader(image.InputStream))
+                {
+                    imagebytes = stream.ReadBytes(image.ContentLength);
+                }
+                var exerciseId = HttpContext.Current.Request.Params["excerciseId"];
+                Guid id = Guid.NewGuid();
+                if (!string.IsNullOrEmpty(exerciseId) && !Guid.TryParse(exerciseId, out id))
+                {
+                    id = Guid.NewGuid();
+                }
+                var fileName = HttpContext.Current.Request.Params["fileName"];
+                var success = imageService.SaveImage(new HttpServerUtilityWrapper(HttpContext.Current.Server), imagebytes, id, fileName);
+                return Json(new { Success = success, Id = id });
             }
-            var fileName = HttpContext.Current.Request.Params["fileName"];
-            var success = imageService.SaveImage(new HttpServerUtilityWrapper(HttpContext.Current.Server), imagebytes, id, fileName);
-            return Json(new { Success = success, Id = id });
+            return BadRequest();
         }
 
         private void SaveExerciseImageToDrive(ExerciseDTO exercise)

@@ -15,14 +15,14 @@ export class AccountService {
 
     constructor(private http: HttpService, private userService: UserService) { };
 
-    login(login: string, password: string): Promise<Result> {
+    login(login: string, password: string, remember: boolean): Promise<Result> {
         let body = 'grant_type=password&username=' + login + '&password=' + password;
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         return this.http.post('/token', body, false, { headers: headers, body: body })
             .toPromise()
             .then(response => {
-                this.userService.storeToken(response.json());
+                this.userService.storeToken(response.json(), remember);
                 return { success: true } as Result;
             })
             .catch(reason => {
@@ -35,7 +35,7 @@ export class AccountService {
         return this.http.post('/api/account/register', { Email: login, Password: password, ConfirmPassword: passwordConfirm })
             .toPromise()
             .then(response => {
-                return this.login(login, password);
+                return this.login(login, password, false);
             })
             .catch(reason => {
                 var errorJson = reason.json() as ModelError;

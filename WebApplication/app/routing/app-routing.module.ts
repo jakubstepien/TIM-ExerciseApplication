@@ -16,9 +16,10 @@ const routes: Routes = [
     {
         path: 'exercises/:page', component: ExercisesComponent,
         canActivate: [LoggedInGuard],
-        children: [{
-            path: "details", component: ExercseDetailComponent
-        }]
+        children: [
+            { path: "add", component: ExercseDetailComponent },
+            { path: "edit/:id", component: ExercseDetailComponent },
+        ]
     },
     { path: 'exercises', redirectTo: 'exercises/1' },
     { path: 'login', component: LoginComponent },

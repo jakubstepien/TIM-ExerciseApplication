@@ -1,5 +1,7 @@
 ﻿import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router, NavigationEnd } from '@angular/router';
+import 'rxjs/add/operator/filter';
+
 
 import { ExercisesService } from './exercises.service';
 import { ExerciseDTO } from './exercise';
@@ -10,6 +12,7 @@ import { NotificationService } from '../common/notification/notification.service
 })
 export class ExercisesComponent implements OnInit {
     title = "Cwiczenia";
+    url: string;
     exercises: ExerciseDTO[];
     currentPage: number;
     pageSize: number = 20;
@@ -22,6 +25,11 @@ export class ExercisesComponent implements OnInit {
         this.activatedRoute.params.subscribe(parms => {
             this.currentPage = +parms['page'];
             this.loadExercises();
+        });
+        this.exercisesService.dataChanged.subscribe(changed => {
+            if (changed) {
+                this.loadExercises();
+            }
         })
     }
 
@@ -38,7 +46,6 @@ export class ExercisesComponent implements OnInit {
             }
         })
             .catch(reason => {
-                console.log(reason);
                 this.notificationService.error("Błąd pobierania ćwiczeń");
             });
     }
@@ -49,7 +56,6 @@ export class ExercisesComponent implements OnInit {
         promise.then(result => {
             if (result.success) {
                 this.notificationService.info("Ćwiczenie zostało usunięte");
-                this.loadExercises();;
             }
             else {
                 showError();

@@ -2,47 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Web;
 
 namespace WebApplication.Services
 {
     public class ImageService
     {
-        public bool SaveImage(HttpServerUtilityBase server, HttpPostedFileBase file, Guid id, string fileName)
-        {
-            if (file != null)
-            {
-                try
-                {
-                    string pic = System.IO.Path.GetFileName(file.FileName);
-                    var folder = GetFolderPath(server, id);
-                    if (!Directory.Exists(folder))
-                    {
-                        Directory.CreateDirectory(folder);
-                    }
-                    string path = GetFilePath(server, id, pic);
-                    file.SaveAs(path);
-
-
-                    using (MemoryStream ms = new MemoryStream())
-                    {
-                        file.InputStream.CopyTo(ms);
-                        byte[] array = ms.GetBuffer();
-                    }
-                    return true;
-                }
-                catch (Exception e)
-                {
-                    return false;
-                }
-
-            }
-            else
-            {
-                return File.Exists(GetFilePath(server, id, fileName));
-            }
-        }
-
         public bool SaveImage(HttpServerUtilityBase server, byte[] file, Guid id, string fileName)
         {
             try
@@ -54,8 +20,20 @@ namespace WebApplication.Services
                     {
                         Directory.CreateDirectory(path);
                     }
-                    File.WriteAllBytes(GetFilePath(server, id, fileName), file);
-                    return true;
+                    //try access file if it's locked
+                    for (int i = 0; i < 1000; i++)
+                    {
+                        try
+                        {
+                            File.WriteAllBytes(GetFilePath(server, id, fileName), file);
+                            return true;
+                        }
+                        catch (Exception e)
+                        {
+                            Thread.Sleep(100);
+                        }
+                    }
+                    return false;
                 }
             }
             catch (Exception e)
@@ -63,6 +41,7 @@ namespace WebApplication.Services
             }
             return false;
         }
+
 
         private static string GetFilePath(HttpServerUtilityBase server, Guid id, string pic)
         {

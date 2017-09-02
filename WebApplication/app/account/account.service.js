@@ -35,7 +35,7 @@ System.register(["@angular/core", "@angular/http", "rxjs/add/operator/toPromise"
                     this.userService = userService;
                 }
                 ;
-                AccountService.prototype.login = function (login, password) {
+                AccountService.prototype.login = function (login, password, remember) {
                     var _this = this;
                     var body = 'grant_type=password&username=' + login + '&password=' + password;
                     var headers = new http_1.Headers();
@@ -43,7 +43,7 @@ System.register(["@angular/core", "@angular/http", "rxjs/add/operator/toPromise"
                     return this.http.post('/token', body, false, { headers: headers, body: body })
                         .toPromise()
                         .then(function (response) {
-                        _this.userService.storeToken(response.json());
+                        _this.userService.storeToken(response.json(), remember);
                         return { success: true };
                     })
                         .catch(function (reason) {
@@ -56,7 +56,7 @@ System.register(["@angular/core", "@angular/http", "rxjs/add/operator/toPromise"
                     return this.http.post('/api/account/register', { Email: login, Password: password, ConfirmPassword: passwordConfirm })
                         .toPromise()
                         .then(function (response) {
-                        return _this.login(login, password);
+                        return _this.login(login, password, false);
                     })
                         .catch(function (reason) {
                         var errorJson = reason.json();

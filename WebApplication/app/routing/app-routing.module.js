@@ -47,9 +47,10 @@ System.register(["@angular/core", "@angular/router", "../home/home.component", "
                 {
                     path: 'exercises/:page', component: exercises_component_1.ExercisesComponent,
                     canActivate: [loggedin_guard_1.LoggedInGuard],
-                    children: [{
-                            path: "details", component: exercise_detail_component_1.ExercseDetailComponent
-                        }]
+                    children: [
+                        { path: "add", component: exercise_detail_component_1.ExercseDetailComponent },
+                        { path: "edit/:id", component: exercise_detail_component_1.ExercseDetailComponent },
+                    ]
                 },
                 { path: 'exercises', redirectTo: 'exercises/1' },
                 { path: 'login', component: login_component_1.LoginComponent },

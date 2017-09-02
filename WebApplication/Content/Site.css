@@ -294,6 +294,18 @@ select {
   min-width: 150px;
   width: 150px;
 }
+input:required + .required,
+textarea:required + .required,
+select:required + .required {
+  display: inline;
+}
+input:required + .required:before,
+textarea:required + .required:before,
+select:required + .required:before {
+  content: '*';
+  color: #ce3f38;
+  display: inline;
+}
 a {
   text-decoration: none;
   outline: none;
@@ -307,7 +319,7 @@ a {
   max-width: 1060px;
   margin: auto;
 }
-.notification .modal {
+.notification .notification-modal {
   margin-top: 10px auto 0 auto;
   z-index: 40;
   border-radius: 5px;
@@ -322,13 +334,13 @@ a {
   -moz-box-shadow: 6px 6px 23px -10px #000000;
   box-shadow: 6px 6px 23px -10px #000000;
 }
-.notification .modal.info {
+.notification .notification-modal.info {
   background-color: #2f96b4;
 }
-.notification .modal.warning {
+.notification .notification-modal.warning {
   background-color: #f89406;
 }
-.notification .modal.error {
+.notification .notification-modal.error {
   background-color: #ce3f38;
 }
 .notification-head {

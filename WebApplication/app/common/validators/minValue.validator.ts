@@ -16,7 +16,6 @@ export class MinValueDirective implements Validator {
         if (c.value && parseFloat(c.value)) {
             var num = parseFloat(c.value)
             if (num < parseFloat(this.minValue)) {
-                console.log(c.errors);
                 return { minValue: 'error' } as ValidationErrors;
             }
         }

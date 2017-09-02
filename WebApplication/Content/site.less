@@ -78,6 +78,16 @@ nav {
 input, textarea, select {
     min-width: 150px;
     width: 150px;
+
+    &:required + .required {
+        display: inline;
+
+        &:before {
+            content: '*';
+            color: @error;
+            display: inline;
+        }
+    }
 }
 
 a {
@@ -95,7 +105,7 @@ a {
     max-width: 1060px;
     margin: auto;
 
-    .modal {
+    .notification-modal {
         margin-top: 10px auto 0 auto;
         z-index: 40;
         border-radius: 5px;

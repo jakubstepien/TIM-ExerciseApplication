@@ -13,6 +13,7 @@ import 'rxjs/add/operator/map';
 export class LoginComponent implements OnInit {
     login: string;
     password: string;
+    remember: boolean;
     redirectUrl: string
 
     constructor(private accountService: AccountService, private notificationService: NotificationService, private router: Router, private route: ActivatedRoute) { };
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
     }
 
     signIn(form: NgForm): void {
-        this.accountService.login(this.login, this.password).then(result => {
+        this.accountService.login(this.login, this.password, this.remember).then(result => {
             if (result.success) {
                 this.router.navigateByUrl(this.redirectUrl);
             }

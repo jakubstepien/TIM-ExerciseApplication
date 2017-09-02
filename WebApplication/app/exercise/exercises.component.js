@@ -1,4 +1,4 @@
-System.register(["@angular/core", "@angular/router", "./exercises.service", "../common/notification/notification.service"], function (exports_1, context_1) {
+System.register(["@angular/core", "@angular/router", "rxjs/add/operator/filter", "./exercises.service", "../common/notification/notification.service"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -18,6 +18,8 @@ System.register(["@angular/core", "@angular/router", "./exercises.service", "../
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (_1) {
             },
             function (exercises_service_1_1) {
                 exercises_service_1 = exercises_service_1_1;
@@ -42,6 +44,11 @@ System.register(["@angular/core", "@angular/router", "./exercises.service", "../
                         _this.currentPage = +parms['page'];
                         _this.loadExercises();
                     });
+                    this.exercisesService.dataChanged.subscribe(function (changed) {
+                        if (changed) {
+                            _this.loadExercises();
+                        }
+                    });
                 };
                 ExercisesComponent.prototype.loadExercises = function () {
                     var _this = this;
@@ -57,7 +64,6 @@ System.register(["@angular/core", "@angular/router", "./exercises.service", "../
                         }
                     })
                         .catch(function (reason) {
-                        console.log(reason);
                         _this.notificationService.error("Błąd pobierania ćwiczeń");
                     });
                 };
@@ -68,8 +74,6 @@ System.register(["@angular/core", "@angular/router", "./exercises.service", "../
                     promise.then(function (result) {
                         if (result.success) {
                             _this.notificationService.info("Ćwiczenie zostało usunięte");
-                            _this.loadExercises();
-                            ;
                         }
                         else {
                             showError();

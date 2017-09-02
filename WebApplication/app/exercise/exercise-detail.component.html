@@ -1,8 +1,9 @@
-﻿<modal #modal [show]="show" header="Add Exercise">
+﻿<modal #modal [show]="show" [header]="title" *ngIf="exercise">
     <form #f="ngForm" (ngSubmit)="saveExercise(f)" class="inline">
         <div class="group">
             <label for="name">Nazwa</label>
             <input [(ngModel)]="exercise.Name" class="form-input" required type="text" id="name" name="name" #name="ngModel" />
+            <div class="required"></div>
             <div *ngIf="name.invalid && (name.dirty || name.touched)">
                 <div [hidden]="!name.errors.required" class="alert alert-danger">
                     Nazwa jest wymagana.
@@ -12,6 +13,7 @@
         <div class="group">
             <label for="description">Opis</label>
             <textarea [(ngModel)]="exercise.Description" class="form-input" required id="description" name="description" #description="ngModel"></textarea>
+            <div class="required"></div>
             <div *ngIf="description.invalid && (description.dirty || description.touched)">
                 <div [hidden]="!description.errors.required" class="alert alert-danger">
                     Opis jest wymagany.
@@ -20,8 +22,12 @@
         </div>
         <div class="group">
             <label for="caloriesPerHour">Kalorie na godzine</label>
-            <input [(ngModel)]="exercise.CaloriesPerHour" class="form-input" number minValue="0" min="0" id="caloriesPerHour" name="caloriesPerHour" #caloriesPerHour="ngModel" />
+            <input [(ngModel)]="exercise.CaloriesPerHour" class="form-input" required number minValue="0" min="0" id="caloriesPerHour" name="caloriesPerHour" #caloriesPerHour="ngModel" />
+            <div class="required"></div>
             <div *ngIf="caloriesPerHour.invalid && (caloriesPerHour.dirty || caloriesPerHour.touched)">
+                <div [hidden]="!caloriesPerHour.errors.required" class="alert alert-danger">
+                    Kalorie są wymagane.
+                </div>
                 <div [hidden]="!caloriesPerHour.errors.minValue" class="alert alert-danger">
                     Kalorie na muszą być dodatnie.
                 </div>
@@ -35,7 +41,7 @@
             <input type="file" (change)="uploadImage($event)" />
         </div>
         <div class="buttons">
-            <button type="submit" class="btn-main" [disabled]="!f.form.valid">Zapisz</button>
+            <button type="submit" class="btn-main" [disabled]="!f.form.valid || imageUploading">Zapisz</button>
             <div class="btn-default" (click)="modal.close()">Anuluj</div>
         </div>
     </form>
