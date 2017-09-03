@@ -1,5 +1,5 @@
 ﻿<div class="pager" *ngIf="lastPage && lastPage != 1">
-    <ul>
+    <ul style="display:inline-block">
         <li routerLink="{{baseUrl}}/1" *ngIf="currentPage != 1"><a>1</a></li>
         <ng-container *ngFor="let index of [currentPage-2,currentPage-1]">
             <li *ngIf="index > 1">
@@ -14,4 +14,8 @@
         </ng-container>
         <li *ngIf="currentPage != lastPage"><a routerLink="{{baseUrl}}/{{lastPage}}">{{lastPage}}</a></li>
     </ul>
+
+    <div class="pager-summary">
+        Wyświetlanie {{pageSize * (currentPage -1) + 1}}:{{currentPage == lastPage ? total :  currentPage * pageSize}} z {{total}}
+    </div>
 </div>

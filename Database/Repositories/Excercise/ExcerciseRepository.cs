@@ -40,7 +40,7 @@ namespace Database.Repositories.Excercise
                 .Where(w => w.UserId == IdUser)
                 .OrderByDescending(o => o.IsFavourite)
                 .Skip((page - 1) * pageSize)
-                .Take(page * pageSize)
+                .Take(pageSize)
                 .ToArray();
         }
     }

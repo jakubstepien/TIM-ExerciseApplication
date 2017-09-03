@@ -448,6 +448,7 @@ a {
 }
 .pager ul {
   padding: 0;
+  display: inline-block;
 }
 .pager ul li {
   display: inline-block;
@@ -467,6 +468,11 @@ a {
 .pager ul li.active {
   background-color: #3080e8;
   color: #fff;
+}
+.pager .pager-summary {
+  display: inline-block;
+  margin-top: 25px;
+  float: right;
 }
 .modal {
   position: fixed;
