@@ -75,10 +75,12 @@ System.register(["@angular/core", "@angular/router", "@angular/common", "./exerc
                     var _this = this;
                     this.imageUploading = true;
                     var file = event.target.files[0];
-                    var result = this.exercisesService.saveImage(file)
+                    var result = this.exercisesService.saveImage(file, this.exercise.IdExercise)
                         .then(function (response) {
-                        if (response.success && !_this.isUpdate) {
-                            _this.exercise.IdExercise = response.data;
+                        if (response.success) {
+                            if (!_this.isUpdate) {
+                                _this.exercise.IdExercise = response.data;
+                            }
                             _this.exercise.ImageName = file.name;
                         }
                         else {
@@ -93,6 +95,7 @@ System.register(["@angular/core", "@angular/router", "@angular/common", "./exerc
                 };
                 ExercseDetailComponent.prototype.saveExercise = function (form) {
                     if (this.isUpdate) {
+                        this.updateExercise();
                     }
                     else {
                         this.addExercise();
@@ -104,6 +107,21 @@ System.register(["@angular/core", "@angular/router", "@angular/common", "./exerc
                         .then(function (result) {
                         if (result.success) {
                             _this.router.navigate(['../'], { relativeTo: _this.activeRoute });
+                        }
+                        else {
+                            throw new Error();
+                        }
+                    })
+                        .catch(function (reason) {
+                        _this.notificationservice.error("Błąd zapisu ćwiczenia");
+                    });
+                };
+                ExercseDetailComponent.prototype.updateExercise = function () {
+                    var _this = this;
+                    this.exercisesService.updateExercise(this.exercise)
+                        .then(function (result) {
+                        if (result.success) {
+                            _this.router.navigate(['../../'], { relativeTo: _this.activeRoute });
                         }
                         else {
                             throw new Error();

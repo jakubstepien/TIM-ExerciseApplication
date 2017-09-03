@@ -1,5 +1,8 @@
 ﻿<h1>{{title}}</h1>
-<a routerLink="add">Test</a>
+<div class="buttons">
+    <a class="btn-main pull-right" style="color:#fff;" routerLink="add">Dodaj ćwiczenie</a>
+</div>
+
 <router-outlet></router-outlet>
 
 <div *ngIf="exercises">
@@ -26,6 +29,7 @@
                 <td>{{exercise.CaloriesPerHour}}</td>
                 <td>
                     <div class="buttons">
+                        <a class="btn-default" routerLink="edit/{{exercise.IdExercise}}">Edytuj</a>
                         <div class="btn-error" (click)="delete(exercise.IdExercise)">Usuń</div>
                     </div>
                 </td>

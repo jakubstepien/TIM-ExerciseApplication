@@ -16,6 +16,10 @@ body {
     }
 }
 
+textarea {
+    font-family: Arial;
+}
+
 ul {
     list-style: none;
 }
@@ -87,6 +91,17 @@ input, textarea, select {
             color: @error;
             display: inline;
         }
+    }
+}
+
+input[type=file] {
+    position: absolute;
+    left: -9999%;
+    display: none !important;
+
+    + label {
+        .btn(@main,@main-hover);
+        display: inline-block !important;
     }
 }
 
@@ -244,6 +259,7 @@ a {
     width: 600px;
     left: 50%;
     top: 10%;
+    max-height: 80%;
     overflow-y: auto;
     transform: translateX(-50%);
 
@@ -277,6 +293,10 @@ a {
             display: inline-block;
             margin-right: 10px;
         }
+    }
+
+    textarea {
+        max-width: 300px;
     }
 }
 

@@ -65,6 +65,17 @@ System.register(["@angular/core", "rxjs/Subject", "../common/http.service", "../
                     }
                     return Promise.resolve({ success: false });
                 };
+                ExercisesService.prototype.updateExercise = function (exercise) {
+                    var _this = this;
+                    return this.http.put('api/exercises/' + exercise.IdExercise, exercise, true).toPromise()
+                        .then(function (response) {
+                        _this.dataChanged.next(true);
+                        return { success: true };
+                    })
+                        .catch(function (reason) {
+                        return { success: false };
+                    });
+                };
                 ExercisesService.prototype.getExercise = function (id) {
                     if (id) {
                         return this.http.get('api/exercises/' + id, true).toPromise()

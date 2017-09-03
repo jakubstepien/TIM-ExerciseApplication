@@ -46,6 +46,17 @@ export class ExercisesService {
         return Promise.resolve({ success: false } as Result)
     }
 
+    updateExercise(exercise: ExerciseDTO): Promise<Result> {
+        return this.http.put('api/exercises/' + exercise.IdExercise, exercise, true).toPromise()
+            .then(response => {
+                this.dataChanged.next(true);
+                return { success: true } as Result;
+            })
+            .catch(reason => {
+                return { success: false } as Result;
+            });
+    }
+
     getExercise(id: string): Promise<DataResult<ExerciseDTO>> {
         if (id) {
             return this.http.get('api/exercises/' + id, true).toPromise()

@@ -53,10 +53,12 @@ export class ExercseDetailComponent implements OnInit {
     uploadImage(event: any) {
         this.imageUploading = true;
         var file: File = event.target.files[0];
-        var result = this.exercisesService.saveImage(file)
+        var result = this.exercisesService.saveImage(file, this.exercise.IdExercise)
             .then(response => {
-                if (response.success && !this.isUpdate) {
-                    this.exercise.IdExercise = response.data;
+                if (response.success) {
+                    if (!this.isUpdate) {
+                        this.exercise.IdExercise = response.data;
+                    }
                     this.exercise.ImageName = file.name;
                 }
                 else {
@@ -72,6 +74,7 @@ export class ExercseDetailComponent implements OnInit {
 
     saveExercise(form: NgForm) {
         if (this.isUpdate) {
+            this.updateExercise();
         }
         else {
             this.addExercise();
@@ -83,6 +86,21 @@ export class ExercseDetailComponent implements OnInit {
             .then(result => {
                 if (result.success) {
                     this.router.navigate(['../'], { relativeTo: this.activeRoute });
+                }
+                else {
+                    throw new Error();
+                }
+            })
+            .catch(reason => {
+                this.notificationservice.error("Błąd zapisu ćwiczenia")
+            });
+    }
+
+    private updateExercise() {
+        this.exercisesService.updateExercise(this.exercise)
+            .then(result => {
+                if (result.success) {
+                    this.router.navigate(['../../'], { relativeTo: this.activeRoute });
                 }
                 else {
                     throw new Error();
