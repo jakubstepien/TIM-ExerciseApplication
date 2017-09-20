@@ -12,7 +12,7 @@ namespace MobileApp
     {
         IContainer container;
 
-        public string ApiServer { get { return "http://10.0.2.2:8080"; } }
+        public string ApiServer { get { return "http://192.168.1.8"; } }
 
         public DateTime LastSleepDate { get; set; }
 

@@ -15,6 +15,7 @@ export class LoaderComponent implements OnInit {
     constructor(private http: HttpService) { };
 
     ngOnInit(): void {
+        console.log('loader init');
         this.http.loading.subscribe(next => { this.active = next });
     }
 

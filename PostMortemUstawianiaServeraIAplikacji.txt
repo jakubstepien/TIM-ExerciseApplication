@@ -1,0 +1,22 @@
+https://docs.microsoft.com/en-us/iis/configuration/system.webserver/handlers/add
+
+ express uses different handlers names than IIS
+
+Add the following markup and it should disable the extensionless handlers for IIS express only
+
+<remove name="ExtensionlessUrl-ISAPI-4.0_32bit" />
+<remove name="ExtensionlessUrlHandler-ISAPI-4.0_64bit" />
+<remove name="ExtensionlessUrl-Integrated-4.0" />
+
+https://stackoverflow.com/questions/26271958/what-does-extensionlessurlhandler-do-in-an-mvc-application
+
+
+Trzeba było włączyć wszystkie opcje developerskie w Progarm & Features dla IISa oraz ustawić tę aplikację jako domyślną w IIS, żeby potrafiła rootować się po skryptach js
+
+
+connectionString="Server=DESKTOP-Q7ESJSQ\SQLEXPRESS;Database=ExerciseApp;User ID=IISAuth;Password=Tomek123$%;"
+
+Działa, trzeba było użytkownikowi dodać uprawnienia do bazy danych, wszystkie uprawnienia w bazie danych oraz w użytkowniku przypisanie do defaultowej bazy.
+W connection stringu trzeba było dorzucic providerName="System.Data.SqlClient". Zrestartować kilka krotnie SQL Server oraz IIS server
+
+W aplikacji zmienić w 2ch miejsca url, w baseClient oraz App.xaml ApiServer ustawić adres servera.

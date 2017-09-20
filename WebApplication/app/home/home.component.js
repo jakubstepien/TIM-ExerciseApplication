@@ -17,13 +17,13 @@ System.register(["@angular/core"], function (exports_1, context_1) {
         execute: function () {
             HomeComponent = (function () {
                 function HomeComponent() {
-                    this.title = "Home";
+                    this.title = "Aplikacja treningowa";
                 }
                 return HomeComponent;
             }());
             HomeComponent = __decorate([
                 core_1.Component({
-                    template: '<h1>{{title}}</h1>'
+                    templateUrl: './home.component.html',
                 })
             ], HomeComponent);
             exports_1("HomeComponent", HomeComponent);
