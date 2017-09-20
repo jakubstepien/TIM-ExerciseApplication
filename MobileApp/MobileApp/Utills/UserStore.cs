@@ -16,6 +16,11 @@ namespace MobileApp.Utills
 
         public static async Task SaveUser(Guid id, string login, string token, DateTime tokenEndDate)
         {
+            var prevAccount = GetAccount();
+            if(prevAccount != null)
+            {
+                await AccountStore.Create().DeleteAsync(prevAccount, appName);
+            }
             var account = new Account { Username = login };
             account.Properties.Add(tokenKey, token);
             account.Properties.Add(tokenEndDateKey, tokenEndDate.ToString());
