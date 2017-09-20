@@ -51,7 +51,7 @@ namespace MobileApp.Views.Account
             }
             else
             {
-                //TODO
+                this.errorMsg.IsVisible = true;
             }
         }
 
