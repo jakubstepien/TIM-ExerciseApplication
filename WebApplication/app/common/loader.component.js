@@ -29,6 +29,7 @@ System.register(["@angular/core", "./http.service"], function (exports_1, contex
                 ;
                 LoaderComponent.prototype.ngOnInit = function () {
                     var _this = this;
+                    console.log('loader init');
                     this.http.loading.subscribe(function (next) { _this.active = next; });
                 };
                 return LoaderComponent;

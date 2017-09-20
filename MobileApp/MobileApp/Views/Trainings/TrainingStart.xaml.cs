@@ -60,7 +60,18 @@ namespace MobileApp.Views.Trainings
                 return;
             }
             var slideCreator = new Utills.TrainingSlideCreator(excerciseService);
-            var slides = await slideCreator.CreateSlides(training);
+            Slide[] slides;
+            try
+            {
+                slides = await slideCreator.CreateSlides(training);
+            }
+            catch (Exception exc)
+            {
+
+                throw exc;
+            }
+            
+             
             ToggleExercising(true);
             int time = -1;
             int currentSlide = 0;

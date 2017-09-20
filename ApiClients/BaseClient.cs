@@ -10,7 +10,7 @@ namespace ApiClients
     public abstract class BaseClient
     {
         protected static HttpClient client = new HttpClient();
-        public static void Init(string url = "http://localhost:8080")
+        public static void Init(string url = "http://192.168.1.8")
         {
             //dodać konfiguracje tego na starcie aplikacji
             client.BaseAddress = new Uri(url);
